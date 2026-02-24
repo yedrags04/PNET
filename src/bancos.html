@@ -8,6 +8,98 @@
     <title>Bancos</title>
 </head>
 <body>
-    
+    <header>
+        <nav>
+            <a href="index.html">HOME</a>
+            <a href="bancos.html">BANCOS</a>
+            <a href="utensilios.html">UTENSILIOS</a>
+            <a href="FAQ.html">FAQ</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside>
+            <h2>FILTRO</h2>
+            <div class="filter-group">
+                <label for="ubicacion">LOCALIZACIÓN</label>
+                <input id="ubicacion" name="ubicacion" type="text" placeholder="Ej: Madrid">
+            </div>
+            <div class="filter-group">
+                <label for="dificultad">DIFICULTAD</label>
+                <select id="dificultad" name="dificultad">
+                    <option value="facil">Fácil</option>
+                    <option value="media">Media</option>
+                    <option value="alta">Alta</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="recompensa">DINERO A GANAR</label>
+                <input id="recompensa" name="recompensa" type="range" min="0" max="1000" value="500">
+                <div>Valor: <output id="recompensaOutput">500</output> €</div>
+            </div>
+            <button id="btnBuscar" style="width:100%; padding: 10px;">BUSCAR</button>
+        </aside>
+
+        <main>
+            <div class="card">
+                <img id="fotos" src="../assets/images/banco-asturias.png" alt="Descripción del banco" width="300">
+                <h3>NOMBRE DEL BANCO</h3>
+                <button class="masInfo">Más Info</button>
+            </div>
+
+            <div class="card">
+                <img id="fotos" src="../assets/images/Banco-barcelona.png" alt="Descripción del banco" width="300">
+                <h3>NOMBRE DEL BANCO</h3>
+                <button class="masInfo">Más Info</button>
+            </div>
+            <div class="card">
+                <img id="fotos" src="../assets/images/banco-de-españa.png" alt="Descripción del banco" width="300">
+                <h3>NOMBRE DEL BANCO</h3>
+                <button class="masInfo">Más Info</button>
+            </div>
+            <div class="card">
+                <img id="fotos" src="../assets/images/Banco-madrid.png" alt="Descripción del banco" width="300">
+                <h3>NOMBRE DEL BANCO</h3>
+                <button class="masInfo">Más Info</button>
+            </div>
+            <div class="card">
+                <img id="fotos" src="../assets/images/bankinter.png" alt="Descripción del banco" width="300">
+                <h3>NOMBRE DEL BANCO</h3>
+                <button class="masInfo">Más Info</button>
+            </div>
+            <div class="card">
+                <img id="fotos" src="../assets/images/BBVA.png" alt="Descripción del banco" width="300">
+                <h3>NOMBRE DEL BANCO</h3>
+                <button class="masInfo">Más Info</button>
+            </div>
+            <div class="card">
+                <img id="fotos" src="../assets/images/Casa-de-la-moneda-barceona.png" alt="Descripción del banco" width="300">
+                <h3>NOMBRE DEL BANCO</h3>
+                <button class="masInfo">Más Info</button>
+            </div>
+            <div class="card">
+                <img id="fotos" src="../assets/images/casa-de-la-moneda-paris.png" alt="Descripción del banco" width="300">
+                <h3>NOMBRE DEL BANCO</h3>
+                <button class="masInfo">Más Info</button>
+            </div>
+            <div class="card">
+                <img id="fotos" src="../assets/images/casa-de-la-moneda-segobia.png" alt="Descripción del banco" width="300">
+                <h3>NOMBRE DEL BANCO</h3>
+                <button class="masInfo">Más Info</button>
+            </div>
+            <div class="card">
+                <img id="fotos" src="../assets/images/Casa-de-la-moneda-sevilla.png" alt="Descripción del banco" width="300">
+                <h3>NOMBRE DEL BANCO</h3>
+                <button class="masInfo">Más Info</button>
+            </div>
+            <div class="card">
+                <img id="fotos" src="../assets/images/Casa-de-la-moneda-y-timbre.png" alt="Descripción del banco" width="300">
+                <h3>NOMBRE DEL BANCO</h3>
+                <button class="masInfo">Más Info</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
