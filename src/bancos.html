@@ -37,6 +37,14 @@
                 <input id="recompensa" name="recompensa" type="range" min="0" max="1000" value="500">
                 <div>Valor: <output id="recompensaOutput">500</output> €</div>
             </div>
+            <div class="filter-group">
+                <label for="disponibilidad">DISPONIBILIDAD</label>
+                <select id="disponibilidad" name="disponibilidad">
+                    <option value="todos">Todos</option>
+                    <option value="si">Sí (Disponible)</option>
+                    <option value="no">No (Ocupado)</option>
+                </select>
+            </div>
             <button id="btnBuscar" style="width:100%; padding: 10px;">BUSCAR</button>
         </aside>
 
@@ -98,6 +106,22 @@
                 <button class="masInfo">Más Info</button>
             </div>
         </main>
+    </div>
+
+    <div id="modalBanco" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-body">
+                <img id="modal-img" src="" alt="Foto del Banco">
+                <div class="modal-info">
+                    <h2 id="modal-nombre">Nombre del Banco</h2>
+                    <p><strong>Dirección:</strong> Centro ciudad</p>
+                    <p><strong>Dificultad:</strong> <span id="modal-dificultad">Media</span></p>
+                    <p><strong>Datos:</strong> Requiere herramienta nivel 2.</p>
+                </div>
+            </div>
+            <button class="btn-reservar-final">RESERVAR</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
