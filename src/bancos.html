@@ -1,21 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-    <title>Bancos</title>
+    <script src="components/site-header.js" defer></script>
+    <script src="components/site-footer.js" defer></script>
+    <script src="script.js" defer></script>
+    <title>Bancos - HeistCraft</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="index.html">HOME</a>
-            <a href="bancos.html">BANCOS</a>
-            <a href="utensilios.html">UTENSILIOS</a>
-            <a href="FAQ.html">FAQ</a>
-        </nav>
-    </header>
+    <site-header></site-header>
 
     <div class="container">
         <aside>
@@ -45,63 +40,72 @@
                     <option value="no">No (Ocupado)</option>
                 </select>
             </div>
-            <button id="btnBuscar" style="width:100%; padding: 10px;">BUSCAR</button>
+            <button id="btnBuscar">BUSCAR</button>
         </aside>
 
         <main>
             <div class="card">
-                <img id="fotos" src="../assets/images/banco-asturias.png" alt="Descripción del banco" width="300">
+                <img class="fotos" src="../assets/images/banco-asturias.png" alt="Banco Asturias" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
                 <button class="masInfo">Más Info</button>
             </div>
 
             <div class="card">
-                <img id="fotos" src="../assets/images/Banco-barcelona.png" alt="Descripción del banco" width="300">
+                <img class="fotos" src="../assets/images/Banco-barcelona.png" alt="Banco Barcelona" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
                 <button class="masInfo">Más Info</button>
             </div>
+
             <div class="card">
-                <img id="fotos" src="../assets/images/banco-de-españa.png" alt="Descripción del banco" width="300">
+                <img class="fotos" src="../assets/images/banco-de-españa.png" alt="Banco de España" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
                 <button class="masInfo">Más Info</button>
             </div>
+
             <div class="card">
-                <img id="fotos" src="../assets/images/Banco-madrid.png" alt="Descripción del banco" width="300">
+                <img class="fotos" src="../assets/images/Banco-madrid.png" alt="Banco Madrid" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
                 <button class="masInfo">Más Info</button>
             </div>
+
             <div class="card">
-                <img id="fotos" src="../assets/images/bankinter.png" alt="Descripción del banco" width="300">
+                <img class="fotos" src="../assets/images/bankinter.png" alt="Bankinter" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
                 <button class="masInfo">Más Info</button>
             </div>
+
             <div class="card">
-                <img id="fotos" src="../assets/images/BBVA.png" alt="Descripción del banco" width="300">
+                <img class="fotos" src="../assets/images/BBVA.png" alt="BBVA" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
                 <button class="masInfo">Más Info</button>
             </div>
+
             <div class="card">
-                <img id="fotos" src="../assets/images/Casa-de-la-moneda-barceona.png" alt="Descripción del banco" width="300">
+                <img class="fotos" src="../assets/images/Casa-de-la-moneda-barceona.png" alt="Casa de la Moneda Barcelona" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
                 <button class="masInfo">Más Info</button>
             </div>
+
             <div class="card">
-                <img id="fotos" src="../assets/images/casa-de-la-moneda-paris.png" alt="Descripción del banco" width="300">
+                <img class="fotos" src="../assets/images/casa-de-la-moneda-paris.png" alt="Casa de la Moneda París" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
                 <button class="masInfo">Más Info</button>
             </div>
+
             <div class="card">
-                <img id="fotos" src="../assets/images/casa-de-la-moneda-segobia.png" alt="Descripción del banco" width="300">
+                <img class="fotos" src="../assets/images/casa-de-la-moneda-segobia.png" alt="Casa de la Moneda Segovia" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
                 <button class="masInfo">Más Info</button>
             </div>
+
             <div class="card">
-                <img id="fotos" src="../assets/images/Casa-de-la-moneda-sevilla.png" alt="Descripción del banco" width="300">
+                <img class="fotos" src="../assets/images/Casa-de-la-moneda-sevilla.png" alt="Casa de la Moneda Sevilla" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
                 <button class="masInfo">Más Info</button>
             </div>
+
             <div class="card">
-                <img id="fotos" src="../assets/images/Casa-de-la-moneda-y-timbre.png" alt="Descripción del banco" width="300">
+                <img class="fotos" src="../assets/images/Casa-de-la-moneda-y-timbre.png" alt="Casa de la Moneda y Timbre" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
                 <button class="masInfo">Más Info</button>
             </div>
@@ -124,6 +128,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <site-footer></site-footer>
 </body>
 </html>

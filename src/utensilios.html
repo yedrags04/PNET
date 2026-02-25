@@ -1,66 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-    <title>Utensilios</title>
+    <script src="components/site-header.js" defer></script>
+    <script src="components/site-footer.js" defer></script>
+    <script src="script.js" defer></script>
+    <title>Utensilios - HeistCraft</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="index.html">HOME</a>
-            <a href="bancos.html">BANCOS</a>
-            <a href="utensilios.html">UTENSILIOS</a>
-            <a href="FAQ.html">FAQ</a>
-        </nav>
-    </header>
-        <h2>Utensilios</h2>
-        <img src="../assets/images/Guantes.jpg" alt="Guantes">
-        <p>Guantes de microfibra para evitar huellas</p>
+    <site-header></site-header>
 
-        <img src="../assets/images/Pasamontanas.jpg" alt="Pasamontañas">
-        <p>Pasamontañas para evitar ser descubierto</p>
-
-        <img src="../assets/images/Cortacristales.jpg" alt="Cortacristales">
-        <p>Cortacristales barato</p>
-
-        <img src="../assets/images/Cortacristales_Ventosa.jpg" alt="Cortacristales con ventosa">
-        <p>Cortacristales con ventosa, para mayor precision</p>
-
-        <aside class="Filtros">
-            <h3>Filtros</h3>
-            <label for="precio">Precio:</label>
-            <select id="precio" name="precio">
-                <option value="todos">Todos</option>
-                <option value="barato">Barato</option>
-                <option value="medio">Medio</option>
-                <option value="caro">Caro</option>
-            </select>
-            <br>
-            <br>
-
-            <label for="tipo">Tipo:</label>
-            <select id="tipo" name="tipo">
-                <option value="todos">Todos</option>
-                <option value="guantes">Guantes</option>
-                <option value="pasamontanas">Pasamontañas</option>
-                <option value="cortacristales">Cortacristales</option>
-            </select>
-            <br>
-            <br>
-
-            <label for="material">Material:</label>
-            <select id="material" name="material">
-                <option value="todos">Todos</option>
-                <option value="microfibra">Microfibra</option>
-                <option value="tela">Tela</option>
-                <option value="metal">Metal</option>
-            </select>
+    <div class="container">
+        <aside>
+            <h2>FILTROS</h2>
+            <div class="filter-group">
+                <label for="precio">PRECIO</label>
+                <select id="precio" name="precio">
+                    <option value="todos">Todos</option>
+                    <option value="barato">Barato</option>
+                    <option value="medio">Medio</option>
+                    <option value="caro">Caro</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="tipo">TIPO</label>
+                <select id="tipo" name="tipo">
+                    <option value="todos">Todos</option>
+                    <option value="guantes">Guantes</option>
+                    <option value="pasamontanas">Pasamontañas</option>
+                    <option value="cortacristales">Cortacristales</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="material">MATERIAL</label>
+                <select id="material" name="material">
+                    <option value="todos">Todos</option>
+                    <option value="microfibra">Microfibra</option>
+                    <option value="tela">Tela</option>
+                    <option value="metal">Metal</option>
+                </select>
+            </div>
         </aside>
 
-    </section>
+        <main>
+            <div class="card">
+                <img class="fotos" src="../assets/images/Guantes.jpg" alt="Guantes">
+                <h3>GUANTES</h3>
+                <p>Guantes de microfibra para evitar huellas</p>
+            </div>
+            <div class="card">
+                <img class="fotos" src="../assets/images/Pasamontanas.jpg" alt="Pasamontañas">
+                <h3>PASAMONTAÑAS</h3>
+                <p>Pasamontañas para evitar ser descubierto</p>
+            </div>
+            <div class="card">
+                <img class="fotos" src="../assets/images/Cortacristales.jpg" alt="Cortacristales">
+                <h3>CORTACRISTALES</h3>
+                <p>Cortacristales barato</p>
+            </div>
+            <div class="card">
+                <img class="fotos" src="../assets/images/Cortacristales_Ventosa.jpg" alt="Cortacristales con ventosa">
+                <h3>CORTACRISTALES CON VENTOSA</h3>
+                <p>Cortacristales con ventosa, para mayor precisión</p>
+            </div>
+        </main>
+    </div>
 
+    <site-footer></site-footer>
 </body>
 </html>
