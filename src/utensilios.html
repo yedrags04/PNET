@@ -17,21 +17,17 @@
         <aside>
             <h2>FILTROS</h2>
             <div class="filter-group">
-                <label for="price">PRECIO</label>
-                <select id="price" name="price">
-                    <option value="todos">Todos</option>
-                    <option value="barato">Barato</option>
-                    <option value="medio">Medio</option>
-                    <option value="caro">Caro</option>
-                </select>
+                <label for="reward">PRECIO</label>
+                <input id="reward" name="price" type="range" min="0" max="100" value="10">
+                <div>Valor: <output id="reward-output">10</output> €</div>
             </div>
             <div class="filter-group">
                 <label for="type">TIPO</label>
                 <select id="type" name="type">
                     <option value="todos">Todos</option>
-                    <option value="guantes">Guantes</option>
-                    <option value="pasamontanas">Pasamontañas</option>
-                    <option value="cortacristales">Cortacristales</option>
+                    <option value="guantes">Ropa</option>
+                    <option value="pasamontanas">Herramientas</option>
+                    <option value="cortacristales">Otros</option>
                 </select>
             </div>
             <div class="filter-group">

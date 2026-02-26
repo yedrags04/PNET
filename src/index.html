@@ -12,14 +12,41 @@
 </head>
 <body>
     <site-header></site-header>
-    <div class="container">
-        <main>
-            <p style="display:flex; align-items:center; gap: 0.5rem;">
-                <i class="hgi hgi-stroke hgi-home-01"></i>
-                Inicio
-            </p>
+    
+    <div class="container home-container">
+        <main class="home-main">
+            <h1 class="hero-title">Expertos en robos desde 1942</h1>
+
+            <div class="horizontal-search-bar">
+                <div class="input-icon">
+                    <i class="hugeicons-search"></i>
+                    <input type="text" placeholder="Buscar objetivo...">
+                </div>
+                <input type="date" title="Fecha del golpe">
+                <select>
+                    <option value="">Tipo de botín</option>
+                    <option value="dinero">Efectivo</option>
+                    <option value="oro">Lingotes de Oro</option>
+                    <option value="arte">Obras de Arte</option>
+                </select>
+                <button class="btn-book" style="width: auto; padding: 10px 30px;">Buscar</button>
+            </div>
+
+            <h2 class="section-title">Top bancos</h2>
+            <div class="top-banks-layout">
+                <div class="large-card">
+                    <img src="assets/images/banco-de-españa.png" alt="Banco Central">
+                </div>
+                <div class="large-card">
+                    <img src="assets/images/casa-de-la-moneda-paris.png" alt="Casa Moneda París">
+                </div>
+                <div class="large-card">
+                    <img src="assets/images/Banco-madrid.png" alt="Banco Madrid">
+                </div>
+            </div>
         </main>
     </div>
+    
     <site-footer></site-footer>
 </body>
 </html>
