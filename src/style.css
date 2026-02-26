@@ -3,56 +3,56 @@
     font-family: "DM Sans";
     font-style: normal;
     font-weight: 400;
-    src: url("../assets/fonts/dm-sans-latin-400-normal.woff2") format("woff2");
+    src: url("assets/fonts/dm-sans-latin-400-normal.woff2") format("woff2");
 }
 
 @font-face {
     font-family: "DM Sans";
     font-style: italic;
     font-weight: 400;
-    src: url("../assets/fonts/dm-sans-latin-400-italic.woff2") format("woff2");
+    src: url("assets/fonts/dm-sans-latin-400-italic.woff2") format("woff2");
 }
 
 @font-face {
     font-family: "DM Sans";
     font-style: normal;
     font-weight: 500;
-    src: url("../assets/fonts/dm-sans-latin-500-normal.woff2") format("woff2");
+    src: url("assets/fonts/dm-sans-latin-500-normal.woff2") format("woff2");
 }
 
 @font-face {
     font-family: "DM Sans";
     font-style: italic;
     font-weight: 500;
-    src: url("../assets/fonts/dm-sans-latin-500-italic.woff2") format("woff2");
+    src: url("assets/fonts/dm-sans-latin-500-italic.woff2") format("woff2");
 }
 
 @font-face {
     font-family: "DM Sans";
     font-style: normal;
     font-weight: 700;
-    src: url("../assets/fonts/dm-sans-latin-700-normal.woff2") format("woff2");
+    src: url("assets/fonts/dm-sans-latin-700-normal.woff2") format("woff2");
 }
 
 @font-face {
     font-family: "DM Sans";
     font-style: italic;
     font-weight: 700;
-    src: url("../assets/fonts/dm-sans-latin-700-italic.woff2") format("woff2");
+    src: url("assets/fonts/dm-sans-latin-700-italic.woff2") format("woff2");
 }
 
 @font-face {
     font-family: "DM Sans";
     font-style: normal;
     font-weight: 800;
-    src: url("../assets/fonts/dm-sans-latin-800-normal.woff2") format("woff2");
+    src: url("assets/fonts/dm-sans-latin-800-normal.woff2") format("woff2");
 }
 
 @font-face {
     font-family: "DM Sans";
     font-style: italic;
     font-weight: 800;
-    src: url("../assets/fonts/dm-sans-latin-800-italic.woff2") format("woff2");
+    src: url("assets/fonts/dm-sans-latin-800-italic.woff2") format("woff2");
 }
 
 /* DM Serif Display */
@@ -60,14 +60,14 @@
     font-family: "DM Serif Display";
     font-style: normal;
     font-weight: 400;
-    src: url("../assets/fonts/dm-serif-display-latin-400-normal.woff2") format("woff2");
+    src: url("assets/fonts/dm-serif-display-latin-400-normal.woff2") format("woff2");
 }
 
 @font-face {
     font-family: "DM Serif Display";
     font-style: italic;
     font-weight: 400;
-    src: url("../assets/fonts/dm-serif-display-latin-400-italic.woff2") format("woff2");
+    src: url("assets/fonts/dm-serif-display-latin-400-italic.woff2") format("woff2");
 }
 
 :root {
@@ -116,6 +116,7 @@ site-footer {
 
 header {
     top: 0;
+    z-index: 99;
     position: sticky;
     box-shadow: var(--shadow-lg);
     background: var(--color-raised);
@@ -165,6 +166,9 @@ nav a {
 aside {
     width: 250px;
     min-width: 250px;
+    position: sticky;
+    top: 90px;
+    height: 80dvh;
     background: var(--color-raised);
     padding: 20px;
     border-radius: 8px;
@@ -215,12 +219,12 @@ main {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#btnBuscar {
+#btn-search {
     width: 100%;
     padding: 10px;
 }
 
-.fotos {
+.photos {
     background: #ddd;
     height: 150px;
     display: flex;
@@ -236,7 +240,7 @@ main {
     font-family: var(--font-sans);
 }
 
-.masInfo {
+.more-info {
     background: var(--color-overlay);
     color: var(--color-text);
     font-family: var(--font-sans);
@@ -318,7 +322,7 @@ main {
 }
 
 /* Botón de Reservar */
-.btn-reservar-final {
+.btn-book {
     width: 100%;
     padding: 15px;
     background-color: var(--color-accent);

@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 	// Mostrar el valor del range
-	const rango = document.getElementById('recompensa');
-	const out = document.getElementById('recompensaOutput');
+	const rango = document.getElementById('reward');
+	const out = document.getElementById('reward-output');
 	if (rango && out) {
 		out.textContent = rango.value;
 		rango.addEventListener('input', () => {
@@ -10,38 +10,38 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	// Botón buscar (ejemplo: sólo filtra en consola)
-	const btnBuscar = document.getElementById('btnBuscar');
-	if (btnBuscar) {
-		btnBuscar.addEventListener('click', () => {
-			const ubic = document.getElementById('ubicacion')?.value || '';
-			const dif = document.getElementById('dificultad')?.value || '';
-			const val = document.getElementById('recompensa')?.value || '';
-			const disp = document.getElementById('disponibilidad')?.value || 'todos';
-            console.log('Buscar con:', { ubicacion: ubic, dificultad: dif, recompensa: val, disponibilidad: disp });
+	const btnSearch = document.getElementById('btn-search');
+	if (btnSearch) {
+		btnSearch.addEventListener('click', () => {
+			const ubic = document.getElementById('location')?.value || '';
+			const dif = document.getElementById('difficulty')?.value || '';
+			const val = document.getElementById('reward')?.value || '';
+			const disp = document.getElementById('availability')?.value || 'todos';
+            console.log('Buscar con:', { location: ubic, difficulty: dif, reward: val, availability: disp });
 			// Aquí puedes implementar la lógica real de filtrado
 		});
 	}
 
-	// masInfo: manejo básico para todos los botones de más información
+	// more-info: manejo básico para todos los botones de más información
 	// --- LÓGICA DEL MODAL (POP-UP) ---
-    const modal = document.getElementById('modalBanco');
+    const modal = document.getElementById('modal-bank');
     const closeBtn = document.querySelector('.close-btn');
     
     // Elementos dentro del modal que vamos a cambiar
     const modalImg = document.getElementById('modal-img');
-    const modalNombre = document.getElementById('modal-nombre');
+    const modalName = document.getElementById('modal-name');
 
     // Al hacer clic en "Más Info"
-    document.querySelectorAll('.masInfo').forEach(btn => {
+    document.querySelectorAll('.more-info').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const card = e.target.closest('.card');
             
             // 1. Extraer los datos de la tarjeta clickeada
-            const nombreBanco = card.querySelector('h3').textContent;
+            const bankName = card.querySelector('h3').textContent;
             const imgSrc = card.querySelector('img').src; 
 
             // 2. Inyectar esos datos en el modal
-            modalNombre.textContent = nombreBanco;
+            modalName.textContent = bankName;
             modalImg.src = imgSrc;
 
             // 3. Mostrar el modal (cambiamos de 'none' a 'flex' para centrarlo)

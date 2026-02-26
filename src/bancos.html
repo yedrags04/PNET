@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="components/site-header.js" defer></script>
+    <script src="components/site-header.js"></script>
     <script src="components/site-footer.js" defer></script>
     <script src="script.js" defer></script>
     <title>Bancos - HeistCraft</title>
+    <link rel="stylesheet" href="https://use.hugeicons.com/font/icons.css" crossorigin="anonymous">
 </head>
 <body>
     <site-header></site-header>
@@ -16,115 +17,115 @@
         <aside>
             <h2>FILTRO</h2>
             <div class="filter-group">
-                <label for="ubicacion">LOCALIZACIÓN</label>
-                <input id="ubicacion" name="ubicacion" type="text" placeholder="Ej: Madrid">
+                <label for="location">LOCALIZACIÓN</label>
+                <input id="location" name="location" type="text" placeholder="Ej: Madrid">
             </div>
             <div class="filter-group">
-                <label for="dificultad">DIFICULTAD</label>
-                <select id="dificultad" name="dificultad">
+                <label for="difficulty">DIFICULTAD</label>
+                <select id="difficulty" name="difficulty">
                     <option value="facil">Fácil</option>
                     <option value="media">Media</option>
                     <option value="alta">Alta</option>
                 </select>
             </div>
             <div class="filter-group">
-                <label for="recompensa">DINERO A GANAR</label>
-                <input id="recompensa" name="recompensa" type="range" min="0" max="1000" value="500">
-                <div>Valor: <output id="recompensaOutput">500</output> €</div>
+                <label for="reward">DINERO A GANAR</label>
+                <input id="reward" name="reward" type="range" min="0" max="1000" value="500">
+                <div>Valor: <output id="reward-output">500</output> €</div>
             </div>
             <div class="filter-group">
-                <label for="disponibilidad">DISPONIBILIDAD</label>
-                <select id="disponibilidad" name="disponibilidad">
+                <label for="availability">DISPONIBILIDAD</label>
+                <select id="availability" name="availability">
                     <option value="todos">Todos</option>
                     <option value="si">Sí (Disponible)</option>
                     <option value="no">No (Ocupado)</option>
                 </select>
             </div>
-            <button id="btnBuscar">BUSCAR</button>
+            <button id="btn-search">BUSCAR</button>
         </aside>
 
         <main>
             <div class="card">
-                <img class="fotos" src="../assets/images/banco-asturias.png" alt="Banco Asturias" width="300">
+                <img class="photos" src="assets/images/banco-asturias.png" alt="Banco Asturias" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
-                <button class="masInfo">Más Info</button>
+                <button class="more-info">Más Info</button>
             </div>
 
             <div class="card">
-                <img class="fotos" src="../assets/images/Banco-barcelona.png" alt="Banco Barcelona" width="300">
+                <img class="photos" src="assets/images/Banco-barcelona.png" alt="Banco Barcelona" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
-                <button class="masInfo">Más Info</button>
+                <button class="more-info">Más Info</button>
             </div>
 
             <div class="card">
-                <img class="fotos" src="../assets/images/banco-de-españa.png" alt="Banco de España" width="300">
+                <img class="photos" src="assets/images/banco-de-españa.png" alt="Banco de España" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
-                <button class="masInfo">Más Info</button>
+                <button class="more-info">Más Info</button>
             </div>
 
             <div class="card">
-                <img class="fotos" src="../assets/images/Banco-madrid.png" alt="Banco Madrid" width="300">
+                <img class="photos" src="assets/images/Banco-madrid.png" alt="Banco Madrid" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
-                <button class="masInfo">Más Info</button>
+                <button class="more-info">Más Info</button>
             </div>
 
             <div class="card">
-                <img class="fotos" src="../assets/images/bankinter.png" alt="Bankinter" width="300">
+                <img class="photos" src="assets/images/bankinter.png" alt="Bankinter" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
-                <button class="masInfo">Más Info</button>
+                <button class="more-info">Más Info</button>
             </div>
 
             <div class="card">
-                <img class="fotos" src="../assets/images/BBVA.png" alt="BBVA" width="300">
+                <img class="photos" src="assets/images/BBVA.png" alt="BBVA" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
-                <button class="masInfo">Más Info</button>
+                <button class="more-info">Más Info</button>
             </div>
 
             <div class="card">
-                <img class="fotos" src="../assets/images/Casa-de-la-moneda-barceona.png" alt="Casa de la Moneda Barcelona" width="300">
+                <img class="photos" src="assets/images/Casa-de-la-moneda-barceona.png" alt="Casa de la Moneda Barcelona" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
-                <button class="masInfo">Más Info</button>
+                <button class="more-info">Más Info</button>
             </div>
 
             <div class="card">
-                <img class="fotos" src="../assets/images/casa-de-la-moneda-paris.png" alt="Casa de la Moneda París" width="300">
+                <img class="photos" src="assets/images/casa-de-la-moneda-paris.png" alt="Casa de la Moneda París" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
-                <button class="masInfo">Más Info</button>
+                <button class="more-info">Más Info</button>
             </div>
 
             <div class="card">
-                <img class="fotos" src="../assets/images/casa-de-la-moneda-segobia.png" alt="Casa de la Moneda Segovia" width="300">
+                <img class="photos" src="assets/images/casa-de-la-moneda-segobia.png" alt="Casa de la Moneda Segovia" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
-                <button class="masInfo">Más Info</button>
+                <button class="more-info">Más Info</button>
             </div>
 
             <div class="card">
-                <img class="fotos" src="../assets/images/Casa-de-la-moneda-sevilla.png" alt="Casa de la Moneda Sevilla" width="300">
+                <img class="photos" src="assets/images/Casa-de-la-moneda-sevilla.png" alt="Casa de la Moneda Sevilla" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
-                <button class="masInfo">Más Info</button>
+                <button class="more-info">Más Info</button>
             </div>
 
             <div class="card">
-                <img class="fotos" src="../assets/images/Casa-de-la-moneda-y-timbre.png" alt="Casa de la Moneda y Timbre" width="300">
+                <img class="photos" src="assets/images/Casa-de-la-moneda-y-timbre.png" alt="Casa de la Moneda y Timbre" width="300">
                 <h3>NOMBRE DEL BANCO</h3>
-                <button class="masInfo">Más Info</button>
+                <button class="more-info">Más Info</button>
             </div>
         </main>
     </div>
 
-    <div id="modalBanco" class="modal">
+    <div id="modal-bank" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
             <div class="modal-body">
                 <img id="modal-img" src="" alt="Foto del Banco">
                 <div class="modal-info">
-                    <h2 id="modal-nombre">Nombre del Banco</h2>
+                    <h2 id="modal-name">Nombre del Banco</h2>
                     <p><strong>Dirección:</strong> Centro ciudad</p>
-                    <p><strong>Dificultad:</strong> <span id="modal-dificultad">Media</span></p>
+                    <p><strong>Dificultad:</strong> <span id="modal-difficulty">Media</span></p>
                     <p><strong>Datos:</strong> Requiere herramienta nivel 2.</p>
                 </div>
             </div>
-            <button class="btn-reservar-final">RESERVAR</button>
+            <button class="btn-book">RESERVAR</button>
         </div>
     </div>
 
