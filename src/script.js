@@ -62,4 +62,32 @@ document.addEventListener('DOMContentLoaded', function () {
             modal.style.display = 'none';
         }
     });
+
+    // carrusel de “top bancos”
+    const track = document.querySelector('.carousel-track');
+    const prev = document.querySelector('.carousel-btn.prev');
+    const next = document.querySelector('.carousel-btn.next');
+    const slides = track ? track.querySelectorAll('.carousel-slide') : [];
+
+    if (track && prev && next && slides.length) {
+        let currentIndex = 0;
+
+        function goTo(index) {
+            currentIndex = (index + slides.length) % slides.length;
+            const left = slides[currentIndex].offsetLeft;
+            track.scrollTo({ left, behavior: 'smooth' });
+        }
+
+        prev.addEventListener('click', () => goTo(currentIndex - 1));
+        next.addEventListener('click', () => goTo(currentIndex + 1));
+
+        // autoplay: avanza una slide cada 3s y vuelve al principio al llegar al
+        // final; se pausa al pasar el ratón por encima
+        let autoScrollInterval = setInterval(() => goTo(currentIndex + 1), 3000);
+
+        track.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+        track.addEventListener('mouseleave', () => {
+            autoScrollInterval = setInterval(() => goTo(currentIndex + 1), 3000);
+        });
+    }
 });
