@@ -26,37 +26,37 @@ document.addEventListener('DOMContentLoaded', function () {
 	// --- LÓGICA DEL MODAL (POP-UP) ---
     const modal = document.getElementById('modal-bank');
     const closeBtn = document.querySelector('.close-btn');
-    
-    // Elementos dentro del modal que vamos a cambiar
+
     const modalImg = document.getElementById('modal-img');
     const modalName = document.getElementById('modal-name');
+    const modalAddress = document.getElementById('modal-address');
+    const modalDifficulty = document.getElementById('modal-difficulty');
+    const modalDetails = document.getElementById('modal-details');
 
-    // Al hacer clic en "Más Info"
     document.querySelectorAll('.more-info').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const card = e.target.closest('.card');
-            
-            // 1. Extraer los datos de la tarjeta clickeada
-            const bankName = card.querySelector('h3').textContent;
-            const imgSrc = card.querySelector('img').src; 
+            if (!card) return;
 
-            // 2. Inyectar esos datos en el modal
-            modalName.textContent = bankName;
-            modalImg.src = imgSrc;
+            const img = card.querySelector('img');
+            modalImg.src = img?.src || '';
+            modalImg.alt = img?.alt || '';
 
-            // 3. Mostrar el modal (cambiamos de 'none' a 'flex' para centrarlo)
+            modalName.textContent = card.querySelector('h3')?.textContent || 'Banco';
+            modalAddress.textContent = card.dataset.address || 'No disponible';
+            modalDifficulty.textContent = card.dataset.difficulty || 'No disponible';
+            modalDetails.textContent = card.dataset.details || 'No hay más información';
+
             modal.style.display = 'flex';
         });
     });
 
-    // Cerrar el modal al hacer clic en la "X"
     if (closeBtn) {
         closeBtn.addEventListener('click', () => {
             modal.style.display = 'none';
         });
     }
 
-    // Cerrar el modal si el usuario hace clic fuera de la caja (en el fondo oscuro)
     window.addEventListener('click', (e) => {
         if (e.target === modal) {
             modal.style.display = 'none';
