@@ -54,10 +54,18 @@ document.addEventListener('DOMContentLoaded', function () {
 		availabilitySelect.addEventListener('change', filterBanks);
 	}
 
-	// Botón buscar
+	// Botón reiniciar filtros
 	const btnSearch = document.getElementById('btn-search');
 	if (btnSearch) {
 		btnSearch.addEventListener('click', () => {
+			// Limpiar filtros
+			if (locationInput) locationInput.value = '';
+			if (difficultySelect) difficultySelect.value = '';
+			if (availabilitySelect) availabilitySelect.value = 'todos';
+			if (rango) {
+				rango.value = rango.max || 1000; // Asumir máximo 1000 si no está definido
+				if (out) out.textContent = rango.value;
+			}
 			filterBanks();
 		});
 	}
@@ -132,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				const moreInfoBtn = card.querySelector('.more-info');
 				if (!moreInfoBtn.classList.contains('reserved-btn')) {
 					moreInfoBtn.classList.add('reserved-btn');
-					moreInfoBtn.textContent = '✓ RESERVADO';
+					moreInfoBtn.textContent = 'CANCELAR RESERVA';
 				}
 			} else {
 				card.classList.remove('reserved');
