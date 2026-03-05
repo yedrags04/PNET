@@ -7,6 +7,7 @@ class SiteHeader extends HTMLElement {
             { href: 'bancos.html', label: 'BANCOS' },
             { href: 'utensilios.html', label: 'UTENSILIOS' },
             { href: 'FAQ.html', label: 'FAQ' },
+            { href: 'formulario.html', label: 'FORMULARIO' },
         ];
 
         const navLinks = links
