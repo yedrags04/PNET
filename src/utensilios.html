@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Utensilios - HeistCraft</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="components/site-header.js"></script>
     <script src="components/site-footer.js" defer></script>
@@ -15,14 +18,8 @@
 
     <div class="container">
         <aside>
-            <h2>FILTROS</h2>
             <div class="filter-group">
-                <label for="reward">PRECIO</label>
-                <input id="reward" name="price" type="range" min="0" max="100" value="10">
-                <div>Valor: <output id="reward-output">10</output> €</div>
-            </div>
-            <div class="filter-group">
-                <label for="type">TIPO</label>
+                <label for="type">Tipo</label>
                 <select id="type" name="type">
                     <option value="todos">Todos</option>
                     <option value="guantes">Ropa</option>
@@ -31,13 +28,18 @@
                 </select>
             </div>
             <div class="filter-group">
-                <label for="material">MATERIAL</label>
+                <label for="material">Material</label>
                 <select id="material" name="material">
                     <option value="todos">Todos</option>
                     <option value="microfibra">Microfibra</option>
                     <option value="tela">Tela</option>
                     <option value="metal">Metal</option>
                 </select>
+            </div>
+            <div class="filter-group">
+                <label for="reward">Precio</label>
+                <input id="reward" name="price" type="range" min="0" max="100" value="10">
+                <div>Valor: <output id="reward-output">10</output> €</div>
             </div>
         </aside>
 

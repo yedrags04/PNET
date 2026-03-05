@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
 	// Inicializar reservas por defecto si no existen
 	const existingReservations = localStorage.getItem('heistcraft_reservations');
 	if (!existingReservations) {
@@ -146,199 +146,211 @@ document.addEventListener('DOMContentLoaded', function () {
 				card.classList.remove('reserved');
 				const moreInfoBtn = card.querySelector('.more-info');
 				moreInfoBtn.classList.remove('reserved-btn');
-				moreInfoBtn.textContent = 'Más Info';
+				moreInfoBtn.textContent = 'Más info';
 			}
 		});
 	}
 
-	// more-info: manejo básico para todos los botones de más información
 	// --- LÓGICA DEL MODAL (POP-UP) ---
-    const modal = document.getElementById('modal-bank');
-    const closeBtn = document.querySelector('.close-btn');
+	const modal = document.getElementById('modal-bank');
+	const closeBtn = document.querySelector('.close-btn');
 
-    const modalImg = document.getElementById('modal-img');
-    const modalName = document.getElementById('modal-name');
-    const modalAddress = document.getElementById('modal-address');
-    const modalDifficulty = document.getElementById('modal-difficulty');
-    const modalReward = document.getElementById('modal-reward');
-    const modalAvailable = document.getElementById('modal-available');
-    const btnBook = document.querySelector('.btn-book');
-    const btnCancel = document.querySelector('.btn-cancel');
+	const modalImg = document.getElementById('modal-img');
+	const modalName = document.getElementById('modal-name');
+	const modalAddress = document.getElementById('modal-address');
+	const modalDifficulty = document.getElementById('modal-difficulty');
+	const modalReward = document.getElementById('modal-reward');
+	const modalAvailable = document.getElementById('modal-available');
+	const btnBook = document.querySelector('.btn-book');
+	const btnCancel = document.querySelector('.btn-cancel');
 
-    document.querySelectorAll('.more-info').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const card = e.target.closest('.card');
-            if (!card) return;
+	document.querySelectorAll('.more-info').forEach(btn => {
+		btn.addEventListener('click', (e) => {
+			const card = e.target.closest('.card');
+			if (!card) return;
 
-            const img = card.querySelector('img');
-            modalImg.src = img?.src || '';
-            modalImg.alt = img?.alt || '';
+			const img = card.querySelector('img');
+			modalImg.src = img?.src || '';
+			modalImg.alt = img?.alt || '';
 
-            const bankName = card.querySelector('h3')?.textContent || 'Banco';
-            modalName.textContent = bankName;
-            modalAddress.textContent = card.dataset.address || 'No disponible';
-            
-            // Formatear dificultad
-            const difficulty = card.dataset.difficulty || 'No disponible';
-            const difficultyFormatted = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
-            modalDifficulty.textContent = difficultyFormatted;
-            
-            modalReward.textContent = card.dataset.reward || 'No disponible';
-            
-            // Formatear disponibilidad
-            const available = card.dataset.available || 'No disponible';
-            const availableFormatted = available === 'si' ? 'Disponible' : available === 'no' ? 'Ocupado' : available;
-            modalAvailable.textContent = availableFormatted;
+			const bankName = card.querySelector('h3')?.textContent || 'Banco';
+			modalName.textContent = bankName;
+			modalAddress.textContent = card.dataset.address || 'No disponible';
 
-            // Verificar si ya está reservado y actualizar botones
-            if (isReserved(bankName)) {
-                btnBook.style.display = 'none';
-                btnCancel.style.display = 'block';
-                btnBook.disabled = false;
-                btnBook.classList.remove('disabled');
-            } else {
-                btnBook.style.display = 'block';
-                btnCancel.style.display = 'none';
-                btnBook.disabled = false;
-                btnBook.classList.remove('disabled');
-            }
+			// Formatear dificultad
+			const difficulty = card.dataset.difficulty || 'No disponible';
+			const difficultyFormatted = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
+			modalDifficulty.textContent = difficultyFormatted;
 
-            modal.style.display = 'flex';
-        });
-    });
+			modalReward.textContent = card.dataset.reward || 'No disponible';
 
-    if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-    }
+			// Formatear disponibilidad
+			const available = card.dataset.available || 'No disponible';
+			const availableFormatted = available === 'si' ? 'Disponible' : available === 'no' ? 'Ocupado' : available;
+			modalAvailable.textContent = availableFormatted;
 
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
+			// Verificar si ya está reservado y actualizar botones
+			if (isReserved(bankName)) {
+				btnBook.style.display = 'none';
+				btnCancel.style.display = 'block';
+				btnBook.disabled = false;
+				btnBook.classList.remove('disabled');
+			} else {
+				btnBook.style.display = 'block';
+				btnCancel.style.display = 'none';
+				btnBook.disabled = false;
+				btnBook.classList.remove('disabled');
+			}
 
-    // Botón RESERVAR
-    if (btnBook) {
-        btnBook.addEventListener('click', () => {
-            // Evitar reserva si ya está deshabilitado
-            if (btnBook.disabled) return;
+			modal.style.display = 'flex';
+		});
+	});
 
-            const bankName = modalName.textContent;
-            const bankAddress = modalAddress.textContent;
-            const bankReward = modalReward.textContent;
-            const bankDifficulty = modalDifficulty.textContent;
-            
-            // Crear objeto de reserva
-            const reservation = {
-                id: Date.now(),
-                bankName: bankName,
-                address: bankAddress,
-                reward: bankReward,
-                difficulty: bankDifficulty,
-                date: new Date().toLocaleDateString('es-ES'),
-                time: new Date().toLocaleTimeString('es-ES')
-            };
-            
-            // Obtener reservas existentes del localStorage
-            let reservations = JSON.parse(localStorage.getItem('heistcraft_reservations')) || [];
-            
-            // Agregar nueva reserva
-            reservations.push(reservation);
-            
-            // Guardar en localStorage
-            localStorage.setItem('heistcraft_reservations', JSON.stringify(reservations));
-            
-            // Mostrar confirmación
-            alert(`✓ RESERVA CONFIRMADA\n\n${bankName}\n${bankAddress}\nRecompensa: ${bankReward}€\nDificultad: ${bankDifficulty}\n\nFecha: ${reservation.date}\nHora: ${reservation.time}`);
-            
-            // Actualizar estado de las tarjetas
-            updateReservationStatus();
-            
-            // Cerrar modal
-            modal.style.display = 'none';
-        });
-    }
+	if (closeBtn) {
+		closeBtn.addEventListener('click', () => {
+			modal.style.display = 'none';
+		});
+	}
 
-    // Botón CANCELAR RESERVA
-    if (btnCancel) {
-        btnCancel.addEventListener('click', () => {
-            const bankName = modalName.textContent;
-            
-            // Obtener reservas del localStorage
-            let reservations = JSON.parse(localStorage.getItem('heistcraft_reservations')) || [];
-            
-            // Filtrar para eliminar la reserva del banco seleccionado
-            reservations = reservations.filter(reservation => reservation.bankName !== bankName);
-            
-            // Guardar en localStorage
-            localStorage.setItem('heistcraft_reservations', JSON.stringify(reservations));
-            
-            // Mostrar confirmación
-            alert(`✓ RESERVA CANCELADA\n\n${bankName}`);
-            
-            // Actualizar estado de las tarjetas
-            updateReservationStatus();
-            
-            // Cerrar modal
-            modal.style.display = 'none';
-        });
-    }
+	window.addEventListener('click', (e) => {
+		if (e.target === modal) {
+			modal.style.display = 'none';
+		}
+	});
 
-    // carrusel de “top bancos”
-    const track = document.querySelector('.carousel-track');
-    const prev = document.querySelector('.carousel-btn.prev');
-    const next = document.querySelector('.carousel-btn.next');
-    const slides = track ? track.querySelectorAll('.carousel-slide') : [];
+	// Botón RESERVAR
+	if (btnBook) {
+		btnBook.addEventListener('click', () => {
+			// Evitar reserva si ya está deshabilitado
+			if (btnBook.disabled) return;
 
-    if (track && prev && next && slides.length) {
-        let currentIndex = 0;
+			const bankName = modalName.textContent;
+			const bankAddress = modalAddress.textContent;
+			const bankReward = modalReward.textContent;
+			const bankDifficulty = modalDifficulty.textContent;
 
-        function goTo(index) {
-            currentIndex = (index + slides.length) % slides.length;
-            const left = slides[currentIndex].offsetLeft;
-            track.scrollTo({ left, behavior: 'smooth' });
-        }
+			// Crear objeto de reserva
+			const reservation = {
+				id: Date.now(),
+				bankName: bankName,
+				address: bankAddress,
+				reward: bankReward,
+				difficulty: bankDifficulty,
+				date: new Date().toLocaleDateString('es-ES'),
+				time: new Date().toLocaleTimeString('es-ES')
+			};
 
-        prev.addEventListener('click', () => goTo(currentIndex - 1));
-        next.addEventListener('click', () => goTo(currentIndex + 1));
+			// Obtener reservas existentes del localStorage
+			let reservations = JSON.parse(localStorage.getItem('heistcraft_reservations')) || [];
 
-        // autoplay: avanza una slide cada 3s y vuelve al principio al llegar al
-        // final; se pausa al pasar el ratón por encima
-        let autoScrollInterval = setInterval(() => goTo(currentIndex + 1), 3000);
+			// Agregar nueva reserva
+			reservations.push(reservation);
 
-        track.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
-        track.addEventListener('mouseleave', () => {
-            autoScrollInterval = setInterval(() => goTo(currentIndex + 1), 3000);
-        });
-    }
-});
+			// Guardar en localStorage
+			localStorage.setItem('heistcraft_reservations', JSON.stringify(reservations));
 
-// FAQ Accordion
-document.addEventListener('DOMContentLoaded', function () {
-    const faqQuestions = document.querySelectorAll('.faq-question');
-    
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', () => {
-            const faqItem = question.closest('.faq-item');
-            const faqAnswer = faqItem.querySelector('.faq-answer');
-            
-            // Obtener el estado actual
-            const isActive = question.classList.contains('active');
-            
-            // Cerrar todos los items abiertos
-            document.querySelectorAll('.faq-item').forEach(item => {
-                item.querySelector('.faq-question').classList.remove('active');
-                item.querySelector('.faq-answer').classList.remove('active');
-            });
-            
-            // Si no estaba activo, abrirlo
-            if (!isActive) {
-                question.classList.add('active');
-                faqAnswer.classList.add('active');
-            }
-        });
-    });
-    
+			// Mostrar confirmación
+			alert(`✓ RESERVA CONFIRMADA\n\n${bankName}\n${bankAddress}\nRecompensa: ${bankReward}€\nDificultad: ${bankDifficulty}\n\nFecha: ${reservation.date}\nHora: ${reservation.time}`);
+
+			// Actualizar estado de las tarjetas
+			updateReservationStatus();
+
+			// Cerrar modal
+			modal.style.display = 'none';
+		});
+	}
+
+	// Botón CANCELAR RESERVA
+	if (btnCancel) {
+		btnCancel.addEventListener('click', () => {
+			const bankName = modalName.textContent;
+
+			// Obtener reservas del localStorage
+			let reservations = JSON.parse(localStorage.getItem('heistcraft_reservations')) || [];
+
+			// Filtrar para eliminar la reserva del banco seleccionado
+			reservations = reservations.filter(reservation => reservation.bankName !== bankName);
+
+			// Guardar en localStorage
+			localStorage.setItem('heistcraft_reservations', JSON.stringify(reservations));
+
+			// Mostrar confirmación
+			alert(`✓ RESERVA CANCELADA\n\n${bankName}`);
+
+			// Actualizar estado de las tarjetas
+			updateReservationStatus();
+
+			// Cerrar modal
+			modal.style.display = 'none';
+		});
+	}
+
+	// carrusel de “top bancos”
+	const track = document.querySelector('.carousel-track');
+	const prev = document.querySelector('.carousel-btn.prev');
+	const next = document.querySelector('.carousel-btn.next');
+	const slides = track ? track.querySelectorAll('.carousel-slide') : [];
+
+	if (track && prev && next && slides.length) {
+		let currentIndex = 0;
+
+		function goTo(index) {
+			currentIndex = (index + slides.length) % slides.length;
+			const left = slides[currentIndex].offsetLeft;
+			track.scrollTo({ left, behavior: 'smooth' });
+		}
+
+		prev.addEventListener('click', () => goTo(currentIndex - 1));
+		next.addEventListener('click', () => goTo(currentIndex + 1));
+
+		// autoplay: avanza una slide cada 3s y vuelve al principio al llegar al
+		// final; se pausa al pasar el ratón por encima
+		let autoScrollInterval = setInterval(() => goTo(currentIndex + 1), 3000);
+
+		track.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+		track.addEventListener('mouseleave', () => {
+			autoScrollInterval = setInterval(() => goTo(currentIndex + 1), 3000);
+		});
+	}
+
+	// FAQ Accordion — animación max-height + solo uno abierto a la vez
+	function closeFaqItem(details) {
+		const answer = details.querySelector('.faq-answer');
+		answer.style.maxHeight = answer.scrollHeight + 'px';
+		answer.offsetHeight; // fuerza reflow
+		answer.style.maxHeight = '0';
+		answer.addEventListener('transitionend', () => {
+			details.removeAttribute('open');
+			answer.style.maxHeight = '';
+		}, { once: true });
+	}
+
+	function openFaqItem(details) {
+		details.setAttribute('open', '');
+		const answer = details.querySelector('.faq-answer');
+		answer.style.maxHeight = '0';
+		answer.offsetHeight; // fuerza reflow
+		answer.style.maxHeight = answer.scrollHeight + 'px';
+		answer.addEventListener('transitionend', () => {
+			answer.style.maxHeight = '';
+		}, { once: true });
+	}
+
+	document.querySelector('.faq-container')?.querySelectorAll('details.faq-item').forEach(details => {
+		details.querySelector('summary').addEventListener('click', e => {
+			e.preventDefault();
+			const isOpen = details.hasAttribute('open');
+
+			// Cerrar todos los demás
+			document.querySelectorAll('.faq-container details[open]').forEach(d => {
+				if (d !== details) closeFaqItem(d);
+			});
+
+			if (isOpen) {
+				closeFaqItem(details);
+			} else {
+				openFaqItem(details);
+			}
+		});
+	});
 });

@@ -1,74 +1,4 @@
-/* DM Sans */
-@font-face {
-    font-family: "DM Sans";
-    font-style: normal;
-    font-weight: 400;
-    src: url("assets/fonts/dm-sans-latin-400-normal.woff2") format("woff2");
-}
-
-@font-face {
-    font-family: "DM Sans";
-    font-style: italic;
-    font-weight: 400;
-    src: url("assets/fonts/dm-sans-latin-400-italic.woff2") format("woff2");
-}
-
-@font-face {
-    font-family: "DM Sans";
-    font-style: normal;
-    font-weight: 500;
-    src: url("assets/fonts/dm-sans-latin-500-normal.woff2") format("woff2");
-}
-
-@font-face {
-    font-family: "DM Sans";
-    font-style: italic;
-    font-weight: 500;
-    src: url("assets/fonts/dm-sans-latin-500-italic.woff2") format("woff2");
-}
-
-@font-face {
-    font-family: "DM Sans";
-    font-style: normal;
-    font-weight: 700;
-    src: url("assets/fonts/dm-sans-latin-700-normal.woff2") format("woff2");
-}
-
-@font-face {
-    font-family: "DM Sans";
-    font-style: italic;
-    font-weight: 700;
-    src: url("assets/fonts/dm-sans-latin-700-italic.woff2") format("woff2");
-}
-
-@font-face {
-    font-family: "DM Sans";
-    font-style: normal;
-    font-weight: 800;
-    src: url("assets/fonts/dm-sans-latin-800-normal.woff2") format("woff2");
-}
-
-@font-face {
-    font-family: "DM Sans";
-    font-style: italic;
-    font-weight: 800;
-    src: url("assets/fonts/dm-sans-latin-800-italic.woff2") format("woff2");
-}
-
-/* DM Serif Display */
-@font-face {
-    font-family: "DM Serif Display";
-    font-style: normal;
-    font-weight: 400;
-    src: url("assets/fonts/dm-serif-display-latin-400-normal.woff2") format("woff2");
-}
-
-@font-face {
-    font-family: "DM Serif Display";
-    font-style: italic;
-    font-weight: 400;
-    src: url("assets/fonts/dm-serif-display-latin-400-italic.woff2") format("woff2");
-}
+/* ===== VARIABLES ===== */
 
 :root {
     --color-surface: #18181b;
@@ -86,37 +16,79 @@
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
+
+/* ===== RESET & BASE ===== */
+
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 html {
     color-scheme: dark;
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-input,
-select {
-    font-family: inherit;
-
-    &:focus {
-        outline: 1px var(--color-accent) solid;
-    }
-}
-
 body {
     font-family: var(--font-sans);
-    margin: 0;
     background: var(--color-surface);
     min-height: 100dvh;
     display: flex;
     flex-direction: column;
 }
+
+
+/* ===== ELEMENTOS BASE ===== */
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    background-color: var(--color-overlay);
+    border: none;
+    font-weight: 600;
+    box-shadow: var(--shadow-sm);
+    border-radius: 99px;
+}
+
+label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+input,
+select {
+    font-family: inherit;
+    width: 100%;
+    color: inherit;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--color-overlay);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 150ms;
+}
+
+input[type="range"] {
+    box-shadow: none;
+}
+
+input::placeholder {
+    color: var(--color-muted);
+}
+
+*:focus-visible,
+input[type="range"]:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+
+/* ===== LAYOUT ===== */
 
 site-header,
 site-footer {
@@ -127,6 +99,7 @@ header {
     top: 0;
     z-index: 99;
     position: sticky;
+    overflow-x: scroll;
     box-shadow: var(--shadow-lg);
     background: var(--color-raised);
     display: flex;
@@ -134,6 +107,7 @@ header {
     align-items: center;
     min-height: 70px;
     padding-inline: 2rem;
+    view-transition-name: site-header;
 
     h1 {
         font-family: var(--font-heading);
@@ -149,10 +123,12 @@ nav {
 nav a {
     font-weight: bold;
     padding: 0.4rem 1rem;
-    border-radius: 8px;
+    border-radius: 99px;
+    transition: background-color 200ms;
 
     &:hover {
         background-color: var(--color-overlay);
+        box-shadow: var(--shadow-sm);
     }
 
     &.active {
@@ -168,8 +144,15 @@ nav a {
     display: flex;
     padding: 20px;
     gap: 20px;
-    box-sizing: border-box;
     flex-grow: 1;
+}
+
+main {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    align-content: start;
 }
 
 aside {
@@ -182,41 +165,28 @@ aside {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
 }
+
+footer {
+    background: var(--color-raised);
+    color: var(--color-muted);
+    text-align: center;
+    padding: 1.5rem 1rem;
+    margin-top: auto;
+    font-size: 0.875rem;
+}
+
+
+/* ===== COMPONENTES ===== */
 
 .filter-group {
     margin-bottom: 15px;
 }
 
-label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-select,
-input {
+#btn-search {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-    border-radius: 4px;
-    border: 1px solid var(--color-raised);
-    background-color: var(--color-overlay);
-}
-
-input[type="range"] {
-    padding: 0;
-}
-
-main {
-    flex-grow: 1;
-    display: grid;
-    grid-template-columns:
-        repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    align-content: start;
+    cursor: pointer;
+    padding: 10px;
 }
 
 .card {
@@ -227,8 +197,18 @@ main {
     padding-bottom: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
+    h3,
+    p {
+        margin: 10px 15px;
+    }
+
     h3 {
-        padding-inline: 15px;
+        font-family: var(--font-heading);
+        font-size: 1.1rem;
+    }
+
+    p {
+        color: var(--color-muted);
     }
 }
 
@@ -238,31 +218,18 @@ main {
     box-shadow: 0 0 15px var(--color-warn);
 }
 
-#btn-search {
-    width: 100%;
-    padding: 10px;
-}
-
 .photos {
-    background: #ddd;
+    background-color: var(--color-overlay);
     height: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #666;
-}
-
-.card h3 {
-    margin: 10px 0;
-    font-size: 1.1rem;
-    color: var(--color-text);
-    font-family: var(--font-sans);
+    color: var(--color-muted);
 }
 
 .more-info {
     background: var(--color-overlay);
     color: var(--color-text);
-    font-family: var(--font-sans);
     border: none;
     padding: 8px 15px;
     border-radius: 20px;
@@ -275,10 +242,11 @@ main {
     opacity: 0.7;
 }
 
-/* --- ESTILOS DEL MODAL (POP-UP) --- */
+
+/* ===== MODAL ===== */
+
 .modal {
     display: none;
-    /* Oculto por defecto */
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -286,9 +254,12 @@ main {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
-    /* Fondo oscuro */
     justify-content: center;
     align-items: center;
+}
+
+#modal-name {
+    font-family: var(--font-heading);
 }
 
 .modal-content {
@@ -302,23 +273,18 @@ main {
     position: relative;
 }
 
-/* Botón de cerrar (la X) */
 .close-btn {
     position: absolute;
     top: 15px;
+    padding: 10px;
     right: 20px;
-    color: var(--color-muted);
-    font-size: 28px;
-    font-weight: bold;
     cursor: pointer;
 
     &:hover {
-        /* Se pone rojo al pasar el ratón */
         color: var(--color-error);
     }
 }
 
-/* Distribución Foto - Texto */
 .modal-body {
     display: flex;
     gap: 20px;
@@ -346,7 +312,6 @@ main {
     }
 }
 
-/* Botón de Reservar */
 .modal-buttons {
     display: flex;
     gap: 10px;
@@ -398,32 +363,17 @@ main {
     }
 }
 
-/* Footer */
-footer {
-    background: var(--color-raised);
-    color: var(--color-muted);
-    text-align: center;
-    padding: 1.5rem 1rem;
-    margin-top: auto;
-    font-size: 0.875rem;
-}
 
+/* ===== PÁGINA DE INICIO ===== */
 
-/* =========================================================
-   ESTILOS ESPECÍFICOS PARA LA PÁGINA DE INICIO (INDEX) 
-   ========================================================= */
-
-/* Rompemos el layout de barra lateral para que ocupe todo el ancho */
 .home-container {
     flex-direction: column;
 }
 
 .home-main {
     display: block;
-    /* Sobrescribe el display: grid global */
 }
 
-/* Título estilo Hero */
 .hero-title {
     font-family: var(--font-heading);
     font-size: 3rem;
@@ -433,27 +383,23 @@ footer {
     color: var(--color-text);
 }
 
-/* --- Barra de Búsqueda Horizontal --- */
 .horizontal-search-bar {
     display: flex;
     gap: 15px;
     background: var(--color-raised);
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 14px;
     box-shadow: var(--shadow-sm);
     margin-bottom: 3rem;
     align-items: center;
 }
 
-/* Forzamos a que los inputs aquí no tengan el margin inferior global */
 .horizontal-search-bar input,
 .horizontal-search-bar select {
     margin-bottom: 0;
     flex: 1;
-    /* Hacemos que todos los cajetines midan lo mismo */
 }
 
-/* Contenedor para poner la lupa dentro del input */
 .input-icon {
     display: flex;
     align-items: center;
@@ -469,33 +415,14 @@ footer {
 
 .input-icon input {
     padding-left: 35px;
-    /* Dejamos espacio para que el texto no pise la lupa */
     width: 100%;
 }
 
-/* --- Sección Top Bancos --- */
 .section-title {
     font-family: var(--font-heading);
     font-size: 2rem;
     margin-bottom: 1rem;
     color: var(--color-text);
-}
-
-/* Grid de 3 columnas exactas para las fotos grandes */
-.top-banks-layout {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.large-card {
-    background: var(--color-raised);
-    border-radius: 8px;
-    overflow: hidden;
-    height: 350px;
-    /* Hacemos la tarjeta bastante alta */
-    box-shadow: var(--shadow-lg);
-    border: 1px solid var(--color-overlay);
 }
 
 .card img {
@@ -504,26 +431,30 @@ footer {
     object-fit: cover;
 }
 
-/* La imagen ocupa toda la tarjeta grande */
-.large-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* Evita que la foto se estire feo */
-    transition: transform 0.3s ease;
+.large-card {
+    background: var(--color-raised);
+    border-radius: 8px;
+    overflow: hidden;
+    height: 350px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-overlay);
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    &:hover img {
+        transform: scale(1.05);
+    }
 }
 
-/* Pequeño efecto al pasar el ratón */
-.large-card:hover img {
-    transform: scale(1.05);
-}
-
-/* carrusel de “top bancos” */
 .carousel {
     position: relative;
     width: 100%;
     overflow: hidden;
-    /* ocultamos la barra de scroll */
 }
 
 .carousel-track {
@@ -532,45 +463,67 @@ footer {
     overflow-x: auto;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
-    /* ya estaba */
     padding: 10px 0;
-    /* un poquito de espacio arriba/abajo */
-}
-
-/* opcional, oculta scrollbar en navegadores webkit */
-.carousel-track::-webkit-scrollbar {
-    display: none;
-}
-
-.carousel-track {
     -ms-overflow-style: none;
     scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 .carousel-slide {
     flex: 0 0 33.33%;
-    /* una tercera parte del ancho */
     max-width: 350px;
-    /* igual que la altura de las tarjetas grandes */
     height: 350px;
-    /* mismo alto que las antiguas large‑card */
     scroll-snap-align: start;
-}
 
-.carousel-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    border-radius: 8px;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 8px;
+    }
 }
 
 .carousel-btn {
     display: none;
-    /* desaparecen las flechas */
 }
 
-/* FAQ Styles */
+main h2 {
+    grid-column: 1 / -1;
+    font-size: 2.5rem;
+    color: var(--color-text);
+    margin-bottom: 0;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+main h2 i {
+    color: var(--color-accent);
+    font-size: 2.2rem;
+    margin-right: 0.5rem;
+}
+
+
+/* ===== FAQ ===== */
+
+#faq-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+
+#faq-subtitle {
+    grid-column: 1 / -1;
+    font-weight: 400;
+    color: var(--color-muted);
+    font-size: 1.1rem;
+    text-align: center;
+}
+
 .faq-container {
     grid-column: 1 / -1;
     max-width: 900px;
@@ -582,26 +535,25 @@ footer {
     padding: 2rem 1rem;
 }
 
-.faq-item {
+details.faq-item {
     border: 2px solid var(--color-overlay);
     border-radius: 12px;
     overflow: hidden;
     background: var(--color-raised);
     box-shadow: var(--shadow-sm);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+
+    &:hover {
+        border-color: var(--color-accent);
+        box-shadow: 0 8px 24px rgba(253, 199, 0, 0.15);
+        transform: translateY(-3px);
+    }
 }
 
-.faq-item:hover {
-    border-color: var(--color-accent);
-    box-shadow: 0 8px 24px rgba(253, 199, 0, 0.15);
-    transform: translateY(-3px);
-}
-
-.faq-question {
-    width: 100%;
+details.faq-item>summary.faq-question {
+    list-style: none;
     padding: 1.8rem 2rem;
     background: linear-gradient(135deg, var(--color-raised) 0%, rgba(253, 199, 0, 0.02) 100%);
-    border: none;
     color: var(--color-text);
     font-size: 1.1rem;
     font-weight: 700;
@@ -610,74 +562,87 @@ footer {
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
-    transition: all 0.3s ease;
-    font-family: var(--font-sans);
+    transition: background 0.3s, color 0.3s;
     letter-spacing: 0.3px;
+
+    &::-webkit-details-marker {
+        display: none;
+    }
+
+    &:hover {
+        background: linear-gradient(135deg, var(--color-overlay) 0%, rgba(253, 199, 0, 0.08) 100%);
+    }
+
+    .hgi {
+        flex-shrink: 0;
+        color: var(--color-accent);
+        font-size: 1.3rem;
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
 }
 
-.faq-question:hover {
-    background: linear-gradient(135deg, var(--color-overlay) 0%, rgba(253, 199, 0, 0.08) 100%);
-}
-
-.faq-question.active {
+details.faq-item[open]>summary.faq-question {
     background: linear-gradient(135deg, var(--color-overlay) 0%, rgba(253, 199, 0, 0.1) 100%);
     color: var(--color-accent);
-}
 
-.faq-question span {
-    flex: 1;
-    text-align: left;
-}
-
-.faq-question i {
-    flex-shrink: 0;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    color: var(--color-accent);
-    font-size: 1.3rem;
-}
-
-.faq-question.active i {
-    transform: rotate(180deg);
+    .hgi {
+        transform: rotate(180deg);
+    }
 }
 
 .faq-answer {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     background: linear-gradient(180deg, rgba(253, 199, 0, 0.03) 0%, var(--color-surface) 100%);
     border-top: 1px solid rgba(253, 199, 0, 0.1);
+
+    p {
+        padding: 1.8rem 2rem;
+        color: var(--color-muted);
+        line-height: 1.9;
+        font-size: 0.99rem;
+        margin: 0;
+
+        strong {
+            color: var(--color-accent);
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+    }
 }
 
-.faq-answer.active {
+details[open]>.faq-answer {
     max-height: 700px;
-    padding: 1.8rem 2rem;
 }
 
-.faq-answer p {
-    color: var(--color-muted);
-    line-height: 1.9;
-    font-size: 0.99rem;
-    margin: 0;
+
+/* ===== VIEW TRANSITIONS ===== */
+
+@view-transition {
+    navigation: auto;
 }
 
-.faq-answer p strong {
-    color: var(--color-accent);
-    font-weight: 700;
-    letter-spacing: 0.2px;
+::view-transition-old(site-header),
+::view-transition-new(site-header) {
+    animation: none;
+    mix-blend-mode: normal;
 }
 
-main h1 {
-    grid-column: 1 / -1;
-    font-size: 2.5rem;
-    text-align: center;
-    color: var(--color-text);
-    margin-bottom: 0;
-    font-weight: 800;
-    letter-spacing: -0.5px;
+::view-transition-old(root) {
+    animation: none;
 }
 
-main h1 i {
-    color: var(--color-accent);
-    font-size: 2.2rem;
-    margin-right: 0.5rem;
+::view-transition-new(root) {
+    animation: fade 0.1s linear reverse;
+}
+
+@keyframes fade {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
 }

@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="style.css">
     <script src="components/site-header.js"></script>
     <script src="components/site-footer.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
     <script src="js/script.js" defer></script>
     <link rel="stylesheet" href="https://use.hugeicons.com/font/icons.css" crossorigin="anonymous">
 </head>
@@ -15,13 +18,12 @@
 
     <div class="container">
         <aside>
-            <h2>FILTRO</h2>
             <div class="filter-group">
-                <label for="location">LOCALIZACIÓN</label>
+                <label for="location">Localización</label>
                 <input id="location" name="location" type="text" placeholder="Ej: Madrid">
             </div>
             <div class="filter-group">
-                <label for="difficulty">DIFICULTAD</label>
+                <label for="difficulty">Dificultad</label>
                 <select id="difficulty" name="difficulty">
                     <option value="">Todos</option>
                     <option value="facil">Fácil</option>
@@ -30,93 +32,95 @@
                 </select>
             </div>
             <div class="filter-group">
-                <label for="reward">DINERO A GANAR</label>
+                <label for="reward">Dinero a ganar</label>
                 <input id="reward" name="reward" type="range" min="0" max="1000" value="500">
                 <div>Valor: <output id="reward-output">500</output> €</div>
             </div>
             <div class="filter-group">
-                <label for="availability">DISPONIBILIDAD</label>
+                <label for="availability">Disponibilidad</label>
                 <select id="availability" name="availability">
                     <option value="todos">Todos</option>
                     <option value="si">Sí (Disponible)</option>
                     <option value="no">No (Ocupado)</option>
                 </select>
             </div>
-            <button id="btn-search">QUITAR FILTROS</button>
+            <button id="btn-search">Quitar filtros</button>
         </aside>
 
         <main>
             <div class="card" data-address="C/ Mayor 1, Oviedo" data-difficulty="facil" data-reward="300" data-available="si">
                 <img class="photos" src="assets/images/banco-asturias.png" alt="Banco Asturias" width="300">
                 <h3>BANCO DE ASTURIAS</h3>
-                <button class="more-info">Más Info</button>
+                <button class="more-info">Más info</button>
             </div>
 
             <div class="card" data-address="Paseo 2, Barcelona" data-difficulty="alta" data-reward="800" data-available="no">
                 <img class="photos" src="assets/images/Banco-barcelona.png" alt="Banco Barcelona" width="300">
                 <h3>BANCO DE BARCELONA</h3>
-                <button class="more-info">Más Info</button>
+                <button class="more-info">Más info</button>
             </div>
 
             <div class="card" data-address="C/ de España 1, Madrid" data-difficulty="media" data-reward="550" data-available="si">
                 <img class="photos" src="assets/images/banco-de-españa.png" alt="Banco de España" width="300">
                 <h3>BANCO DE ESPAÑA</h3>
-                <button class="more-info">Más Info</button>
+                <button class="more-info">Más info</button>
             </div>
 
             <div class="card" data-address="C/ de Madrid 1, Madrid" data-difficulty="alta" data-reward="900" data-available="si">
                 <img class="photos" src="assets/images/Banco-madrid.png" alt="Banco Madrid" width="300">
                 <h3>BANCO DE MADRID</h3>
-                <button class="more-info">Más Info</button>
+                <button class="more-info">Más info</button>
             </div>
 
             <div class="card" data-address="C/ de Bankinter 1, Madrid" data-difficulty="media" data-reward="600" data-available="no">
                 <img class="photos" src="assets/images/bankinter.png" alt="Bankinter" width="300">
                 <h3>BANCO BANKINTER</h3>
-                <button class="more-info">Más Info</button>
+                <button class="more-info">Más info</button>
             </div>
 
             <div class="card" data-address="C/ de BBVA 1, Madrid" data-difficulty="alta" data-reward="850" data-available="si">
                 <img class="photos" src="assets/images/BBVA.png" alt="BBVA" width="300">
                 <h3>BANCO BBVA</h3>
-                <button class="more-info">Más Info</button>
+                <button class="more-info">Más info</button>
             </div>
 
             <div class="card" data-address="C/ de la Moneda 1, Barcelona" data-difficulty="media" data-reward="650" data-available="si">
                 <img class="photos" src="assets/images/Casa-de-la-moneda-barceona.png" alt="Casa de la Moneda Barcelona" width="300">
                 <h3>CASA DE LA MONEDA BARCELONA</h3>
-                <button class="more-info">Más Info</button>
+                <button class="more-info">Más info</button>
             </div>
 
             <div class="card" data-address="C/ de la Moneda 1, París" data-difficulty="alta" data-reward="1000" data-available="no">
                 <img class="photos" src="assets/images/casa-de-la-moneda-paris.png" alt="Casa de la Moneda París" width="300">
                 <h3>CASA DE LA MONEDA PARÍS</h3>
-                <button class="more-info">Más Info</button>
+                <button class="more-info">Más info</button>
             </div>
 
             <div class="card" data-address="C/ de la Moneda 1, Segovia" data-difficulty="media" data-reward="500" data-available="si">
                 <img class="photos" src="assets/images/casa-de-la-moneda-segobia.png" alt="Casa de la Moneda Segovia" width="300">
                 <h3>CASA DE LA MONEDA SEGOVIA</h3>
-                <button class="more-info">Más Info</button>
+                <button class="more-info">Más info</button>
             </div>
 
             <div class="card" data-address="C/ de la Moneda 1, Sevilla" data-difficulty="alta" data-reward="750" data-available="si">
                 <img class="photos" src="assets/images/Casa-de-la-moneda-sevilla.png" alt="Casa de la Moneda Sevilla" width="300">
                 <h3>CASA DE LA MONEDA SEVILLA</h3>
-                <button class="more-info">Más Info</button>
+                <button class="more-info">Más info</button>
             </div>
 
             <div class="card" data-address="C/ de la Moneda 1, Y Timbre" data-difficulty="media" data-reward="590" data-available="no">
                 <img class="photos" src="assets/images/Casa-de-la-moneda-y-timbre.png" alt="Casa de la Moneda y Timbre" width="300">
                 <h3>CASA DE LA MONEDA Y TIMBRE</h3>
-                <button class="more-info">Más Info</button>
+                <button class="more-info">Más info</button>
             </div>
         </main>
     </div>
 
     <div id="modal-bank" class="modal">
         <div class="modal-content">
-            <span class="close-btn">&times;</span>
+            <span class="close-btn">
+                <i class="hgi hgi-stroke hgi-cancel-01"></i>
+            </span>
             <div class="modal-body">
                 <img id="modal-img" src="" alt="Foto del Banco">
                 <div class="modal-info">
