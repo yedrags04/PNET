@@ -333,20 +333,4 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
     
-    // Efecto al pasar el mouse en desktop
-    if (window.matchMedia('(hover: hover)').matches) {
-        faqQuestions.forEach(question => {
-            question.addEventListener('mouseenter', function() {
-                if (!question.classList.contains('active')) {
-                    question.style.color = 'var(--color-accent)';
-                }
-            });
-            
-            question.addEventListener('mouseleave', function() {
-                if (!question.classList.contains('active')) {
-                    question.style.color = 'var(--color-text)';
-                }
-            });
-        });
-    }
 });
