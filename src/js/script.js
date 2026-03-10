@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 			// Mostrar u ocultar la tarjeta
 			if (matches) {
-				card.style.display = 'block';
+				card.style.display = 'flex';
 				visibleCount++;
 			} else {
 				card.style.display = 'none';
