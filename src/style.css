@@ -48,6 +48,7 @@ a {
 button {
     background-color: var(--color-overlay);
     border: none;
+    font-family: inherit;
     font-weight: 600;
     box-shadow: var(--shadow-sm);
     border-radius: 99px;
