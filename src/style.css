@@ -100,7 +100,7 @@ header {
     top: 0;
     z-index: 99;
     position: sticky;
-    overflow-x: scroll;
+    overflow-x: auto;
     box-shadow: var(--shadow-lg);
     background: var(--color-raised);
     display: flex;
@@ -199,6 +199,7 @@ footer {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+
     h3,
     p {
         margin: 10px 15px;
@@ -512,11 +513,11 @@ main h2 i {
 
 /* ===== UTENSILIOS ===== */
 
-.btn-add{
+.btn-add {
     background-color: var(--color-accent);
     color: var(--color-surface);
     font-weight: 600;
-    box-shadow: var(--shadow-sm); 
+    box-shadow: var(--shadow-sm);
     border-radius: 99px;
     padding: 10px 20px;
     margin-top: auto;
@@ -525,38 +526,41 @@ main h2 i {
     padding: 8px 16px;
     font-size: 14px;
     transition: transform 0.4s;
+
     &:hover {
         transform: scale(1.05);
     }
 
 }
 
-.btn-comprar{
+.btn-comprar {
     background-color: var(--color-accent);
     color: var(--color-surface);
     font-weight: 600;
     font-size: 22px;
-    box-shadow: var(--shadow-sm); 
-    width: 50px;         
+    box-shadow: var(--shadow-sm);
+    width: 50px;
     height: 50px;
-    display: flex;        
+    transition: transform 200ms, opacity 100ms;
+    display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     position: fixed;
     bottom: 30px;
     right: 30px;
+
     &:hover {
         transform: scale(1.05);
     }
 }
 
 .btn-comprar:disabled {
-    visibility: hidden;
+    opacity: 0;
 }
 
-.btn-close-panel{
-    color: var(--color-accent);
+.btn-close-panel {
+    color: var(--color-error);
     font-size: 22px;
     background: none;
     border: none;
@@ -572,12 +576,12 @@ main h2 i {
     background-color: var(--color-raised);
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    transition: right 0.3s ease;
+    transition: right 0.3s cubic-bezier(0.25, 1, 0.5, 1);
     display: flex;
     flex-direction: column;
     gap: 20px;
 
-    z-index: 1001;
+    z-index: 100;
 
     &.open {
         right: 0;
@@ -585,11 +589,11 @@ main h2 i {
 }
 
 .panel-header {
-    display: flex;        
-    align-items: center;    
-    justify-content: space-between; 
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* ===== FAQ ===== */

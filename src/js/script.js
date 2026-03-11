@@ -355,23 +355,35 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 });
 
+function openCart(btn) {
+	const panel = document.getElementById('side-panel');
+	panel.classList.add('open'); // Añade la clase y el panel se muestra
+	btn.disabled = true; // Deshabilita el botón
+}
+
+function closeCart(btn) {
+	const panel = document.getElementById('side-panel');
+	panel.classList.remove('open'); // Quita la clase y el panel se esconde
+	setTimeout(() => {
+		btn.disabled = false; // Rehabilita el botón
+	}, 300);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Seleccionamos los elementos
-    const panel = document.getElementById('side-panel');
-    const btnComprar = document.querySelector('.btn-comprar'); // El botón que abre
-    const btnClose = document.getElementById('btn-close-panel'); // El botón que cierra
+	const btnComprar = document.querySelector('.btn-comprar');
+	const btnClose = document.getElementById('btn-close-panel');
 
-    // 2. Función para abrir el panel
-    btnComprar.addEventListener('click', () => {
-        panel.classList.add('open'); // Añade la clase que tiene "right: 0"
-		btnComprar.disabled = true; // Deshabilita el botón para evitar múltiples clics
-    });
+	btnComprar.addEventListener('click', () => {
+		openCart(btnComprar);
 
-    // 3. Función para cerrar el panel
-    btnClose.addEventListener('click', () => {
-        panel.classList.remove('open'); // Quita la clase y el panel se esconde
-		setTimeout(() => {
-		btnComprar.disabled = false; // Rehabilita el botón
-		}, 300);
+		document.addEventListener('keydown', (e) => {
+			if (e.key === "Escape") {
+				closeCart(btnComprar);
+			}
+		}, { once: true });
+	});
+
+	btnClose.addEventListener('click', () => {
+		closeCart(btnComprar);
 	});
 });
