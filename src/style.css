@@ -513,6 +513,11 @@ main h2 i {
 
 /* ===== UTENSILIOS ===== */
 
+.price-tag{
+    display: inline-block;
+    font-size: 22px;
+}
+
 .btn-add {
     background-color: var(--color-accent);
     color: var(--color-surface);
@@ -560,7 +565,6 @@ main h2 i {
 }
 
 .btn-close-panel {
-    color: var(--color-error);
     font-size: 22px;
     background: none;
     border: none;
