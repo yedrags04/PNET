@@ -531,6 +531,66 @@ main h2 i {
 
 }
 
+.btn-comprar{
+    background-color: var(--color-accent);
+    color: var(--color-surface);
+    font-weight: 600;
+    font-size: 22px;
+    box-shadow: var(--shadow-sm); 
+    width: 50px;         
+    height: 50px;
+    display: flex;        
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+.btn-comprar:disabled {
+    visibility: hidden;
+}
+
+.btn-close-panel{
+    color: var(--color-accent);
+    font-size: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.side-panel {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100%;
+    background-color: var(--color-raised);
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: right 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    z-index: 1001;
+
+    &.open {
+        right: 0;
+    }
+}
+
+.panel-header {
+    display: flex;        
+    align-items: center;    
+    justify-content: space-between; 
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
 
 /* ===== FAQ ===== */
 

@@ -354,3 +354,23 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	});
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Seleccionamos los elementos
+    const panel = document.getElementById('side-panel');
+    const btnComprar = document.querySelector('.btn-comprar'); // El botón que abre
+    const btnClose = document.getElementById('btn-close-panel'); // El botón que cierra
+
+    // 2. Función para abrir el panel
+    btnComprar.addEventListener('click', () => {
+        panel.classList.add('open'); // Añade la clase que tiene "right: 0"
+		btnComprar.disabled = true; // Deshabilita el botón para evitar múltiples clics
+    });
+
+    // 3. Función para cerrar el panel
+    btnClose.addEventListener('click', () => {
+        panel.classList.remove('open'); // Quita la clase y el panel se esconde
+		const btnComprar = document.querySelector('.btn-comprar');
+		btnComprar.disabled = false; // Rehabilita el botón
+    });
+});
