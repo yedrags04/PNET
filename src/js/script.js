@@ -370,7 +370,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Función para cerrar el panel
     btnClose.addEventListener('click', () => {
         panel.classList.remove('open'); // Quita la clase y el panel se esconde
-		const btnComprar = document.querySelector('.btn-comprar');
+		setTimeout(() => {
 		btnComprar.disabled = false; // Rehabilita el botón
-    });
+		}, 300);
+	});
 });
