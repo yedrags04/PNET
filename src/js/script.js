@@ -131,25 +131,45 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 	// Función para mostrar estado de reserva en las tarjetas
-	function updateReservationStatus() {
-		const cards = document.querySelectorAll('main > .card');
-		cards.forEach(card => {
-			const bankName = card.querySelector('h3').textContent;
-			if (isReserved(bankName)) {
-				card.classList.add('reserved');
-				const moreInfoBtn = card.querySelector('.more-info');
-				if (!moreInfoBtn.classList.contains('reserved-btn')) {
-					moreInfoBtn.classList.add('reserved-btn');
-					moreInfoBtn.textContent = 'CANCELAR RESERVA';
-				}
-			} else {
-				card.classList.remove('reserved');
-				const moreInfoBtn = card.querySelector('.more-info');
-				moreInfoBtn.classList.remove('reserved-btn');
-				moreInfoBtn.textContent = 'Más info';
-			}
-		});
-	}
+	// Función para mostrar estado de reserva en las tarjetas y actualizar filtros
+    function updateReservationStatus() {
+        const cards = document.querySelectorAll('main > .card');
+        
+        cards.forEach(card => {
+            const bankName = card.querySelector('h3').textContent;
+            
+            // 1. Guardamos el estado original la primera vez que leemos la tarjeta.
+            if (!card.hasAttribute('data-original-available')) {
+                card.setAttribute('data-original-available', card.dataset.available);
+            }
+
+            // 2. Comprobamos si está reservado
+            if (isReserved(bankName)) {
+                card.classList.add('reserved');
+                
+                card.dataset.available = 'no'; 
+                
+                const moreInfoBtn = card.querySelector('.more-info');
+                if (!moreInfoBtn.classList.contains('reserved-btn')) {
+                    moreInfoBtn.classList.add('reserved-btn');
+                    moreInfoBtn.textContent = 'CANCELAR RESERVA';
+                }
+            } else {
+                card.classList.remove('reserved');
+                
+                card.dataset.available = card.getAttribute('data-original-available');
+                
+                const moreInfoBtn = card.querySelector('.more-info');
+                moreInfoBtn.classList.remove('reserved-btn');
+                moreInfoBtn.textContent = 'Más info';
+            }
+        });
+
+        // 3. Volvemos a ejecutar los filtros automáticamente.
+        if (typeof filterBanks === 'function') {
+            filterBanks();
+        }
+    }
 
 	// --- LÓGICA DEL MODAL (POP-UP) ---
 	const modal = document.getElementById('modal-bank');
