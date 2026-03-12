@@ -219,71 +219,107 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 
 	// Botón RESERVAR
-	if (btnBook) {
-		btnBook.addEventListener('click', () => {
-			// Evitar reserva si ya está deshabilitado
-			if (btnBook.disabled) return;
+	// --- LÓGICA DE APERTURA DEL FORMULARIO ---
+    const modalFormOverlay = document.getElementById('modal-form-overlay');
+    const heistForm = document.getElementById('heist-form');
+    const closeFormBtn = document.querySelector('.close-form-btn');
+    const btnCancelForm = document.getElementById('btn-cancel-form');
+    let pendingReservationData = {}; // Guardaremos los datos del banco temporalmente aquí
 
-			const bankName = modalName.textContent;
-			const bankAddress = modalAddress.textContent;
-			const bankReward = modalReward.textContent;
-			const bankDifficulty = modalDifficulty.textContent;
+    // Al pulsar RESERVAR en el primer modal
+    if (btnBook) {
+        btnBook.addEventListener('click', () => {
+            if (btnBook.disabled) return;
 
-			// Crear objeto de reserva
-			const reservation = {
-				id: Date.now(),
-				bankName: bankName,
-				address: bankAddress,
-				reward: bankReward,
-				difficulty: bankDifficulty,
-				date: new Date().toLocaleDateString('es-ES'),
-				time: new Date().toLocaleTimeString('es-ES')
-			};
+            // Guardamos los datos del banco que estamos viendo
+            pendingReservationData = {
+                bankName: modalName.textContent,
+                address: modalAddress.textContent,
+                reward: modalReward.textContent,
+                difficulty: modalDifficulty.textContent
+            };
 
-			// Obtener reservas existentes del localStorage
-			let reservations = JSON.parse(localStorage.getItem('heistcraft_reservations')) || [];
+            // Intentamos pre-seleccionar el banco en el select del formulario
+            const bankSelect = document.getElementById('bank-select');
+            if (bankSelect) {
+                Array.from(bankSelect.options).forEach(opt => {
+                    if (opt.text.trim() === pendingReservationData.bankName.trim()) {
+                        opt.selected = true;
+                    }
+                });
+            }
 
-			// Agregar nueva reserva
-			reservations.push(reservation);
+            // Cerramos el primer modal y abrimos el del formulario
+            modal.style.display = 'none';
+            modalFormOverlay.style.display = 'flex';
+        });
+    }
 
-			// Guardar en localStorage
-			localStorage.setItem('heistcraft_reservations', JSON.stringify(reservations));
+    // Funciones para cerrar el modal del formulario
+    const closeForm = () => {
+        modalFormOverlay.style.display = 'none';
+        if(heistForm) heistForm.reset();
+    };
 
-			// Mostrar confirmación
-			alert(`✓ RESERVA CONFIRMADA\n\n${bankName}\n${bankAddress}\nRecompensa: ${bankReward}€\nDificultad: ${bankDifficulty}\n\nFecha: ${reservation.date}\nHora: ${reservation.time}`);
+    if (closeFormBtn) closeFormBtn.addEventListener('click', closeForm);
+    if (btnCancelForm) btnCancelForm.addEventListener('click', closeForm);
+    
+    window.addEventListener('click', (e) => {
+        if (e.target === modalFormOverlay) closeForm();
+    });
 
-			// Actualizar estado de las tarjetas
-			updateReservationStatus();
+    // --- ENVÍO DEL FORMULARIO (CONFIRMAR RESERVA) ---
+    if (heistForm) {
+        heistForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Evita que la página se recargue
 
-			// Cerrar modal
-			modal.style.display = 'none';
-		});
-	}
+            // Obtenemos el nombre del banco desde el select del formulario
+            const bankSelect = document.getElementById('bank-select');
+            const selectedBankName = bankSelect.options[bankSelect.selectedIndex].text;
 
-	// Botón CANCELAR RESERVA
-	if (btnCancel) {
-		btnCancel.addEventListener('click', () => {
-			const bankName = modalName.textContent;
+            // Crear objeto de reserva
+            const reservation = {
+                id: Date.now(),
+                bankName: selectedBankName,
+                address: pendingReservationData.address || 'Dirección no especificada',
+                reward: pendingReservationData.reward || '0',
+                difficulty: pendingReservationData.difficulty || 'No especificada',
+                date: document.getElementById('operation-date').value,
+                time: document.getElementById('operation-time').value
+            };
 
-			// Obtener reservas del localStorage
-			let reservations = JSON.parse(localStorage.getItem('heistcraft_reservations')) || [];
+            // Obtener reservas existentes del localStorage
+            let reservations = JSON.parse(localStorage.getItem('heistcraft_reservations')) || [];
 
-			// Filtrar para eliminar la reserva del banco seleccionado
-			reservations = reservations.filter(reservation => reservation.bankName !== bankName);
+            // Agregar nueva reserva
+            reservations.push(reservation);
 
-			// Guardar en localStorage
-			localStorage.setItem('heistcraft_reservations', JSON.stringify(reservations));
+            // Guardar en localStorage
+            localStorage.setItem('heistcraft_reservations', JSON.stringify(reservations));
 
-			// Mostrar confirmación
-			alert(`✓ RESERVA CANCELADA\n\n${bankName}`);
+            // Actualizar estado de las tarjetas en pantalla
+            updateReservationStatus();
 
-			// Actualizar estado de las tarjetas
-			updateReservationStatus();
+            // Cerrar modal y limpiar
+            closeForm();
 
-			// Cerrar modal
-			modal.style.display = 'none';
-		});
-	}
+            // Mostrar confirmación
+            alert(`✓ RESERVA CONFIRMADA\n\n${reservation.bankName}\nFecha: ${reservation.date}\nHora: ${reservation.time}`);
+        });
+    }
+
+    // Botón CANCELAR RESERVA (desde la tarjeta o el primer modal)
+    if (btnCancel) {
+        btnCancel.addEventListener('click', () => {
+            const bankName = modalName.textContent;
+            let reservations = JSON.parse(localStorage.getItem('heistcraft_reservations')) || [];
+            reservations = reservations.filter(reservation => reservation.bankName !== bankName);
+            localStorage.setItem('heistcraft_reservations', JSON.stringify(reservations));
+            alert(`✓ RESERVA CANCELADA\n\n${bankName}`);
+            updateReservationStatus();
+            modal.style.display = 'none';
+        });
+    }
 
 	// carrusel de “top bancos”
 	const track = document.querySelector('.carousel-track');

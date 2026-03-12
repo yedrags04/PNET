@@ -137,6 +137,120 @@
             </div>
         </div>
     </div>
+    <div id="modal-form-overlay" class="modal">
+        <div class="modal-content" style="max-height: 90vh; overflow-y: auto; max-width: 800px;">
+            <span class="close-form-btn close-btn">
+                <i class="hgi hgi-stroke hgi-cancel-01"></i>
+            </span>
+            
+            <h2 class="form-title" style="font-size: 2rem; margin-top: 10px;">Formulario de Operación</h2>
+            <p class="form-subtitle">Completa los detalles para confirmar tu reserva</p>
+
+            <form id="heist-form" class="heist-form">
+                <fieldset class="form-section">
+                    <legend>Información del Líder</legend>
+                    <div class="form-group">
+                        <label for="leader-name">Nombre del Líder *</label>
+                        <input id="leader-name" name="leader-name" type="text" placeholder="Tu nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="leader-email">Email de Contacto *</label>
+                        <input id="leader-email" name="leader-email" type="email" placeholder="tu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience">Años de Experiencia *</label>
+                        <input id="experience" name="experience" type="number" min="0" max="50" placeholder="0" required>
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-section">
+                    <legend>Información de la Operación</legend>
+                    <div class="form-group">
+                        <label for="bank-select">Banco Objetivo *</label>
+                        <select id="bank-select" name="bank-select" required>
+                            <option value="">Selecciona un banco</option>
+                            <option value="banco-asturias">BANCO DE ASTURIAS</option>
+                            <option value="banco-barcelona">BANCO DE BARCELONA</option>
+                            <option value="banco-españa">BANCO DE ESPAÑA</option>
+                            <option value="banco-madrid">BANCO DE MADRID</option>
+                            <option value="banco-bankinter">BANCO BANKINTER</option>
+                            <option value="banco-bbva">BANCO BBVA</option>
+                            <option value="casa-moneda-barcelona">CASA DE LA MONEDA BARCELONA</option>
+                            <option value="casa-moneda-paris">CASA DE LA MONEDA PARÍS</option>
+                            <option value="casa-moneda-segovia">CASA DE LA MONEDA SEGOVIA</option>
+                            <option value="casa-moneda-sevilla">CASA DE LA MONEDA SEVILLA</option>
+                            <option value="casa-moneda-timbre">CASA DE LA MONEDA Y TIMBRE</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="operation-date">Fecha de Operación *</label>
+                            <input id="operation-date" name="operation-date" type="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="operation-time">Hora de Inicio *</label>
+                            <input id="operation-time" name="operation-time" type="time" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="team-size">Número de Miembros del Equipo *</label>
+                        <input id="team-size" name="team-size" type="number" min="1" max="20" placeholder="1" required>
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-section">
+                    <legend>Detalles Operacionales</legend>
+                    <div class="form-group">
+                        <label for="risk-level">Nivel de Riesgo Aceptado *</label>
+                        <select id="risk-level" name="risk-level" required>
+                            <option value="">Selecciona un nivel</option>
+                            <option value="bajo">Bajo - Operación Segura</option>
+                            <option value="medio">Medio - Riesgo Moderado</option>
+                            <option value="alto">Alto - Muy Peligroso</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="budget">Presupuesto Disponible (€) *</label>
+                        <input id="budget" name="budget" type="number" min="0" max="100000" placeholder="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="equipment">Equipo Necesario *</label>
+                        <textarea id="equipment" name="equipment" placeholder="Describe el equipo que necesitarás..." rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="plan">Plan de Operación *</label>
+                        <textarea id="plan" name="plan" placeholder="Explica tu plan detallado para el robo..." rows="6" required></textarea>
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-section">
+                    <legend>Especialidades del Equipo</legend>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label"><input type="checkbox" name="specialties" value="hacking"><span>Hacking / Sistemas</span></label>
+                        <label class="checkbox-label"><input type="checkbox" name="specialties" value="driving"><span>Conducción</span></label>
+                        <label class="checkbox-label"><input type="checkbox" name="specialties" value="explosives"><span>Explosivos</span></label>
+                        <label class="checkbox-label"><input type="checkbox" name="specialties" value="negotiation"><span>Infiltración</span></label>
+                        <label class="checkbox-label"><input type="checkbox" name="specialties" value="combat"><span>Combate</span></label>
+                        <label class="checkbox-label"><input type="checkbox" name="specialties" value="logistics"><span>Logística</span></label>
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-section">
+                    <legend>Confirmación</legend>
+                    <label class="checkbox-label full-width">
+                        <input type="checkbox" name="terms" required>
+                        <span>Asumo los riesgos de esta operación *</span>
+                    </label>
+                </fieldset>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">Confirmar y Reservar</button>
+                    <button type="button" class="btn-reset" id="btn-cancel-form">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
 
     <site-footer></site-footer>
 </body>
