@@ -60,7 +60,7 @@ label {
     margin-bottom: 5px;
 }
 
-input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+input,
 select,
 textarea {
     font-family: inherit;
