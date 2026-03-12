@@ -3,18 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario - HeistCraft</title>
+    <title>Formulario de Reserva - HeistCraft</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="components/site-header.js"></script>
     <script src="components/site-footer.js" defer></script>
-    <script src="js/script.js" defer></script>
+    <script src="js/validacion-formulario.js" defer></script>
     <link rel="stylesheet" href="https://use.hugeicons.com/font/icons.css" crossorigin="anonymous">
 </head>
 <body>
     <site-header></site-header>
+
+    <div class="container">
+        <main class="form-container">
+            <h1 class="form-title">Formulario de Operación</h1>
+            <p class="form-subtitle">Rellena todos los detalles de tu próxima operación de robo</p>
+
+            <form id="heist-form" class="heist-form">
+                <!-- Información del Líder -->
+                <fieldset class="form-section">
+                    <legend>Información del Líder</legend>
+                    
+                    <div class="form-group">
+                        <label for="leader-name">Nombre del Líder *</label>
+                        <input id="leader-name" name="leader-name" type="text" placeholder="Tu nombre" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="leader-email">Email de Contacto *</label>
+                        <input id="leader-email" name="leader-email" type="email" placeholder="tu@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="experience">Años de Experiencia *</label>
+                        <input id="experience" name="experience" type="number" min="0" max="50" placeholder="0" required>
+                    </div>
+                </fieldset>
+
+                <!-- Información de la Operación -->
+                <fieldset class="form-section">
+                    <legend>Información de la Operación</legend>
+                    
+                    <div class="form-group">
+                        <label for="bank-select">Banco Objetivo *</label>
+                        <select id="bank-select" name="bank-select" required>
+                            <option value="">Selecciona un banco</option>
+                            <option value="banco-asturias">BANCO DE ASTURIAS</option>
+                            <option value="banco-barcelona">BANCO DE BARCELONA</option>
+                            <option value="banco-españa">BANCO DE ESPAÑA</option>
+                            <option value="banco-madrid">BANCO DE MADRID</option>
+                            <option value="banco-bankinter">BANCO BANKINTER</option>
+                            <option value="banco-bbva">BANCO BBVA</option>
+                            <option value="casa-moneda-barcelona">CASA DE LA MONEDA BARCELONA</option>
+                            <option value="casa-moneda-paris">CASA DE LA MONEDA PARÍS</option>
+                            <option value="casa-moneda-segovia">CASA DE LA MONEDA SEGOVIA</option>
+                            <option value="casa-moneda-sevilla">CASA DE LA MONEDA SEVILLA</option>
+                            <option value="casa-moneda-timbre">CASA DE LA MONEDA Y TIMBRE</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="operation-date">Fecha de Operación *</label>
+                            <input id="operation-date" name="operation-date" type="date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="operation-time">Hora de Inicio *</label>
+                            <input id="operation-time" name="operation-time" type="time" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="team-size">Número de Miembros del Equipo *</label>
+                        <input id="team-size" name="team-size" type="number" min="1" max="20" placeholder="1" required>
+                    </div>
+                </fieldset>
+
+                <!-- Detalles de la Operación -->
+                <fieldset class="form-section">
+                    <legend>Detalles Operacionales</legend>
+                    
+                    <div class="form-group">
+                        <label for="risk-level">Nivel de Riesgo Aceptado *</label>
+                        <select id="risk-level" name="risk-level" required>
+                            <option value="">Selecciona un nivel</option>
+                            <option value="bajo">Bajo - Operación Segura</option>
+                            <option value="medio">Medio - Riesgo Moderado</option>
+                            <option value="alto">Alto - Muy Peligroso</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="budget">Presupuesto Disponible (€) *</label>
+                        <input id="budget" name="budget" type="number" min="0" max="100000" placeholder="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="equipment">Equipo Necesario *</label>
+                        <textarea id="equipment" name="equipment" placeholder="Describe el equipo que necesitarás..." rows="4" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="plan">Plan de Operación *</label>
+                        <textarea id="plan" name="plan" placeholder="Explica tu plan detallado para el robo..." rows="6" required></textarea>
+                    </div>
+                </fieldset>
+
+                <!-- Especialidades del Equipo -->
+                <fieldset class="form-section">
+                    <legend>Especialidades del Equipo</legend>
+                    
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="specialties" value="hacking">
+                            <span>Hacking / Sistemas de Seguridad</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="specialties" value="driving">
+                            <span>Conducción / Transporte</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="specialties" value="explosives">
+                            <span>Explosivos / Demolición</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="specialties" value="negotiation">
+                            <span>Negociación / Infiltración</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="specialties" value="combat">
+                            <span>Combate / Seguridad</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="specialties" value="logistics">
+                            <span>Logística / Planificación</span>
+                        </label>
+                    </div>
+                </fieldset>
+
+                <!-- Términos y Condiciones -->
+                <fieldset class="form-section">
+                    <legend>Confirmación</legend>
+                    
+                    <label class="checkbox-label full-width">
+                        <input type="checkbox" name="terms" required>
+                        <span>Confirmo que toda la información proporcionada es correcta y que asumo los riesgos de esta operación *</span>
+                    </label>
+
+                    <label class="checkbox-label full-width">
+                        <input type="checkbox" name="warranty">
+                        <span>Deseo recibir actualizaciones sobre operaciones futuras</span>
+                    </label>
+                </fieldset>
+
+                <!-- Botones de Acción -->
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">Reservar Operación</button>
+                    <button type="reset" class="btn-reset">Limpiar Formulario</button>
+                </div>
+            </form>
+        </main>
+    </div>
 
     <site-footer></site-footer>
 </body>

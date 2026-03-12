@@ -60,8 +60,9 @@ label {
     margin-bottom: 5px;
 }
 
-input,
-select {
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+select,
+textarea {
     font-family: inherit;
     width: 100%;
     color: inherit;
@@ -737,5 +738,223 @@ details[open]>.faq-answer {
 
     to {
         opacity: 0;
+    }
+}
+
+
+/* ===== FORMULARIO ===== */
+
+.form-container {
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+    text-align: center;
+    letter-spacing: -0.5px;
+}
+
+.form-subtitle {
+    color: var(--color-muted);
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    margin-top: 0.5rem;
+}
+
+.heist-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.form-section {
+    background: var(--color-raised);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-overlay);
+    box-shadow: var(--shadow-sm);
+    margin: 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-section legend {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: var(--color-accent);
+    margin-bottom: 1.5rem;
+    padding: 0 0.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 0;
+    background-color: var(--color-overlay);
+    border: 2px solid transparent;
+    border-radius: 8px;
+    color: inherit;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color 200ms, box-shadow 200ms;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px rgba(253, 199, 0, 0.2);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.checkbox-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--color-muted);
+    transition: color 200ms;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    cursor: pointer;
+    accent-color: var(--color-accent);
+}
+
+.checkbox-label:hover {
+    color: var(--color-text);
+}
+
+.checkbox-label.full-width {
+    grid-column: 1 / -1;
+    margin-bottom: 1rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: center;
+}
+
+.btn-submit {
+    flex: 1;
+    max-width: 250px;
+    padding: 15px 30px;
+    background-color: var(--color-accent);
+    color: var(--color-surface);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-submit:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-reset {
+    flex: 1;
+    max-width: 250px;
+    padding: 15px 30px;
+    background-color: var(--color-overlay);
+    color: var(--color-text);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: 2px solid var(--color-accent);
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-reset:hover {
+    transform: scale(1.05);
+    background-color: rgba(253, 199, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        padding: 1rem;
+    }
+
+    .form-title {
+        font-size: 2rem;
+    }
+
+    .form-section {
+        padding: 1rem;
+    }
+
+    .form-section legend {
+        font-size: 1.2rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn-submit,
+    .btn-reset {
+        max-width: 100%;
     }
 }
