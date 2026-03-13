@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio - HeistCraft</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/styles.css">
     <script src="components/site-header.js"></script>
-    <script src="components/site-footer.js" defer></script>
+    <script src="components/site-footer.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-    <script src="js/script.js" defer></script>
     <link rel="stylesheet" href="https://use.hugeicons.com/font/icons.css" crossorigin="anonymous">
+    <script src="js/script.js" defer></script>
 </head>
 <body>
     <site-header></site-header>
@@ -20,7 +22,7 @@
         <main class="home-main">
             <h2 class="hero-title">Expertos en robos desde 1942</h2>
 
-            <div class="horizontal-search-bar">
+            <form class="horizontal-search-bar">
                 <div class="input-icon">
                     <i class="hgi hgi-stroke hgi-search-01"></i>
                     <input type="search" placeholder="Buscar objetivo...">
@@ -32,8 +34,8 @@
                     <option value="oro">Lingotes de Oro</option>
                     <option value="arte">Obras de Arte</option>
                 </select>
-                <button class="btn-book" style="width: auto; padding: 10px 30px;">Buscar</button>
-            </div>
+                <input type="submit" value="Buscar" />
+            </form>
 
             <h2 class="section-title">Top bancos</h2>
 

@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Utensilios - HeistCraft</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="components/site-header.js"></script>
+    <script src="components/site-footer.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <script src="components/site-header.js"></script>
-    <script src="components/site-footer.js" defer></script>
-    <script src="js/script.js" defer></script>
     <link rel="stylesheet" href="https://use.hugeicons.com/font/icons.css" crossorigin="anonymous">
+    <script src="js/script.js" defer></script>
 </head>
 <body>
     <site-header></site-header>
@@ -43,9 +45,11 @@
             </div>
         </aside>
 
+        <div id="cart-backdrop" class="cart-backdrop"></div>
+
         <div id="side-panel" class="side-panel">
             <div class="panel-header">
-                <button class="btn-comprar">
+                <button class="btn-cart">
                     <i class="hgi hgi-stroke hgi-shopping-cart-02"></i>
                 </button>
                 <h2>Mi Carrito</h2>

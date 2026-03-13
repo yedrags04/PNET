@@ -1,99 +1,6 @@
-/* ===== VARIABLES ===== */
+/* ===== HEADER ===== */
 
-:root {
-    --color-surface: #18181b;
-    --color-raised: #27272a;
-    --color-overlay: #3f3f46;
-    --color-accent: #FDC700;
-    --color-success: #4ade80;
-    --color-warn: #fb923C;
-    --color-error: #f87171;
-    --color-text: #f4f4f5;
-    --color-muted: #a1a1aa;
-    --font-heading: "DM Serif Display", serif;
-    --font-sans: DM Sans, sans-serif;
-    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-}
-
-
-/* ===== RESET & BASE ===== */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    color-scheme: dark;
-}
-
-body {
-    font-family: var(--font-sans);
-    background: var(--color-surface);
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-}
-
-
-/* ===== ELEMENTOS BASE ===== */
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button {
-    background-color: var(--color-overlay);
-    border: none;
-    font-family: inherit;
-    font-weight: 600;
-    box-shadow: var(--shadow-sm);
-    border-radius: 99px;
-}
-
-label {
-    display: block;
-    font-weight: 700;
-    margin-bottom: 5px;
-}
-
-input,
-select,
-textarea {
-    font-family: inherit;
-    width: 100%;
-    color: inherit;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: none;
-    border-radius: 8px;
-    background-color: var(--color-overlay);
-    box-shadow: var(--shadow-sm);
-    transition: box-shadow 150ms;
-}
-
-input[type="range"] {
-    box-shadow: none;
-}
-
-input::placeholder {
-    color: var(--color-muted);
-}
-
-*:focus-visible,
-input[type="range"]:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 2px var(--color-accent);
-}
-
-
-/* ===== LAYOUT ===== */
-
-site-header,
-site-footer {
+site-header {
     display: contents;
 }
 
@@ -112,7 +19,7 @@ header {
     view-transition-name: site-header;
 
     h1 {
-        font-family: var(--font-heading);
+        font-family: var(--font-brand);
     }
 }
 
@@ -138,6 +45,8 @@ nav a {
         color: var(--color-surface);
     }
 }
+
+/* ===== CONTENIDO ===== */
 
 .container {
     width: 100%;
@@ -169,6 +78,12 @@ aside {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* ===== FOOTER ===== */
+
+site-footer {
+    display: contents;
+}
+
 footer {
     background: var(--color-raised);
     color: var(--color-muted);
@@ -178,17 +93,23 @@ footer {
     font-size: 0.875rem;
 }
 
-
 /* ===== COMPONENTES ===== */
 
 .filter-group {
     margin-bottom: 15px;
 }
 
-#btn-search {
+#reward {
+    width: 100%;
+}
+
+#btn-remove-filters {
     width: 100%;
     cursor: pointer;
     padding: 10px;
+    margin-top: 1rem;
+    border-radius: 99px;
+    box-shadow: var(--shadow-sm);
 }
 
 .card {
@@ -207,19 +128,25 @@ footer {
     }
 
     h3 {
-        font-family: var(--font-heading);
+        font-family: var(--font-brand);
         font-size: 1.1rem;
     }
 
     p {
         color: var(--color-muted);
     }
+
+    img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+    }
 }
 
+
 .card.reserved {
-    opacity: 0.7;
     border: 2px solid var(--color-warn);
-    box-shadow: 0 0 15px var(--color-warn);
+    box-shadow: 0 0 10px var(--color-warn);
 }
 
 .photos {
@@ -245,27 +172,83 @@ footer {
 .more-info.reserved-btn {
     background: var(--color-warn);
     color: var(--color-surface);
-    opacity: 0.7;
 }
-
 
 /* ===== MODAL ===== */
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    justify-content: center;
-    align-items: center;
+@keyframes dialog-in {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
-#modal-name {
-    font-family: var(--font-heading);
+@keyframes dialog-out {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+@keyframes backdrop-in {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    to {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+}
+
+@keyframes backdrop-out {
+    from {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    to {
+        background-color: rgba(0, 0, 0, 0);
+    }
+}
+
+dialog {
+    border: none;
+    background: transparent;
+    padding: 0;
+    outline: none;
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+dialog[open] {
+    animation: dialog-in 200ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+dialog.is-closing {
+    animation: dialog-out 150ms ease-in forwards;
+}
+
+dialog[open]::backdrop {
+    animation: backdrop-in 200ms ease forwards;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+dialog.is-closing::backdrop {
+    animation: backdrop-out 150ms ease forwards;
 }
 
 .modal-content {
@@ -273,10 +256,14 @@ footer {
     color: var(--color-text);
     padding: 20px;
     border-radius: 12px;
-    width: 90%;
+    width: 90vw;
     max-width: 600px;
     border: 2px solid var(--color-raised);
     position: relative;
+}
+
+.modal-content h2 {
+    font-family: var(--font-brand);
 }
 
 .close-btn {
@@ -314,6 +301,9 @@ footer {
 
     p {
         margin: 5px 0;
+    }
+
+    span {
         color: var(--color-muted);
     }
 }
@@ -328,8 +318,8 @@ footer {
     flex: 1;
     padding: 15px;
     background-color: var(--color-accent);
-    color: var(--color-raised);
-    font-family: var(--font-heading);
+    color: var(--color-surface);
+    font-family: var(--font-brand);
     font-size: 1.2rem;
     border: none;
     border-radius: 30px;
@@ -345,8 +335,8 @@ footer {
     flex: 1;
     padding: 15px;
     background-color: var(--color-error);
-    color: var(--color-raised);
-    font-family: var(--font-heading);
+    color: var(--color-surface);
+    font-family: var(--font-brand);
     font-size: 1.2rem;
     border: none;
     border-radius: 30px;
@@ -358,15 +348,33 @@ footer {
     }
 }
 
-.btn-book.disabled {
-    background-color: var(--color-success);
-    cursor: not-allowed;
-    opacity: 0.7;
-    transform: none;
+/* Visibilidad de botones según estado de reserva del banco */
+#modal-bank:not(.is-reserved) .btn-cancel {
+    display: none;
+}
 
-    &:hover {
-        transform: none;
-    }
+#modal-bank.is-reserved .btn-book {
+    display: none;
+}
+
+/* Tarjetas ocultas por el filtro */
+.card.hidden {
+    display: none;
+}
+
+/* Dialog del formulario de reserva */
+#modal-form-overlay {
+    max-width: min(90vw, 800px);
+}
+
+.dialog-form {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.dialog-form .form-title {
+    font-size: 2rem;
+    margin-top: 10px;
 }
 
 
@@ -381,7 +389,7 @@ footer {
 }
 
 .hero-title {
-    font-family: var(--font-heading);
+    font-family: var(--font-brand);
     font-size: 3rem;
     text-align: left;
     margin-top: 1rem;
@@ -402,8 +410,17 @@ footer {
 
 .horizontal-search-bar input,
 .horizontal-search-bar select {
-    margin-bottom: 0;
     flex: 1;
+}
+
+.horizontal-search-bar input[type="submit"] {
+    padding: 10px;
+    border-radius: 99px;
+    border: none;
+    background-color: var(--color-accent);
+    color: var(--color-surface);
+    font-family: var(--font-brand);
+    font-size: 1.3rem;
 }
 
 .input-icon {
@@ -425,16 +442,10 @@ footer {
 }
 
 .section-title {
-    font-family: var(--font-heading);
+    font-family: var(--font-brand);
     font-size: 2rem;
     margin-bottom: 1rem;
     color: var(--color-text);
-}
-
-.card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
 }
 
 .large-card {
@@ -461,6 +472,10 @@ footer {
     position: relative;
     width: 100%;
     overflow: hidden;
+}
+
+.carousel-btn {
+    display: none;
 }
 
 .carousel-track {
@@ -493,10 +508,6 @@ footer {
     }
 }
 
-.carousel-btn {
-    display: none;
-}
-
 main h2 {
     grid-column: 1 / -1;
     font-size: 2.5rem;
@@ -514,7 +525,7 @@ main h2 i {
 
 /* ===== UTENSILIOS ===== */
 
-.price-tag{
+.price-tag {
     display: inline-block;
     font-size: 22px;
 }
@@ -539,15 +550,16 @@ main h2 i {
 
 }
 
-.btn-comprar {
+.btn-cart {
     background-color: var(--color-accent);
     color: var(--color-surface);
     font-weight: 600;
     font-size: 22px;
     box-shadow: var(--shadow-sm);
+    border-radius: 99px;
     width: 50px;
     height: 50px;
-    transition: transform 200ms, opacity 100ms;
+    transition: transform 200ms, opacity 250ms;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -561,8 +573,9 @@ main h2 i {
     }
 }
 
-.btn-comprar:disabled {
+.btn-cart:disabled {
     opacity: 0;
+    cursor: default;
 }
 
 .btn-close-panel {
@@ -570,6 +583,21 @@ main h2 i {
     background: none;
     border: none;
     cursor: pointer;
+}
+
+.cart-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+
+    &.open {
+        opacity: 1;
+        pointer-events: auto;
+    }
 }
 
 .side-panel {
@@ -753,7 +781,7 @@ details[open]>.faq-answer {
 }
 
 .form-title {
-    font-family: var(--font-heading);
+    font-family: var(--font-brand);
     font-size: 2.5rem;
     color: var(--color-text);
     margin-bottom: 0.5rem;
@@ -788,7 +816,7 @@ details[open]>.faq-answer {
 }
 
 .form-section legend {
-    font-family: var(--font-heading);
+    font-family: var(--font-brand);
     font-size: 1.4rem;
     color: var(--color-accent);
     margin-bottom: 1.5rem;
@@ -864,7 +892,6 @@ details[open]>.faq-answer {
     gap: 0.75rem;
     cursor: pointer;
     font-weight: 500;
-    color: var(--color-muted);
     transition: color 200ms;
 }
 
@@ -897,7 +924,7 @@ details[open]>.faq-answer {
     padding: 15px 30px;
     background-color: var(--color-accent);
     color: var(--color-surface);
-    font-family: var(--font-heading);
+    font-family: var(--font-brand);
     font-size: 1.1rem;
     font-weight: 700;
     border: none;
@@ -918,7 +945,7 @@ details[open]>.faq-answer {
     padding: 15px 30px;
     background-color: var(--color-overlay);
     color: var(--color-text);
-    font-family: var(--font-heading);
+    font-family: var(--font-brand);
     font-size: 1.1rem;
     font-weight: 700;
     border: 2px solid var(--color-accent);

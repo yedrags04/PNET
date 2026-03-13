@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-	// Inicializar reservas por defecto si no existen
 	const existingReservations = localStorage.getItem('heistcraft_reservations');
 	if (!existingReservations) {
 		const defaultReservations = [
@@ -25,52 +24,40 @@ document.addEventListener('DOMContentLoaded', function() {
 		localStorage.setItem('heistcraft_reservations', JSON.stringify(defaultReservations));
 	}
 
-	// Actualizar estado de reservas al cargar la página
 	updateReservationStatus();
 
-	// Mostrar el valor del range
 	const rango = document.getElementById('reward');
 	const out = document.getElementById('reward-output');
 	if (rango && out) {
 		out.textContent = rango.value;
 		rango.addEventListener('input', () => {
 			out.textContent = rango.value;
-			filterBanks(); // Filtrar en tiempo real
+			filterBanks();
 		});
 	}
 
-	// Filtrar en tiempo real cuando cambien otros inputs
 	const locationInput = document.getElementById('location');
 	const difficultySelect = document.getElementById('difficulty');
 	const availabilitySelect = document.getElementById('availability');
 
-	if (locationInput) {
-		locationInput.addEventListener('input', filterBanks);
-	}
-	if (difficultySelect) {
-		difficultySelect.addEventListener('change', filterBanks);
-	}
-	if (availabilitySelect) {
-		availabilitySelect.addEventListener('change', filterBanks);
-	}
+	if (locationInput) locationInput.addEventListener('input', filterBanks);
+	if (difficultySelect) difficultySelect.addEventListener('change', filterBanks);
+	if (availabilitySelect) availabilitySelect.addEventListener('change', filterBanks);
 
-	// Botón reiniciar filtros
-	const btnSearch = document.getElementById('btn-search');
+	const btnSearch = document.getElementById('btn-remove-filters');
 	if (btnSearch) {
 		btnSearch.addEventListener('click', () => {
-			// Limpiar filtros
 			if (locationInput) locationInput.value = '';
 			if (difficultySelect) difficultySelect.value = '';
 			if (availabilitySelect) availabilitySelect.value = 'todos';
 			if (rango) {
-				rango.value = rango.max || 1000; // Asumir máximo 1000 si no está definido
+				rango.value = rango.max || 1000;
 				if (out) out.textContent = rango.value;
 			}
 			filterBanks();
 		});
 	}
 
-	// Función para filtrar bancos
 	function filterBanks() {
 		const location = document.getElementById('location')?.value.toLowerCase() || '';
 		const difficulty = document.getElementById('difficulty')?.value || '';
@@ -78,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		const availability = document.getElementById('availability')?.value || 'todos';
 
 		const cards = document.querySelectorAll('main > .card');
-		let visibleCount = 0;
 
 		cards.forEach(card => {
 			const cardAddress = card.dataset.address?.toLowerCase() || '';
@@ -86,262 +72,197 @@ document.addEventListener('DOMContentLoaded', function() {
 			const cardReward = parseInt(card.dataset.reward) || 0;
 			const cardAvailable = card.dataset.available?.toLowerCase() || '';
 
-			// Verificar si cumple con todos los filtros
-			let matches = true;
+			const matches =
+				(!location || cardAddress.includes(location)) &&
+				(!difficulty || cardDifficulty === difficulty) &&
+				(cardReward <= maxReward) &&
+				(availability === 'todos' || cardAvailable === availability);
 
-			// Filtro de localización (búsqueda parcial)
-			if (location && !cardAddress.includes(location)) {
-				matches = false;
-			}
-
-			// Filtro de dificultad
-			if (difficulty && cardDifficulty !== difficulty) {
-				matches = false;
-			}
-
-			// Filtro de recompensa (mostrar si es menor o igual al valor del rango)
-			if (cardReward > maxReward) {
-				matches = false;
-			}
-
-			// Filtro de disponibilidad
-			if (availability !== 'todos' && cardAvailable !== availability) {
-				matches = false;
-			}
-
-			// Mostrar u ocultar la tarjeta
-			if (matches) {
-				card.style.display = 'flex';
-				visibleCount++;
-			} else {
-				card.style.display = 'none';
-			}
+			card.classList.toggle('hidden', !matches);
 		});
-
-		// Opcional: mostrar mensaje si no hay resultados
-		if (visibleCount === 0) {
-			console.log('No se encontraron bancos con los criterios especificados');
-		}
 	}
 
-	// Función para verificar si un banco está reservado
 	function isReserved(bankName) {
 		const reservations = JSON.parse(localStorage.getItem('heistcraft_reservations')) || [];
-		return reservations.some(reservation => reservation.bankName === bankName);
+		return reservations.some(r => r.bankName === bankName);
 	}
 
-	// Función para mostrar estado de reserva en las tarjetas
-	// Función para mostrar estado de reserva en las tarjetas y actualizar filtros
-    function updateReservationStatus() {
-        const cards = document.querySelectorAll('main > .card');
-        
-        cards.forEach(card => {
-            const bankName = card.querySelector('h3').textContent;
-            
-            // 1. Guardamos el estado original la primera vez que leemos la tarjeta.
-            if (!card.hasAttribute('data-original-available')) {
-                card.setAttribute('data-original-available', card.dataset.available);
-            }
+	// Sincroniza el estado visual de cada tarjeta con localStorage y re-aplica los filtros.
+	// data-original-available guarda la disponibilidad real del banco (sin reservas) para
+	// poder restaurarla si el usuario cancela, sin tener que recargar el HTML.
+	function updateReservationStatus() {
+		const cards = document.querySelectorAll('main > .card');
 
-            // 2. Comprobamos si está reservado
-            if (isReserved(bankName)) {
-                card.classList.add('reserved');
-                
-                card.dataset.available = 'no'; 
-                
-                const moreInfoBtn = card.querySelector('.more-info');
-                if (!moreInfoBtn.classList.contains('reserved-btn')) {
-                    moreInfoBtn.classList.add('reserved-btn');
-                    moreInfoBtn.textContent = 'CANCELAR RESERVA';
-                }
-            } else {
-                card.classList.remove('reserved');
-                
-                card.dataset.available = card.getAttribute('data-original-available');
-                
-                const moreInfoBtn = card.querySelector('.more-info');
-                moreInfoBtn.classList.remove('reserved-btn');
-                moreInfoBtn.textContent = 'Más info';
-            }
-        });
+		cards.forEach(card => {
+			const bankName = card.querySelector('h3').textContent;
 
-        // 3. Volvemos a ejecutar los filtros automáticamente.
-        if (typeof filterBanks === 'function') {
-            filterBanks();
-        }
-    }
-
-	// --- LÓGICA DEL MODAL (POP-UP) ---
-	const modal = document.getElementById('modal-bank');
-	const closeBtn = document.querySelector('.close-btn');
-
-	const modalImg = document.getElementById('modal-img');
-	const modalName = document.getElementById('modal-name');
-	const modalAddress = document.getElementById('modal-address');
-	const modalDifficulty = document.getElementById('modal-difficulty');
-	const modalReward = document.getElementById('modal-reward');
-	const modalAvailable = document.getElementById('modal-available');
-	const btnBook = document.querySelector('.btn-book');
-	const btnCancel = document.querySelector('.btn-cancel');
-
-	document.querySelectorAll('.more-info').forEach(btn => {
-		btn.addEventListener('click', (e) => {
-			const card = e.target.closest('.card');
-			if (!card) return;
-
-			const img = card.querySelector('img');
-			modalImg.src = img?.src || '';
-			modalImg.alt = img?.alt || '';
-
-			const bankName = card.querySelector('h3')?.textContent || 'Banco';
-			modalName.textContent = bankName;
-			modalAddress.textContent = card.dataset.address || 'No disponible';
-
-			// Formatear dificultad
-			const difficulty = card.dataset.difficulty || 'No disponible';
-			const difficultyFormatted = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
-			modalDifficulty.textContent = difficultyFormatted;
-
-			modalReward.textContent = card.dataset.reward || 'No disponible';
-
-			// Formatear disponibilidad
-			const available = card.dataset.available || 'No disponible';
-			const availableFormatted = available === 'si' ? 'Disponible' : available === 'no' ? 'Ocupado' : available;
-			modalAvailable.textContent = availableFormatted;
-
-			// Verificar si ya está reservado y actualizar botones
-			if (isReserved(bankName)) {
-				btnBook.style.display = 'none';
-				btnCancel.style.display = 'block';
-				btnBook.disabled = false;
-				btnBook.classList.remove('disabled');
-			} else {
-				btnBook.style.display = 'block';
-				btnCancel.style.display = 'none';
-				btnBook.disabled = false;
-				btnBook.classList.remove('disabled');
+			if (!card.hasAttribute('data-original-available')) {
+				card.setAttribute('data-original-available', card.dataset.available);
 			}
 
-			modal.style.display = 'flex';
-		});
-	});
+			const reserved = isReserved(bankName);
+			card.classList.toggle('reserved', reserved);
+			card.dataset.available = reserved
+				? 'no'
+				: card.getAttribute('data-original-available');
 
-	if (closeBtn) {
-		closeBtn.addEventListener('click', () => {
-			modal.style.display = 'none';
+			const moreInfoBtn = card.querySelector('.more-info');
+			moreInfoBtn.classList.toggle('reserved-btn', reserved);
+			moreInfoBtn.textContent = reserved ? 'CANCELAR RESERVA' : 'Más info';
 		});
+
+		filterBanks();
 	}
 
-	window.addEventListener('click', (e) => {
-		if (e.target === modal) {
-			modal.style.display = 'none';
+	// --- MODALES (solo en bancos.html) ---
+	const modal = document.getElementById('modal-bank');
+
+	if (modal) {
+		const closeBtn = document.querySelector('.close-btn');
+
+		function closeDialog(dialog) {
+			dialog.classList.add('is-closing');
+			dialog.addEventListener('animationend', () => {
+				dialog.classList.remove('is-closing');
+				dialog.close();
+			}, { once: true });
 		}
-	});
 
-	// Botón RESERVAR
-	// --- LÓGICA DE APERTURA DEL FORMULARIO ---
-    const modalFormOverlay = document.getElementById('modal-form-overlay');
-    const heistForm = document.getElementById('heist-form');
-    const closeFormBtn = document.querySelector('.close-form-btn');
-    const btnCancelForm = document.getElementById('btn-cancel-form');
-    let pendingReservationData = {}; // Guardaremos los datos del banco temporalmente aquí
+		const modalImg = document.getElementById('modal-img');
+		const modalName = document.getElementById('modal-name');
+		const modalAddress = document.getElementById('modal-address');
+		const modalDifficulty = document.getElementById('modal-difficulty');
+		const modalReward = document.getElementById('modal-reward');
+		const modalAvailable = document.getElementById('modal-available');
+		const btnBook = document.querySelector('.btn-book');
+		const btnCancel = document.querySelector('.btn-cancel');
 
-    // Al pulsar RESERVAR en el primer modal
-    if (btnBook) {
-        btnBook.addEventListener('click', () => {
-            if (btnBook.disabled) return;
+		document.querySelectorAll('.more-info').forEach(btn => {
+			btn.addEventListener('click', (e) => {
+				const card = e.target.closest('.card');
+				if (!card) return;
 
-            // Guardamos los datos del banco que estamos viendo
-            pendingReservationData = {
-                bankName: modalName.textContent,
-                address: modalAddress.textContent,
-                reward: modalReward.textContent,
-                difficulty: modalDifficulty.textContent
-            };
+				const img = card.querySelector('img');
+				modalImg.src = img?.src || '';
+				modalImg.alt = img?.alt || '';
 
-            // Intentamos pre-seleccionar el banco en el select del formulario
-            const bankSelect = document.getElementById('bank-select');
-            if (bankSelect) {
-                Array.from(bankSelect.options).forEach(opt => {
-                    if (opt.text.trim() === pendingReservationData.bankName.trim()) {
-                        opt.selected = true;
-                    }
-                });
-            }
+				const bankName = card.querySelector('h3')?.textContent || 'Banco';
+				modalName.textContent = bankName;
+				modalAddress.textContent = card.dataset.address || 'No disponible';
 
-            // Cerramos el primer modal y abrimos el del formulario
-            modal.style.display = 'none';
-            modalFormOverlay.style.display = 'flex';
-        });
-    }
+				const difficulty = card.dataset.difficulty || 'no disponible';
+				modalDifficulty.textContent = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
 
-    // Funciones para cerrar el modal del formulario
-    const closeForm = () => {
-        modalFormOverlay.style.display = 'none';
-        if(heistForm) heistForm.reset();
-    };
+				modalReward.textContent = card.dataset.reward || 'No disponible';
 
-    if (closeFormBtn) closeFormBtn.addEventListener('click', closeForm);
-    if (btnCancelForm) btnCancelForm.addEventListener('click', closeForm);
-    
-    window.addEventListener('click', (e) => {
-        if (e.target === modalFormOverlay) closeForm();
-    });
+				const available = card.dataset.available || '';
+				modalAvailable.textContent = available === 'si' ? 'Disponible' : available === 'no' ? 'Ocupado' : available;
 
-    // --- ENVÍO DEL FORMULARIO (CONFIRMAR RESERVA) ---
-    if (heistForm) {
-        heistForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Evita que la página se recargue
+				modal.classList.toggle('is-reserved', isReserved(bankName));
+				modal.showModal();
+			});
+		});
 
-            // Obtenemos el nombre del banco desde el select del formulario
-            const bankSelect = document.getElementById('bank-select');
-            const selectedBankName = bankSelect.options[bankSelect.selectedIndex].text;
+		if (closeBtn) closeBtn.addEventListener('click', () => closeDialog(modal));
 
-            // Crear objeto de reserva
-            const reservation = {
-                id: Date.now(),
-                bankName: selectedBankName,
-                address: pendingReservationData.address || 'Dirección no especificada',
-                reward: pendingReservationData.reward || '0',
-                difficulty: pendingReservationData.difficulty || 'No especificada',
-                date: document.getElementById('operation-date').value,
-                time: document.getElementById('operation-time').value
-            };
+		// El evento 'cancel' se dispara cuando el navegador cierra el dialog con Escape.
+		// Sin preventDefault(), el cierre es inmediato y saltaría la animación de salida.
+		modal.addEventListener('cancel', (e) => {
+			e.preventDefault();
+			closeDialog(modal);
+		});
 
-            // Obtener reservas existentes del localStorage
-            let reservations = JSON.parse(localStorage.getItem('heistcraft_reservations')) || [];
+		modal.addEventListener('click', (e) => {
+			if (e.target === modal) closeDialog(modal);
+		});
 
-            // Agregar nueva reserva
-            reservations.push(reservation);
+		// --- MODAL DEL FORMULARIO ---
+		const modalFormOverlay = document.getElementById('modal-form-overlay');
+		const heistForm = document.getElementById('heist-form');
+		const closeFormBtn = document.querySelector('.close-form-btn');
+		const btnCancelForm = document.getElementById('btn-cancel-form');
+		let pendingReservationData = {};
 
-            // Guardar en localStorage
-            localStorage.setItem('heistcraft_reservations', JSON.stringify(reservations));
+		if (btnBook) {
+			btnBook.addEventListener('click', () => {
+				pendingReservationData = {
+					bankName: modalName.textContent,
+					address: modalAddress.textContent,
+					reward: modalReward.textContent,
+					difficulty: modalDifficulty.textContent
+				};
 
-            // Actualizar estado de las tarjetas en pantalla
-            updateReservationStatus();
+				// Pre-seleccionar el banco en el select del formulario
+				const bankSelect = document.getElementById('bank-select');
+				if (bankSelect) {
+					Array.from(bankSelect.options).forEach(opt => {
+						opt.selected = opt.text.trim() === pendingReservationData.bankName.trim();
+					});
+				}
 
-            // Cerrar modal y limpiar
-            closeForm();
+				modal.close();
+				modalFormOverlay.showModal();
+			});
+		}
 
-            // Mostrar confirmación
-            alert(`✓ RESERVA CONFIRMADA\n\n${reservation.bankName}\nFecha: ${reservation.date}\nHora: ${reservation.time}`);
-        });
-    }
+		const closeForm = () => {
+			closeDialog(modalFormOverlay);
+			if (heistForm) heistForm.reset();
+		};
 
-    // Botón CANCELAR RESERVA (desde la tarjeta o el primer modal)
-    if (btnCancel) {
-        btnCancel.addEventListener('click', () => {
-            const bankName = modalName.textContent;
-            let reservations = JSON.parse(localStorage.getItem('heistcraft_reservations')) || [];
-            reservations = reservations.filter(reservation => reservation.bankName !== bankName);
-            localStorage.setItem('heistcraft_reservations', JSON.stringify(reservations));
-            alert(`✓ RESERVA CANCELADA\n\n${bankName}`);
-            updateReservationStatus();
-            modal.style.display = 'none';
-        });
-    }
+		if (closeFormBtn) closeFormBtn.addEventListener('click', closeForm);
+		if (btnCancelForm) btnCancelForm.addEventListener('click', closeForm);
 
-	// carrusel de “top bancos”
+		modalFormOverlay.addEventListener('cancel', (e) => {
+			e.preventDefault();
+			closeForm();
+		});
+
+		modalFormOverlay.addEventListener('click', (e) => {
+			if (e.target === modalFormOverlay) closeForm();
+		});
+
+		if (heistForm) {
+			heistForm.addEventListener('submit', (e) => {
+				e.preventDefault();
+
+				const bankSelect = document.getElementById('bank-select');
+				const selectedBankName = bankSelect.options[bankSelect.selectedIndex].text;
+
+				const reservation = {
+					id: Date.now(),
+					bankName: selectedBankName,
+					address: pendingReservationData.address || 'Dirección no especificada',
+					reward: pendingReservationData.reward || '0',
+					difficulty: pendingReservationData.difficulty || 'No especificada',
+					date: document.getElementById('operation-date').value,
+					time: document.getElementById('operation-time').value
+				};
+
+				let reservations = JSON.parse(localStorage.getItem('heistcraft_reservations')) || [];
+				reservations.push(reservation);
+				localStorage.setItem('heistcraft_reservations', JSON.stringify(reservations));
+
+				updateReservationStatus();
+				closeForm();
+				alert(`✓ RESERVA CONFIRMADA\n\n${reservation.bankName}\nFecha: ${reservation.date}\nHora: ${reservation.time}`);
+			});
+		}
+
+		if (btnCancel) {
+			btnCancel.addEventListener('click', () => {
+				const bankName = modalName.textContent;
+				let reservations = JSON.parse(localStorage.getItem('heistcraft_reservations')) || [];
+				reservations = reservations.filter(r => r.bankName !== bankName);
+				localStorage.setItem('heistcraft_reservations', JSON.stringify(reservations));
+				alert(`✓ RESERVA CANCELADA\n\n${bankName}`);
+				updateReservationStatus();
+				closeDialog(modal);
+			});
+		}
+	}
+
+	// --- CARRUSEL ---
 	const track = document.querySelector('.carousel-track');
 	const prev = document.querySelector('.carousel-btn.prev');
 	const next = document.querySelector('.carousel-btn.next');
@@ -352,24 +273,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		function goTo(index) {
 			currentIndex = (index + slides.length) % slides.length;
-			const left = slides[currentIndex].offsetLeft;
-			track.scrollTo({ left, behavior: 'smooth' });
+			track.scrollTo({ left: slides[currentIndex].offsetLeft, behavior: 'smooth' });
 		}
 
 		prev.addEventListener('click', () => goTo(currentIndex - 1));
 		next.addEventListener('click', () => goTo(currentIndex + 1));
 
-		// autoplay: avanza una slide cada 3s y vuelve al principio al llegar al
-		// final; se pausa al pasar el ratón por encima
+		// Avanza automáticamente cada 3 s; se pausa al pasar el ratón por encima.
 		let autoScrollInterval = setInterval(() => goTo(currentIndex + 1), 3000);
-
 		track.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
 		track.addEventListener('mouseleave', () => {
 			autoScrollInterval = setInterval(() => goTo(currentIndex + 1), 3000);
 		});
 	}
 
-	// FAQ Accordion — animación max-height + solo uno abierto a la vez
+	// --- FAQ ACCORDION ---
+	// La animación de max-height requiere JS porque CSS no puede animar desde/hacia 'auto'.
+	// Se usa un reflow forzado (offsetHeight) entre los dos cambios de max-height para que
+	// el navegador registre el valor inicial antes de aplicar la transición.
 	function closeFaqItem(details) {
 		const answer = details.querySelector('.faq-answer');
 		answer.style.maxHeight = answer.scrollHeight + 'px';
@@ -397,7 +318,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			e.preventDefault();
 			const isOpen = details.hasAttribute('open');
 
-			// Cerrar todos los demás
 			document.querySelectorAll('.faq-container details[open]').forEach(d => {
 				if (d !== details) closeFaqItem(d);
 			});
@@ -411,35 +331,32 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 });
 
-function openCart(btn) {
-	const panel = document.getElementById('side-panel');
-	panel.classList.add('open'); // Añade la clase y el panel se muestra
-	btn.disabled = true; // Deshabilita el botón
-}
-
-function closeCart(btn) {
-	const panel = document.getElementById('side-panel');
-	panel.classList.remove('open'); // Quita la clase y el panel se esconde
-	setTimeout(() => {
-		btn.disabled = false; // Rehabilita el botón
-	}, 300);
-}
-
+// --- CARRITO EN UTENSILIOS ---
 document.addEventListener('DOMContentLoaded', () => {
-	const btnComprar = document.querySelector('.btn-comprar');
+	const btnCart = document.querySelector('.btn-cart');
 	const btnClose = document.getElementById('btn-close-panel');
 
-	btnComprar.addEventListener('click', () => {
-		openCart(btnComprar);
+	const backdrop = document.getElementById('cart-backdrop');
 
-		document.addEventListener('keydown', (e) => {
-			if (e.key === "Escape") {
-				closeCart(btnComprar);
-			}
-		}, { once: true });
-	});
+	function openCart(btn) {
+		const panel = document.getElementById('side-panel');
+		panel.classList.add('open');
+		backdrop.classList.add('open');
+		btn.disabled = true;
+		btn._keydownHandler = (e) => { if (e.key === 'Escape') closeCart(btn); };
+		document.addEventListener('keydown', btn._keydownHandler);
+	}
 
-	btnClose.addEventListener('click', () => {
-		closeCart(btnComprar);
-	});
+	function closeCart(btn) {
+		const panel = document.getElementById('side-panel');
+		panel.classList.remove('open');
+		backdrop.classList.remove('open');
+		document.removeEventListener('keydown', btn._keydownHandler);
+		btn._keydownHandler = null;
+		btn.disabled = false;
+	}
+
+	btnCart.addEventListener('click', () => openCart(btnCart));
+	btnClose.addEventListener('click', () => closeCart(btnCart));
+	backdrop.addEventListener('click', () => closeCart(btnCart));
 });

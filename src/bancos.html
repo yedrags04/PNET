@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bancos - HeistCraft</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/styles.css">
     <script src="components/site-header.js"></script>
-    <script src="components/site-footer.js" defer></script>
+    <script src="components/site-footer.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-    <script src="js/script.js" defer></script>
     <link rel="stylesheet" href="https://use.hugeicons.com/font/icons.css" crossorigin="anonymous">
+    <script src="js/script.js" defer></script>
 </head>
 <body>
     <site-header></site-header>
@@ -44,7 +46,7 @@
                     <option value="no">No (Ocupado)</option>
                 </select>
             </div>
-            <button id="btn-search">Quitar filtros</button>
+            <button id="btn-remove-filters">Quitar filtros</button>
         </aside>
 
         <main>
@@ -116,7 +118,7 @@
         </main>
     </div>
 
-    <div id="modal-bank" class="modal">
+    <dialog id="modal-bank">
         <div class="modal-content">
             <span class="close-btn">
                 <i class="hgi hgi-stroke hgi-cancel-01"></i>
@@ -133,17 +135,17 @@
             </div>
             <div class="modal-buttons">
                 <button class="btn-book">RESERVAR</button>
-                <button class="btn-cancel" style="display: none;">CANCELAR RESERVA</button>
+                <button class="btn-cancel">CANCELAR RESERVA</button>
             </div>
         </div>
-    </div>
-    <div id="modal-form-overlay" class="modal">
-        <div class="modal-content" style="max-height: 90vh; overflow-y: auto; max-width: 800px;">
+    </dialog>
+    <dialog id="modal-form-overlay">
+        <div class="modal-content dialog-form">
             <span class="close-form-btn close-btn">
                 <i class="hgi hgi-stroke hgi-cancel-01"></i>
             </span>
-            
-            <h2 class="form-title" style="font-size: 2rem; margin-top: 10px;">Formulario de Operación</h2>
+
+            <h2 class="form-title">Formulario de Operación</h2>
             <p class="form-subtitle">Completa los detalles para confirmar tu reserva</p>
 
             <form id="heist-form" class="heist-form">
@@ -249,7 +251,7 @@
                 </div>
             </form>
         </div>
-    </div>
+    </dialog>
     
 
     <site-footer></site-footer>

@@ -1,0 +1,69 @@
+/* ===== VARIABLES ===== */
+:root {
+    --color-surface: #18181b;
+    --color-raised: #27272a;
+    --color-overlay: #3f3f46;
+    --color-accent: oklch(85.2% 0.199 91.936);
+    --color-success: oklch(79.2% 0.209 151.711);
+    --color-warn: oklch(75% 0.183 55.934);
+    --color-error: oklch(70.4% 0.191 22.216);
+    --color-text: oklch(96.7% 0.001 286.375);
+    --color-muted: oklch(70.5% 0.015 286.067);
+    --font-brand: "DM Serif Display", serif;
+    --font-sans: "DM Sans", sans-serif;
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+/* ===== BASE ===== */
+html {
+    color-scheme: dark;
+}
+
+body {
+    font-family: var(--font-sans);
+    background: var(--color-surface);
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    background-color: var(--color-overlay);
+    font-weight: 600;
+}
+
+label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="search"],
+select,
+textarea {
+    font-family: inherit;
+    width: 100%;
+    color: inherit;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--color-overlay);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 150ms;
+}
+
+input::placeholder {
+    color: var(--color-muted);
+}
+
+*:focus-visible {
+    outline: none;
+
+    /* ES MALA PRÁCTICA USAR "!important", pero me da igual, no funciona de otra forma... */
+    box-shadow: 0 0 0 2px var(--color-accent) !important;
+}
