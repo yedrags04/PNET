@@ -145,8 +145,9 @@ footer {
 
 
 .card.reserved {
-    border: 2px solid var(--color-warn);
-    box-shadow: 0 0 10px var(--color-warn);
+   
+    
+    opacity: 0.5;
 }
 
 .photos {
