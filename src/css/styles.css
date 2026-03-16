@@ -1098,4 +1098,9 @@ details[open]>.faq-answer {
         flex: 0 0 80%; 
         height: 250px;
     }
+
+    .side-panel {
+        width: 100%; 
+        right: -100%; 
+    }
 }
