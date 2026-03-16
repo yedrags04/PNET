@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+
 	const existingReservations = localStorage.getItem('heistcraft_reservations');
 	if (!existingReservations) {
 		const defaultReservations = [
