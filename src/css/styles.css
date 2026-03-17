@@ -14,6 +14,8 @@ header {
     display: flex;
     gap: 30px;
     align-items: center;
+    flex-wrap: wrap;
+    padding: 15px 1.5rem;
     min-height: 70px;
     padding-inline: 2rem;
     view-transition-name: site-header;
@@ -994,6 +996,9 @@ details[open]>.faq-answer {
 /* ===== BOTÓN HAMBURGUESA (Oculto en PC) ===== */
 .menu-toggle {
     display: none;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
     background: transparent;
     color: var(--color-text);
     font-size: 2rem;
@@ -1018,16 +1023,17 @@ details[open]>.faq-answer {
 
     .menu-toggle {
         display: block; 
+        margin-top: 10px;
     }
     
     nav {
         display: none; 
         width: 100%;
         flex-direction: column; 
-        gap: 10px;
-        padding-top: 15px;
+        gap: 5px; 
+        padding-top: 10px; 
         border-top: 1px solid var(--color-overlay);
-        margin-top: 10px;
+        margin-top: 5px;
     }
 
     nav.open {
