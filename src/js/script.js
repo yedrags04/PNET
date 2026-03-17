@@ -372,3 +372,94 @@ document.addEventListener('DOMContentLoaded', () => {
 	btnClose.addEventListener('click', () => closeCart(btnCart));
 	backdrop.addEventListener('click', () => closeCart(btnCart));
 });
+
+
+// ==========================================
+// ===== WIDGET DE ACCESIBILIDAD GLOBAL =====
+// ==========================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Crear e inyectar el HTML del widget en el body
+    const a11yWidget = document.createElement('div');
+    a11yWidget.innerHTML = `
+        <button id="a11y-toggle" class="a11y-btn" aria-label="Abrir menú de accesibilidad" title="Accesibilidad">
+            <i class="hgi hgi-stroke hgi-user"></i> 
+        </button>
+        <div id="a11y-panel" class="a11y-panel">
+            <div class="a11y-header">
+                <h3>Accesibilidad</h3>
+                
+            </div>
+            <div class="a11y-options">
+                <button id="a11y-text" class="a11y-option-btn">Aa - Texto más grande</button>
+                <button id="a11y-contrast" class="a11y-option-btn">◐ - Alto contraste</button>
+                <button id="a11y-animations" class="a11y-option-btn">⏸ - Detener animaciones</button>
+                <button id="a11y-reset" class="a11y-option-btn reset">Restablecer ajustes</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(a11yWidget);
+
+    // 2. Elementos del DOM
+    const htmlElement = document.documentElement;
+    const btnToggle = document.getElementById('a11y-toggle');
+    const btnClose = document.getElementById('a11y-close');
+    const panel = document.getElementById('a11y-panel');
+    
+    const btnText = document.getElementById('a11y-text');
+    const btnContrast = document.getElementById('a11y-contrast');
+    const btnAnim = document.getElementById('a11y-animations');
+    const btnReset = document.getElementById('a11y-reset');
+
+    // 3. Función para aplicar preferencias guardadas al cargar la página
+    function loadA11yPreferences() {
+        if (localStorage.getItem('a11y-large-text') === 'true') {
+            htmlElement.classList.add('a11y-large-text');
+            btnText.classList.add('active');
+        }
+        if (localStorage.getItem('a11y-high-contrast') === 'true') {
+            htmlElement.classList.add('a11y-high-contrast');
+            btnContrast.classList.add('active');
+        }
+        if (localStorage.getItem('a11y-stop-animations') === 'true') {
+            htmlElement.classList.add('a11y-stop-animations');
+            btnAnim.classList.add('active');
+        }
+    }
+
+    // 4. Lógica para abrir/cerrar el panel
+    btnToggle.addEventListener('click', () => panel.classList.toggle('open'));
+
+    // 5. Lógica de los botones de opciones
+    btnText.addEventListener('click', () => {
+        const isActive = htmlElement.classList.toggle('a11y-large-text');
+        btnText.classList.toggle('active');
+        localStorage.setItem('a11y-large-text', isActive);
+    });
+
+    btnContrast.addEventListener('click', () => {
+        const isActive = htmlElement.classList.toggle('a11y-high-contrast');
+        btnContrast.classList.toggle('active');
+        localStorage.setItem('a11y-high-contrast', isActive);
+    });
+
+    btnAnim.addEventListener('click', () => {
+        const isActive = htmlElement.classList.toggle('a11y-stop-animations');
+        btnAnim.classList.toggle('active');
+        localStorage.setItem('a11y-stop-animations', isActive);
+    });
+
+    btnReset.addEventListener('click', () => {
+        htmlElement.classList.remove('a11y-large-text', 'a11y-high-contrast', 'a11y-stop-animations');
+        btnText.classList.remove('active');
+        btnContrast.classList.remove('active');
+        btnAnim.classList.remove('active');
+        
+        localStorage.setItem('a11y-large-text', 'false');
+        localStorage.setItem('a11y-high-contrast', 'false');
+        localStorage.setItem('a11y-stop-animations', 'false');
+    });
+
+    // Cargar preferencias iniciales
+    loadA11yPreferences();
+});
