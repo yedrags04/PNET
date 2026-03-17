@@ -1,5 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+	// --- ACORDEÓN DE FILTROS EN MÓVIL ---
+    const filtersToggle = document.getElementById('filters-toggle');
+    const filtersContent = document.getElementById('filters-content');
+
+    if (filtersToggle && filtersContent) {
+        filtersToggle.addEventListener('click', () => {
+            filtersContent.classList.toggle('open');
+            filtersToggle.classList.toggle('open');
+        });
+    }
+
 	const existingReservations = localStorage.getItem('heistcraft_reservations');
 	if (!existingReservations) {
 		const defaultReservations = [

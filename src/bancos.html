@@ -20,33 +20,40 @@
 
     <div class="container">
         <aside>
-            <div class="filter-group">
-                <label for="location">Localización</label>
-                <input id="location" name="location" type="text" placeholder="Ej: Madrid">
+            <button id="filters-toggle" class="filters-toggle">
+                <span>Filtros</span>
+                <i class="hgi hgi-stroke hgi-arrow-down-01"></i>
+            </button>
+
+            <div id="filters-content" class="filters-content">
+                <div class="filter-group">
+                    <label for="location">Localización</label>
+                    <input id="location" name="location" type="text" placeholder="Ej: Madrid">
+                </div>
+                <div class="filter-group">
+                    <label for="difficulty">Dificultad</label>
+                    <select id="difficulty" name="difficulty">
+                        <option value="">Todos</option>
+                        <option value="facil">Fácil</option>
+                        <option value="media">Media</option>
+                        <option value="alta">Alta</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="reward">Dinero a ganar</label>
+                    <input id="reward" name="reward" type="range" min="0" max="1000" value="1000">
+                    <div>Valor: <output id="reward-output">1000</output> €</div>
+                </div>
+                <div class="filter-group">
+                    <label for="availability">Disponibilidad</label>
+                    <select id="availability" name="availability">
+                        <option value="todos">Todos</option>
+                        <option value="si">Sí (Disponible)</option>
+                        <option value="no">No (Ocupado)</option>
+                    </select>
+                </div>
+                <button id="btn-remove-filters">Quitar filtros</button>
             </div>
-            <div class="filter-group">
-                <label for="difficulty">Dificultad</label>
-                <select id="difficulty" name="difficulty">
-                    <option value="">Todos</option>
-                    <option value="facil">Fácil</option>
-                    <option value="media">Media</option>
-                    <option value="alta">Alta</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label for="reward">Dinero a ganar</label>
-                <input id="reward" name="reward" type="range" min="0" max="1000" value="1000">
-                <div>Valor: <output id="reward-output">1000</output> €</div>
-            </div>
-            <div class="filter-group">
-                <label for="availability">Disponibilidad</label>
-                <select id="availability" name="availability">
-                    <option value="todos">Todos</option>
-                    <option value="si">Sí (Disponible)</option>
-                    <option value="no">No (Ocupado)</option>
-                </select>
-            </div>
-            <button id="btn-remove-filters">Quitar filtros</button>
         </aside>
 
         <main>
