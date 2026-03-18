@@ -1,266 +1,500 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bancos - HeistCraft</title>
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="components/site-header.js"></script>
-    <script src="components/site-footer.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.hugeicons.com/font/icons.css" crossorigin="anonymous">
-    <script src="js/script.js" defer></script>
-</head>
-<body>
-    <site-header></site-header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Bancos - HeistCraft</title>
+        <link rel="stylesheet" href="css/reset.css" />
+        <link rel="stylesheet" href="css/base.css" />
+        <link rel="stylesheet" href="css/styles.css" />
+        <script src="components/site-header.js"></script>
+        <script src="components/site-footer.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://use.hugeicons.com/font/icons.css"
+            crossorigin="anonymous"
+        />
+        <script src="js/script.js" defer></script>
+    </head>
+    <body>
+        <site-header></site-header>
 
-    <div class="container">
-        <aside>
-            <button id="filters-toggle" class="filters-toggle">
-                <span>Filtros</span>
-                <i class="hgi hgi-stroke hgi-arrow-down-01"></i>
-            </button>
+        <div class="container">
+            <aside>
+                <button id="filters-toggle" class="filters-toggle">
+                    <span>Filtros</span>
+                    <i class="hgi hgi-stroke hgi-arrow-down-01"></i>
+                </button>
 
-            <div id="filters-content" class="filters-content">
-                <div class="filter-group">
-                    <label for="location">Localización</label>
-                    <input id="location" name="location" type="text" placeholder="Ej: Madrid">
-                </div>
-                <div class="filter-group">
-                    <label for="difficulty">Dificultad</label>
-                    <select id="difficulty" name="difficulty">
-                        <option value="">Todos</option>
-                        <option value="facil">Fácil</option>
-                        <option value="media">Media</option>
-                        <option value="alta">Alta</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="reward">Dinero a ganar</label>
-                    <input id="reward" name="reward" type="range" min="0" max="1000" value="1000">
-                    <div>Valor: <output id="reward-output">1000</output> €</div>
-                </div>
-                <div class="filter-group">
-                    <label for="availability">Disponibilidad</label>
-                    <select id="availability" name="availability">
-                        <option value="todos">Todos</option>
-                        <option value="si">Sí (Disponible)</option>
-                        <option value="no">No (Ocupado)</option>
-                    </select>
-                </div>
-                <button id="btn-remove-filters">Quitar filtros</button>
-            </div>
-        </aside>
-
-        <main>
-            <div class="card" data-address="C/ Mayor 1, Oviedo" data-difficulty="facil" data-reward="300" data-available="si">
-                <img class="photos" src="assets/images/banco-asturias.png" alt="Banco Asturias" width="300">
-                <h3>BANCO DE ASTURIAS</h3>
-                <button class="more-info">Más info</button>
-            </div>
-
-            <div class="card" data-address="Paseo 2, Barcelona" data-difficulty="alta" data-reward="800" data-available="si">
-                <img class="photos" src="assets/images/Banco-barcelona.png" alt="Banco Barcelona" width="300">
-                <h3>BANCO DE BARCELONA</h3>
-                <button class="more-info">Más info</button>
-            </div>
-
-            <div class="card" data-address="C/ de España 1, Madrid" data-difficulty="media" data-reward="550" data-available="si">
-                <img class="photos" src="assets/images/banco-de-españa.png" alt="Banco de España" width="300">
-                <h3>BANCO DE ESPAÑA</h3>
-                <button class="more-info">Más info</button>
-            </div>
-
-            <div class="card" data-address="C/ de Madrid 1, Madrid" data-difficulty="alta" data-reward="900" data-available="si">
-                <img class="photos" src="assets/images/Banco-madrid.png" alt="Banco Madrid" width="300">
-                <h3>BANCO DE MADRID</h3>
-                <button class="more-info">Más info</button>
-            </div>
-
-            <div class="card" data-address="C/ de Bankinter 1, Madrid" data-difficulty="media" data-reward="600" data-available="si">
-                <img class="photos" src="assets/images/bankinter.png" alt="Bankinter" width="300">
-                <h3>BANCO BANKINTER</h3>
-                <button class="more-info">Más info</button>
-            </div>
-
-            <div class="card" data-address="C/ de BBVA 1, Madrid" data-difficulty="alta" data-reward="850" data-available="si">
-                <img class="photos" src="assets/images/BBVA.png" alt="BBVA" width="300">
-                <h3>BANCO BBVA</h3>
-                <button class="more-info">Más info</button>
-            </div>
-
-            <div class="card" data-address="C/ de la Moneda 1, Barcelona" data-difficulty="media" data-reward="650" data-available="si">
-                <img class="photos" src="assets/images/Casa-de-la-moneda-barceona.png" alt="Casa de la Moneda Barcelona" width="300">
-                <h3>CASA DE LA MONEDA BARCELONA</h3>
-                <button class="more-info">Más info</button>
-            </div>
-
-            <div class="card" data-address="C/ de la Moneda 1, París" data-difficulty="alta" data-reward="1000" data-available="si">
-                <img class="photos" src="assets/images/casa-de-la-moneda-paris.png" alt="Casa de la Moneda París" width="300">
-                <h3>CASA DE LA MONEDA PARÍS</h3>
-                <button class="more-info">Más info</button>
-            </div>
-
-            <div class="card" data-address="C/ de la Moneda 1, Segovia" data-difficulty="media" data-reward="500" data-available="si">
-                <img class="photos" src="assets/images/casa-de-la-moneda-segobia.png" alt="Casa de la Moneda Segovia" width="300">
-                <h3>CASA DE LA MONEDA SEGOVIA</h3>
-                <button class="more-info">Más info</button>
-            </div>
-
-            <div class="card" data-address="C/ de la Moneda 1, Sevilla" data-difficulty="alta" data-reward="750" data-available="si">
-                <img class="photos" src="assets/images/Casa-de-la-moneda-sevilla.png" alt="Casa de la Moneda Sevilla" width="300">
-                <h3>CASA DE LA MONEDA SEVILLA</h3>
-                <button class="more-info">Más info</button>
-            </div>
-
-            <div class="card" data-address="C/ de la Moneda 1, Y Timbre" data-difficulty="media" data-reward="590" data-available="si">
-                <img class="photos" src="assets/images/Casa-de-la-moneda-y-timbre.png" alt="Casa de la Moneda y Timbre" width="300">
-                <h3>CASA DE LA MONEDA Y TIMBRE</h3>
-                <button class="more-info">Más info</button>
-            </div>
-        </main>
-    </div>
-
-    <dialog id="modal-bank">
-        <div class="modal-content">
-            <span class="close-btn">
-                <i class="hgi hgi-stroke hgi-cancel-01"></i>
-            </span>
-            <div class="modal-body">
-                <img id="modal-img" src="" alt="Foto del Banco">
-                <div class="modal-info">
-                    <h2 id="modal-name">Nombre del Banco</h2>
-                    <p><strong>Dirección:</strong> <span id="modal-address">Centro ciudad</span></p>
-                    <p><strong>Dificultad:</strong> <span id="modal-difficulty">Media</span></p>
-                    <p><strong>Recompensa estimada:</strong> <span id="modal-reward">500</span> €</p>
-                    <p><strong>Disponibilidad:</strong> <span id="modal-available">Desconocida</span></p>
-                </div>
-            </div>
-            <div class="modal-buttons">
-                <button class="btn-book">RESERVAR</button>
-                <button class="btn-cancel">CANCELAR RESERVA</button>
-            </div>
-        </div>
-    </dialog>
-    <dialog id="modal-form-overlay">
-        <div class="modal-content dialog-form">
-            <span class="close-form-btn close-btn">
-                <i class="hgi hgi-stroke hgi-cancel-01"></i>
-            </span>
-
-            <h2 class="form-title">Formulario de Operación</h2>
-            <p class="form-subtitle">Completa los detalles para confirmar tu reserva</p>
-
-            <form id="heist-form" class="heist-form">
-                <fieldset class="form-section">
-                    <legend>Información del Líder</legend>
-                    <div class="form-group">
-                        <label for="leader-name">Nombre del Líder *</label>
-                        <input id="leader-name" name="leader-name" type="text" placeholder="Tu nombre" required>
+                <div id="filters-content" class="filters-content">
+                    <div class="filter-group">
+                        <label for="location">Localización</label>
+                        <input id="location" name="location" type="text" placeholder="Ej: Madrid" />
                     </div>
-                    <div class="form-group">
-                        <label for="leader-email">Email de Contacto *</label>
-                        <input id="leader-email" name="leader-email" type="email" placeholder="tu@email.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="experience">Años de Experiencia *</label>
-                        <input id="experience" name="experience" type="number" min="0" max="50" placeholder="0" required>
-                    </div>
-                </fieldset>
-
-                <fieldset class="form-section">
-                    <legend>Información de la Operación</legend>
-                    <div class="form-group">
-                        <label for="bank-select">Banco Objetivo *</label>
-                        <select id="bank-select" name="bank-select" required>
-                            <option value="">Selecciona un banco</option>
-                            <option value="banco-asturias">BANCO DE ASTURIAS</option>
-                            <option value="banco-barcelona">BANCO DE BARCELONA</option>
-                            <option value="banco-españa">BANCO DE ESPAÑA</option>
-                            <option value="banco-madrid">BANCO DE MADRID</option>
-                            <option value="banco-bankinter">BANCO BANKINTER</option>
-                            <option value="banco-bbva">BANCO BBVA</option>
-                            <option value="casa-moneda-barcelona">CASA DE LA MONEDA BARCELONA</option>
-                            <option value="casa-moneda-paris">CASA DE LA MONEDA PARÍS</option>
-                            <option value="casa-moneda-segovia">CASA DE LA MONEDA SEGOVIA</option>
-                            <option value="casa-moneda-sevilla">CASA DE LA MONEDA SEVILLA</option>
-                            <option value="casa-moneda-timbre">CASA DE LA MONEDA Y TIMBRE</option>
+                    <div class="filter-group">
+                        <label for="difficulty">Dificultad</label>
+                        <select id="difficulty" name="difficulty">
+                            <option value="">Todos</option>
+                            <option value="facil">Fácil</option>
+                            <option value="media">Media</option>
+                            <option value="alta">Alta</option>
                         </select>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="operation-date">Fecha de Operación *</label>
-                            <input id="operation-date" name="operation-date" type="date" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="operation-time">Hora de Inicio *</label>
-                            <input id="operation-time" name="operation-time" type="time" required>
-                        </div>
+                    <div class="filter-group">
+                        <label for="reward">Dinero a ganar</label>
+                        <input
+                            id="reward"
+                            name="reward"
+                            type="range"
+                            min="0"
+                            max="1000"
+                            value="1000"
+                        />
+                        <div>Valor: <output id="reward-output">1000</output> €</div>
                     </div>
-                    <div class="form-group">
-                        <label for="team-size">Número de Miembros del Equipo *</label>
-                        <input id="team-size" name="team-size" type="number" min="1" max="20" placeholder="1" required>
-                    </div>
-                </fieldset>
-
-                <fieldset class="form-section">
-                    <legend>Detalles Operacionales</legend>
-                    <div class="form-group">
-                        <label for="risk-level">Nivel de Riesgo Aceptado *</label>
-                        <select id="risk-level" name="risk-level" required>
-                            <option value="">Selecciona un nivel</option>
-                            <option value="bajo">Bajo - Operación Segura</option>
-                            <option value="medio">Medio - Riesgo Moderado</option>
-                            <option value="alto">Alto - Muy Peligroso</option>
+                    <div class="filter-group">
+                        <label for="availability">Disponibilidad</label>
+                        <select id="availability" name="availability">
+                            <option value="todos">Todos</option>
+                            <option value="si">Sí (Disponible)</option>
+                            <option value="no">No (Ocupado)</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="budget">Presupuesto Disponible (€) *</label>
-                        <input id="budget" name="budget" type="number" min="0" max="100000" placeholder="0" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="equipment">Equipo Necesario *</label>
-                        <textarea id="equipment" name="equipment" placeholder="Describe el equipo que necesitarás..." rows="4" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="plan">Plan de Operación *</label>
-                        <textarea id="plan" name="plan" placeholder="Explica tu plan detallado para el robo..." rows="6" required></textarea>
-                    </div>
-                </fieldset>
-
-                <fieldset class="form-section">
-                    <legend>Especialidades del Equipo</legend>
-                    <div class="checkbox-group">
-                        <label class="checkbox-label"><input type="checkbox" name="specialties" value="hacking"><span>Hacking / Sistemas</span></label>
-                        <label class="checkbox-label"><input type="checkbox" name="specialties" value="driving"><span>Conducción</span></label>
-                        <label class="checkbox-label"><input type="checkbox" name="specialties" value="explosives"><span>Explosivos</span></label>
-                        <label class="checkbox-label"><input type="checkbox" name="specialties" value="negotiation"><span>Infiltración</span></label>
-                        <label class="checkbox-label"><input type="checkbox" name="specialties" value="combat"><span>Combate</span></label>
-                        <label class="checkbox-label"><input type="checkbox" name="specialties" value="logistics"><span>Logística</span></label>
-                    </div>
-                </fieldset>
-
-                <fieldset class="form-section">
-                    <legend>Confirmación</legend>
-                    <label class="checkbox-label full-width">
-                        <input type="checkbox" name="terms" required>
-                        <span>Asumo los riesgos de esta operación *</span>
-                    </label>
-                </fieldset>
-
-                <div class="form-actions">
-                    <button type="submit" class="btn-submit">Confirmar y Reservar</button>
-                    <button type="button" class="btn-reset" id="btn-cancel-form">Cancelar</button>
+                    <button id="btn-remove-filters">Quitar filtros</button>
                 </div>
-            </form>
-        </div>
-    </dialog>
-    
+            </aside>
 
-    <site-footer></site-footer>
-</body>
+            <main>
+                <div
+                    class="card"
+                    data-address="C/ Mayor 1, Oviedo"
+                    data-difficulty="facil"
+                    data-reward="300"
+                    data-available="si"
+                >
+                    <img
+                        class="photos"
+                        src="assets/images/banco-asturias.png"
+                        alt="Banco Asturias"
+                        width="300"
+                    />
+                    <h3>BANCO DE ASTURIAS</h3>
+                    <button class="more-info">Más info</button>
+                </div>
+
+                <div
+                    class="card"
+                    data-address="Paseo 2, Barcelona"
+                    data-difficulty="alta"
+                    data-reward="800"
+                    data-available="si"
+                >
+                    <img
+                        class="photos"
+                        src="assets/images/Banco-barcelona.png"
+                        alt="Banco Barcelona"
+                        width="300"
+                    />
+                    <h3>BANCO DE BARCELONA</h3>
+                    <button class="more-info">Más info</button>
+                </div>
+
+                <div
+                    class="card"
+                    data-address="C/ de España 1, Madrid"
+                    data-difficulty="media"
+                    data-reward="550"
+                    data-available="si"
+                >
+                    <img
+                        class="photos"
+                        src="assets/images/banco-de-españa.png"
+                        alt="Banco de España"
+                        width="300"
+                    />
+                    <h3>BANCO DE ESPAÑA</h3>
+                    <button class="more-info">Más info</button>
+                </div>
+
+                <div
+                    class="card"
+                    data-address="C/ de Madrid 1, Madrid"
+                    data-difficulty="alta"
+                    data-reward="900"
+                    data-available="si"
+                >
+                    <img
+                        class="photos"
+                        src="assets/images/Banco-madrid.png"
+                        alt="Banco Madrid"
+                        width="300"
+                    />
+                    <h3>BANCO DE MADRID</h3>
+                    <button class="more-info">Más info</button>
+                </div>
+
+                <div
+                    class="card"
+                    data-address="C/ de Bankinter 1, Madrid"
+                    data-difficulty="media"
+                    data-reward="600"
+                    data-available="si"
+                >
+                    <img
+                        class="photos"
+                        src="assets/images/bankinter.png"
+                        alt="Bankinter"
+                        width="300"
+                    />
+                    <h3>BANCO BANKINTER</h3>
+                    <button class="more-info">Más info</button>
+                </div>
+
+                <div
+                    class="card"
+                    data-address="C/ de BBVA 1, Madrid"
+                    data-difficulty="alta"
+                    data-reward="850"
+                    data-available="si"
+                >
+                    <img class="photos" src="assets/images/BBVA.png" alt="BBVA" width="300" />
+                    <h3>BANCO BBVA</h3>
+                    <button class="more-info">Más info</button>
+                </div>
+
+                <div
+                    class="card"
+                    data-address="C/ de la Moneda 1, Barcelona"
+                    data-difficulty="media"
+                    data-reward="650"
+                    data-available="si"
+                >
+                    <img
+                        class="photos"
+                        src="assets/images/Casa-de-la-moneda-barceona.png"
+                        alt="Casa de la Moneda Barcelona"
+                        width="300"
+                    />
+                    <h3>CASA DE LA MONEDA BARCELONA</h3>
+                    <button class="more-info">Más info</button>
+                </div>
+
+                <div
+                    class="card"
+                    data-address="C/ de la Moneda 1, París"
+                    data-difficulty="alta"
+                    data-reward="1000"
+                    data-available="si"
+                >
+                    <img
+                        class="photos"
+                        src="assets/images/casa-de-la-moneda-paris.png"
+                        alt="Casa de la Moneda París"
+                        width="300"
+                    />
+                    <h3>CASA DE LA MONEDA PARÍS</h3>
+                    <button class="more-info">Más info</button>
+                </div>
+
+                <div
+                    class="card"
+                    data-address="C/ de la Moneda 1, Segovia"
+                    data-difficulty="media"
+                    data-reward="500"
+                    data-available="si"
+                >
+                    <img
+                        class="photos"
+                        src="assets/images/casa-de-la-moneda-segobia.png"
+                        alt="Casa de la Moneda Segovia"
+                        width="300"
+                    />
+                    <h3>CASA DE LA MONEDA SEGOVIA</h3>
+                    <button class="more-info">Más info</button>
+                </div>
+
+                <div
+                    class="card"
+                    data-address="C/ de la Moneda 1, Sevilla"
+                    data-difficulty="alta"
+                    data-reward="750"
+                    data-available="si"
+                >
+                    <img
+                        class="photos"
+                        src="assets/images/Casa-de-la-moneda-sevilla.png"
+                        alt="Casa de la Moneda Sevilla"
+                        width="300"
+                    />
+                    <h3>CASA DE LA MONEDA SEVILLA</h3>
+                    <button class="more-info">Más info</button>
+                </div>
+
+                <div
+                    class="card"
+                    data-address="C/ de la Moneda 1, Y Timbre"
+                    data-difficulty="media"
+                    data-reward="590"
+                    data-available="si"
+                >
+                    <img
+                        class="photos"
+                        src="assets/images/Casa-de-la-moneda-y-timbre.png"
+                        alt="Casa de la Moneda y Timbre"
+                        width="300"
+                    />
+                    <h3>CASA DE LA MONEDA Y TIMBRE</h3>
+                    <button class="more-info">Más info</button>
+                </div>
+            </main>
+        </div>
+
+        <dialog id="modal-bank">
+            <div class="modal-content">
+                <span class="close-btn">
+                    <i class="hgi hgi-stroke hgi-cancel-01"></i>
+                </span>
+                <div class="modal-body">
+                    <img id="modal-img" src="" alt="Foto del Banco" />
+                    <div class="modal-info">
+                        <h2 id="modal-name">Nombre del Banco</h2>
+                        <p>
+                            <strong>Dirección:</strong>
+                            <span id="modal-address">Centro ciudad</span>
+                        </p>
+                        <p><strong>Dificultad:</strong> <span id="modal-difficulty">Media</span></p>
+                        <p>
+                            <strong>Recompensa estimada:</strong>
+                            <span id="modal-reward">500</span> €
+                        </p>
+                        <p>
+                            <strong>Disponibilidad:</strong>
+                            <span id="modal-available">Desconocida</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn-book">RESERVAR</button>
+                    <button class="btn-cancel">CANCELAR RESERVA</button>
+                </div>
+            </div>
+        </dialog>
+        <dialog id="modal-form-overlay">
+            <div class="modal-content dialog-form">
+                <span class="close-form-btn close-btn">
+                    <i class="hgi hgi-stroke hgi-cancel-01"></i>
+                </span>
+
+                <h2 class="form-title">Formulario de Operación</h2>
+                <p class="form-subtitle">Completa los detalles para confirmar tu reserva</p>
+
+                <form id="heist-form" class="heist-form">
+                    <fieldset class="form-section">
+                        <legend>Información del Líder</legend>
+                        <div class="form-group">
+                            <label for="leader-name">Nombre del Líder *</label>
+                            <input
+                                id="leader-name"
+                                name="leader-name"
+                                type="text"
+                                placeholder="Tu nombre"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label for="leader-email">Email de Contacto *</label>
+                            <input
+                                id="leader-email"
+                                name="leader-email"
+                                type="email"
+                                placeholder="tu@email.com"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label for="experience">Años de Experiencia *</label>
+                            <input
+                                id="experience"
+                                name="experience"
+                                type="number"
+                                min="0"
+                                max="50"
+                                placeholder="0"
+                                required
+                            />
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="form-section">
+                        <legend>Información de la Operación</legend>
+                        <div class="form-group">
+                            <label for="bank-select">Banco Objetivo *</label>
+                            <select id="bank-select" name="bank-select" required>
+                                <option value="">Selecciona un banco</option>
+                                <option value="banco-asturias">BANCO DE ASTURIAS</option>
+                                <option value="banco-barcelona">BANCO DE BARCELONA</option>
+                                <option value="banco-españa">BANCO DE ESPAÑA</option>
+                                <option value="banco-madrid">BANCO DE MADRID</option>
+                                <option value="banco-bankinter">BANCO BANKINTER</option>
+                                <option value="banco-bbva">BANCO BBVA</option>
+                                <option value="casa-moneda-barcelona">
+                                    CASA DE LA MONEDA BARCELONA
+                                </option>
+                                <option value="casa-moneda-paris">CASA DE LA MONEDA PARÍS</option>
+                                <option value="casa-moneda-segovia">
+                                    CASA DE LA MONEDA SEGOVIA
+                                </option>
+                                <option value="casa-moneda-sevilla">
+                                    CASA DE LA MONEDA SEVILLA
+                                </option>
+                                <option value="casa-moneda-timbre">
+                                    CASA DE LA MONEDA Y TIMBRE
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="operation-date">Fecha de Operación *</label>
+                                <input
+                                    id="operation-date"
+                                    name="operation-date"
+                                    type="date"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="operation-time">Hora de Inicio *</label>
+                                <input
+                                    id="operation-time"
+                                    name="operation-time"
+                                    type="time"
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="team-size">Número de Miembros del Equipo *</label>
+                            <input
+                                id="team-size"
+                                name="team-size"
+                                type="number"
+                                min="1"
+                                max="20"
+                                placeholder="1"
+                                required
+                            />
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="form-section">
+                        <legend>Detalles Operacionales</legend>
+                        <div class="form-group">
+                            <label for="risk-level">Nivel de Riesgo Aceptado *</label>
+                            <select id="risk-level" name="risk-level" required>
+                                <option value="">Selecciona un nivel</option>
+                                <option value="bajo">Bajo - Operación Segura</option>
+                                <option value="medio">Medio - Riesgo Moderado</option>
+                                <option value="alto">Alto - Muy Peligroso</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="budget">Presupuesto Disponible (€) *</label>
+                            <input
+                                id="budget"
+                                name="budget"
+                                type="number"
+                                min="0"
+                                max="100000"
+                                placeholder="0"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label for="equipment">Equipo Necesario *</label>
+                            <textarea
+                                id="equipment"
+                                name="equipment"
+                                placeholder="Describe el equipo que necesitarás..."
+                                rows="4"
+                                required
+                            ></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="plan">Plan de Operación *</label>
+                            <textarea
+                                id="plan"
+                                name="plan"
+                                placeholder="Explica tu plan detallado para el robo..."
+                                rows="6"
+                                required
+                            ></textarea>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="form-section">
+                        <legend>Especialidades del Equipo</legend>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label"
+                                ><input type="checkbox" name="specialties" value="hacking" /><span
+                                    >Hacking / Sistemas</span
+                                ></label
+                            >
+                            <label class="checkbox-label"
+                                ><input type="checkbox" name="specialties" value="driving" /><span
+                                    >Conducción</span
+                                ></label
+                            >
+                            <label class="checkbox-label"
+                                ><input
+                                    type="checkbox"
+                                    name="specialties"
+                                    value="explosives"
+                                /><span>Explosivos</span></label
+                            >
+                            <label class="checkbox-label"
+                                ><input
+                                    type="checkbox"
+                                    name="specialties"
+                                    value="negotiation"
+                                /><span>Infiltración</span></label
+                            >
+                            <label class="checkbox-label"
+                                ><input type="checkbox" name="specialties" value="combat" /><span
+                                    >Combate</span
+                                ></label
+                            >
+                            <label class="checkbox-label"
+                                ><input type="checkbox" name="specialties" value="logistics" /><span
+                                    >Logística</span
+                                ></label
+                            >
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="form-section">
+                        <legend>Confirmación</legend>
+                        <label class="checkbox-label full-width">
+                            <input type="checkbox" name="terms" required />
+                            <span>Asumo los riesgos de esta operación *</span>
+                        </label>
+                    </fieldset>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">Confirmar y Reservar</button>
+                        <button type="button" class="btn-reset" id="btn-cancel-form">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+
+        <site-footer></site-footer>
+    </body>
 </html>

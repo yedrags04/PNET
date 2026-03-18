@@ -145,10 +145,7 @@ footer {
     }
 }
 
-
 .card.reserved {
-   
-    
     opacity: 0.5;
 }
 
@@ -380,7 +377,6 @@ dialog.is-closing::backdrop {
     margin-top: 10px;
 }
 
-
 /* ===== PÁGINA DE INICIO ===== */
 
 .home-container {
@@ -550,7 +546,6 @@ main h2 i {
     &:hover {
         transform: scale(1.05);
     }
-
 }
 
 .btn-cart {
@@ -562,7 +557,9 @@ main h2 i {
     border-radius: 99px;
     width: 50px;
     height: 50px;
-    transition: transform 200ms, opacity 250ms;
+    transition:
+        transform 200ms,
+        opacity 250ms;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -666,7 +663,10 @@ details.faq-item {
     overflow: hidden;
     background: var(--color-raised);
     box-shadow: var(--shadow-sm);
-    transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    transition:
+        border-color 0.3s,
+        box-shadow 0.3s,
+        transform 0.3s;
 
     &:hover {
         border-color: var(--color-accent);
@@ -675,7 +675,7 @@ details.faq-item {
     }
 }
 
-details.faq-item>summary.faq-question {
+details.faq-item > summary.faq-question {
     list-style: none;
     padding: 1.8rem 2rem;
     background: linear-gradient(135deg, var(--color-raised) 0%, rgba(253, 199, 0, 0.02) 100%);
@@ -687,7 +687,9 @@ details.faq-item>summary.faq-question {
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
-    transition: background 0.3s, color 0.3s;
+    transition:
+        background 0.3s,
+        color 0.3s;
     letter-spacing: 0.3px;
 
     &::-webkit-details-marker {
@@ -706,7 +708,7 @@ details.faq-item>summary.faq-question {
     }
 }
 
-details.faq-item[open]>summary.faq-question {
+details.faq-item[open] > summary.faq-question {
     background: linear-gradient(135deg, var(--color-overlay) 0%, rgba(253, 199, 0, 0.1) 100%);
     color: var(--color-accent);
 
@@ -737,10 +739,9 @@ details.faq-item[open]>summary.faq-question {
     }
 }
 
-details[open]>.faq-answer {
+details[open] > .faq-answer {
     max-height: 700px;
 }
-
 
 /* ===== VIEW TRANSITIONS ===== */
 
@@ -771,7 +772,6 @@ details[open]>.faq-answer {
         opacity: 0;
     }
 }
-
 
 /* ===== FORMULARIO ===== */
 
@@ -848,7 +848,9 @@ details[open]>.faq-answer {
     color: inherit;
     font-family: inherit;
     font-size: 0.95rem;
-    transition: border-color 200ms, box-shadow 200ms;
+    transition:
+        border-color 200ms,
+        box-shadow 200ms;
 }
 
 .form-group textarea {
@@ -933,7 +935,9 @@ details[open]>.faq-answer {
     border: none;
     border-radius: 30px;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
     box-shadow: var(--shadow-sm);
 }
 
@@ -954,7 +958,9 @@ details[open]>.faq-answer {
     border: 2px solid var(--color-accent);
     border-radius: 30px;
     cursor: pointer;
-    transition: transform 0.2s, background-color 0.2s;
+    transition:
+        transform 0.2s,
+        background-color 0.2s;
 }
 
 .btn-reset:hover {
@@ -1035,51 +1041,50 @@ details[open]>.faq-answer {
 }
 
 @media (max-width: 768px) {
-    
     /* --- 1. HEADER Y NAVEGACIÓN --- */
     header {
-        flex-direction: row; 
+        flex-direction: row;
         justify-content: space-between;
         flex-wrap: wrap;
         padding: 15px 1.5rem;
     }
 
     .menu-toggle {
-        display: block; 
+        display: block;
         margin-top: 10px;
     }
-    
+
     nav {
-        display: none; 
+        display: none;
         width: 100%;
-        flex-direction: column; 
-        gap: 5px; 
-        padding-top: 10px; 
+        flex-direction: column;
+        gap: 5px;
+        padding-top: 10px;
         border-top: 1px solid var(--color-overlay);
         margin-top: 5px;
     }
 
     nav.open {
-        display: flex; 
+        display: flex;
     }
 
     nav a {
         width: 100%;
         text-align: center;
-        padding: 12px; 
+        padding: 12px;
     }
 
     /* --- 2. LAYOUT Y FILTROS (ASIDE) --- */
     .container {
-        flex-direction: column; 
+        flex-direction: column;
         padding: 10px;
     }
 
     aside {
-        width: 100%; 
+        width: 100%;
         min-width: 100%;
-        height: auto; 
-        position: static; 
+        height: auto;
+        position: static;
         margin-bottom: 20px;
         padding: 15px;
     }
@@ -1089,7 +1094,7 @@ details[open]>.faq-answer {
     }
 
     .filters-content {
-        display: none; 
+        display: none;
         flex-direction: column;
         margin-top: 15px;
         padding-top: 15px;
@@ -1102,24 +1107,24 @@ details[open]>.faq-answer {
 
     /* --- 3. MODALES (POP-UPS) --- */
     .modal-body {
-        flex-direction: column; 
+        flex-direction: column;
         align-items: center;
         text-align: center;
     }
 
     .modal-body img {
-        width: 100%; 
+        width: 100%;
         max-width: 300px;
         height: auto;
     }
 
     .modal-buttons {
-        flex-direction: column; 
+        flex-direction: column;
     }
 
     /* --- 4. PÁGINA DE INICIO --- */
     .hero-title {
-        font-size: 2.2rem; 
+        font-size: 2.2rem;
         text-align: center;
     }
 
@@ -1132,22 +1137,22 @@ details[open]>.faq-answer {
     .horizontal-search-bar select,
     .input-icon,
     .horizontal-search-bar input[type="submit"] {
-        width: 100%; 
+        width: 100%;
     }
 
     main h2 {
-        font-size: 1.8rem; 
+        font-size: 1.8rem;
     }
-    
+
     /* Ajustes del carrusel para móviles */
     .carousel-slide {
-        flex: 0 0 80%; 
+        flex: 0 0 80%;
         height: 250px;
     }
 
     .side-panel {
-        width: 100%; 
-        right: -100%; 
+        width: 100%;
+        right: -100%;
     }
 
     .a11y-btn {
@@ -1160,7 +1165,6 @@ details[open]>.faq-answer {
         width: calc(100% - 40px); /* Ocupa el ancho del móvil menos los márgenes */
     }
 }
-
 
 /* ========================================= */
 /* ===== WIDGET DE ACCESIBILIDAD ===== */
@@ -1182,7 +1186,9 @@ details[open]>.faq-answer {
     left: 30px;
     cursor: pointer;
     z-index: 1000;
-    transition: transform 0.3s, background-color 0.3s;
+    transition:
+        transform 0.3s,
+        background-color 0.3s;
     box-shadow: var(--shadow-lg);
 }
 
@@ -1271,8 +1277,8 @@ html.a11y-high-contrast {
     filter: contrast(130%) saturate(120%); /* Aumenta el contraste de colores oscuros/claros */
 }
 
-html.a11y-stop-animations *, 
-html.a11y-stop-animations *::before, 
+html.a11y-stop-animations *,
+html.a11y-stop-animations *::before,
 html.a11y-stop-animations *::after {
     animation-play-state: paused !important; /* Detiene animaciones */
     transition: none !important; /* Elimina transiciones suaves */
