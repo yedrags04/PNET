@@ -1278,3 +1278,10 @@ html.a11y-stop-animations *::after {
     transition: none !important; /* Elimina transiciones suaves */
     scroll-behavior: auto !important; /* Elimina el scroll suave */
 }
+
+html.a11y-dyslexic {
+    font-family: 'OpenDyslexic', Arial, sans-serif;
+    line-height: 1.6;        /* Más espacio entre líneas */
+    letter-spacing: 0.05em;  /* Un poco más de aire entre letras */
+    word-spacing: 0.1em;     /* Más espacio entre palabras */
+}
