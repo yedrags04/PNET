@@ -1291,7 +1291,15 @@ html.a11y-high-contrast {
 html.a11y-stop-animations *,
 html.a11y-stop-animations *::before,
 html.a11y-stop-animations *::after {
-    animation-play-state: paused !important; /* Detiene animaciones */
     transition: none !important; /* Elimina transiciones suaves */
     scroll-behavior: auto !important; /* Elimina el scroll suave */
+    animation: none !important; /* Elimina cualquier animación */
+    view-transition-name: none !important; /* Desactiva view transitions por elemento */
+}
+
+html.a11y-stop-animations::view-transition-old(root),
+html.a11y-stop-animations::view-transition-new(root),
+html.a11y-stop-animations::view-transition-old(site-header),
+html.a11y-stop-animations::view-transition-new(site-header) {
+    animation: none !important;
 }
