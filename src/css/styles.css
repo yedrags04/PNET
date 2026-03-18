@@ -145,10 +145,7 @@ footer {
     }
 }
 
-
 .card.reserved {
-   
-    
     opacity: 0.5;
 }
 
@@ -380,7 +377,6 @@ dialog.is-closing::backdrop {
     margin-top: 10px;
 }
 
-
 /* ===== PÁGINA DE INICIO ===== */
 
 .home-container {
@@ -424,6 +420,11 @@ dialog.is-closing::backdrop {
     color: var(--color-surface);
     font-family: var(--font-brand);
     font-size: 1.3rem;
+    transition: transform 0.2s;
+
+    &:hover {
+        transform: scale(1.02);
+    }
 }
 
 .input-icon {
@@ -530,7 +531,7 @@ main h2 i {
 
 .price-tag {
     display: inline-block;
-    font-size: 22px;
+    font-size: 1.375rem;
 }
 
 .btn-add {
@@ -544,25 +545,26 @@ main h2 i {
     cursor: pointer;
     align-self: center;
     padding: 8px 16px;
-    font-size: 14px;
+    font-size: 0.875rem;
     transition: transform 0.4s;
 
     &:hover {
         transform: scale(1.05);
     }
-
 }
 
 .btn-cart {
     background-color: var(--color-accent);
     color: var(--color-surface);
     font-weight: 600;
-    font-size: 22px;
+    font-size: 1.375rem;
     box-shadow: var(--shadow-sm);
     border-radius: 99px;
     width: 50px;
     height: 50px;
-    transition: transform 200ms, opacity 250ms;
+    transition:
+        transform 200ms,
+        opacity 250ms;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -582,7 +584,7 @@ main h2 i {
 }
 
 .btn-close-panel {
-    font-size: 22px;
+    font-size: 1.375rem;
     background: none;
     border: none;
     cursor: pointer;
@@ -666,7 +668,10 @@ details.faq-item {
     overflow: hidden;
     background: var(--color-raised);
     box-shadow: var(--shadow-sm);
-    transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    transition:
+        border-color 0.3s,
+        box-shadow 0.3s,
+        transform 0.3s;
 
     &:hover {
         border-color: var(--color-accent);
@@ -675,7 +680,7 @@ details.faq-item {
     }
 }
 
-details.faq-item>summary.faq-question {
+details.faq-item > summary.faq-question {
     list-style: none;
     padding: 1.8rem 2rem;
     background: linear-gradient(135deg, var(--color-raised) 0%, rgba(253, 199, 0, 0.02) 100%);
@@ -687,7 +692,9 @@ details.faq-item>summary.faq-question {
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
-    transition: background 0.3s, color 0.3s;
+    transition:
+        background 0.3s,
+        color 0.3s;
     letter-spacing: 0.3px;
 
     &::-webkit-details-marker {
@@ -706,7 +713,7 @@ details.faq-item>summary.faq-question {
     }
 }
 
-details.faq-item[open]>summary.faq-question {
+details.faq-item[open] > summary.faq-question {
     background: linear-gradient(135deg, var(--color-overlay) 0%, rgba(253, 199, 0, 0.1) 100%);
     color: var(--color-accent);
 
@@ -737,10 +744,9 @@ details.faq-item[open]>summary.faq-question {
     }
 }
 
-details[open]>.faq-answer {
+details[open] > .faq-answer {
     max-height: 700px;
 }
-
 
 /* ===== VIEW TRANSITIONS ===== */
 
@@ -771,7 +777,6 @@ details[open]>.faq-answer {
         opacity: 0;
     }
 }
-
 
 /* ===== FORMULARIO ===== */
 
@@ -848,7 +853,9 @@ details[open]>.faq-answer {
     color: inherit;
     font-family: inherit;
     font-size: 0.95rem;
-    transition: border-color 200ms, box-shadow 200ms;
+    transition:
+        border-color 200ms,
+        box-shadow 200ms;
 }
 
 .form-group textarea {
@@ -933,7 +940,9 @@ details[open]>.faq-answer {
     border: none;
     border-radius: 30px;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
     box-shadow: var(--shadow-sm);
 }
 
@@ -954,7 +963,9 @@ details[open]>.faq-answer {
     border: 2px solid var(--color-accent);
     border-radius: 30px;
     cursor: pointer;
-    transition: transform 0.2s, background-color 0.2s;
+    transition:
+        transform 0.2s,
+        background-color 0.2s;
 }
 
 .btn-reset:hover {
@@ -1035,51 +1046,50 @@ details[open]>.faq-answer {
 }
 
 @media (max-width: 768px) {
-    
     /* --- 1. HEADER Y NAVEGACIÓN --- */
     header {
-        flex-direction: row; 
+        flex-direction: row;
         justify-content: space-between;
         flex-wrap: wrap;
         padding: 15px 1.5rem;
     }
 
     .menu-toggle {
-        display: block; 
+        display: block;
         margin-top: 10px;
     }
-    
+
     nav {
-        display: none; 
+        display: none;
         width: 100%;
-        flex-direction: column; 
-        gap: 5px; 
-        padding-top: 10px; 
+        flex-direction: column;
+        gap: 5px;
+        padding-top: 10px;
         border-top: 1px solid var(--color-overlay);
         margin-top: 5px;
     }
 
     nav.open {
-        display: flex; 
+        display: flex;
     }
 
     nav a {
         width: 100%;
         text-align: center;
-        padding: 12px; 
+        padding: 12px;
     }
 
     /* --- 2. LAYOUT Y FILTROS (ASIDE) --- */
     .container {
-        flex-direction: column; 
+        flex-direction: column;
         padding: 10px;
     }
 
     aside {
-        width: 100%; 
+        width: 100%;
         min-width: 100%;
-        height: auto; 
-        position: static; 
+        height: auto;
+        position: static;
         margin-bottom: 20px;
         padding: 15px;
     }
@@ -1089,7 +1099,7 @@ details[open]>.faq-answer {
     }
 
     .filters-content {
-        display: none; 
+        display: none;
         flex-direction: column;
         margin-top: 15px;
         padding-top: 15px;
@@ -1102,24 +1112,24 @@ details[open]>.faq-answer {
 
     /* --- 3. MODALES (POP-UPS) --- */
     .modal-body {
-        flex-direction: column; 
+        flex-direction: column;
         align-items: center;
         text-align: center;
     }
 
     .modal-body img {
-        width: 100%; 
+        width: 100%;
         max-width: 300px;
         height: auto;
     }
 
     .modal-buttons {
-        flex-direction: column; 
+        flex-direction: column;
     }
 
     /* --- 4. PÁGINA DE INICIO --- */
     .hero-title {
-        font-size: 2.2rem; 
+        font-size: 2.2rem;
         text-align: center;
     }
 
@@ -1132,22 +1142,22 @@ details[open]>.faq-answer {
     .horizontal-search-bar select,
     .input-icon,
     .horizontal-search-bar input[type="submit"] {
-        width: 100%; 
+        width: 100%;
     }
 
     main h2 {
-        font-size: 1.8rem; 
+        font-size: 1.8rem;
     }
-    
+
     /* Ajustes del carrusel para móviles */
     .carousel-slide {
-        flex: 0 0 80%; 
+        flex: 0 0 80%;
         height: 250px;
     }
 
     .side-panel {
-        width: 100%; 
-        right: -100%; 
+        width: 100%;
+        right: -100%;
     }
 
     .a11y-btn {
@@ -1160,7 +1170,6 @@ details[open]>.faq-answer {
         width: calc(100% - 40px); /* Ocupa el ancho del móvil menos los márgenes */
     }
 }
-
 
 /* ========================================= */
 /* ===== WIDGET DE ACCESIBILIDAD ===== */
@@ -1176,13 +1185,15 @@ details[open]>.faq-answer {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
+    font-size: 1.5rem;
     position: fixed;
     bottom: 30px;
     left: 30px;
     cursor: pointer;
     z-index: 1000;
-    transition: transform 0.3s, background-color 0.3s;
+    transition:
+        transform 0.3s,
+        background-color 0.3s;
     box-shadow: var(--shadow-lg);
 }
 
@@ -1202,13 +1213,54 @@ details[open]>.faq-answer {
     box-shadow: var(--shadow-lg);
     padding: 20px;
     z-index: 1000;
-    display: none;
+    display: flex;
     flex-direction: column;
     gap: 15px;
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+    transform-origin: bottom left;
+    visibility: hidden;
+    pointer-events: none;
+    will-change: opacity, transform;
 }
 
 .a11y-panel.open {
-    display: flex;
+    animation: a11y-panel-in 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform-origin: bottom left;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.a11y-panel.is-closing {
+    animation: a11y-panel-out 140ms ease-in forwards;
+    visibility: visible;
+    pointer-events: none;
+}
+
+@keyframes a11y-panel-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes a11y-panel-out {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(8px) scale(0.96);
+    }
 }
 
 .a11y-header {
@@ -1225,6 +1277,12 @@ details[open]>.faq-answer {
     margin: 0;
 }
 
+.a11y-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .a11y-option-btn {
     background: var(--color-overlay);
     color: var(--color-text);
@@ -1234,11 +1292,11 @@ details[open]>.faq-answer {
     cursor: pointer;
     text-align: left;
     font-weight: 600;
-    transition: all 0.2s;
+    transition: background-color 0.2s;
 }
 
 .a11y-option-btn:hover {
-    background: #3f3f4680;
+    background: var(--color-highlight);
 }
 
 /* Cuando una opción está activada */
@@ -1271,12 +1329,20 @@ html.a11y-high-contrast {
     filter: contrast(130%) saturate(120%); /* Aumenta el contraste de colores oscuros/claros */
 }
 
-html.a11y-stop-animations *, 
-html.a11y-stop-animations *::before, 
+html.a11y-stop-animations *,
+html.a11y-stop-animations *::before,
 html.a11y-stop-animations *::after {
-    animation-play-state: paused !important; /* Detiene animaciones */
     transition: none !important; /* Elimina transiciones suaves */
     scroll-behavior: auto !important; /* Elimina el scroll suave */
+    animation: none !important; /* Elimina cualquier animación */
+    view-transition-name: none !important; /* Desactiva view transitions por elemento */
+}
+
+html.a11y-stop-animations::view-transition-old(root),
+html.a11y-stop-animations::view-transition-new(root),
+html.a11y-stop-animations::view-transition-old(site-header),
+html.a11y-stop-animations::view-transition-new(site-header) {
+    animation: none !important;
 }
 
 html.a11y-dyslexic {

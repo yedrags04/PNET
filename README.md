@@ -2,16 +2,30 @@
 
 Una aplicación web para reservar bancos y utensilios para cometer atracos 💵.
 
+Creado por:
+
+- Joaquín Guerra Tocino
+- Yedra García Sánchez
+- David Cifredo Juliá
+
 ## Servidor de desarrollo
 
 El script `server.js` puede ser ejecutado con [`bun`](https://bun.sh/) para
 abrir un servidor web con el comando `bun server.js`.
 
-**Actualmente no recarga el navegador automáticamente al cambiar el código de la
-aplicación.**
+La página se recargará _automágicamente_ cuando se modifique el código de la misma.
 
-## Autores
+## Formato de código (Prettier)
 
-- Joaquín Guerra Tocino
-- Yedra García Sánchez
-- David Cifredo Juliá
+Este proyecto usa [Prettier](https://prettier.io/) para mantener un formato de
+código consistente.
+
+Se recomienda encarecidamente que todos los desarrolladores usen la extensión
+oficial de [Prettier para VS
+Code](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode):
+
+El repositorio incluye la configuración en
+[`.vscode/settings.json`](.vscode/settings.json), donde está activado
+`editor.formatOnSave` y se define Prettier como formateador por defecto para
+HTML, CSS, JavaScript y Markdown. Esto hará que el código se formatee
+automáticamente al guardar.

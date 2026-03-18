@@ -1,115 +1,129 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Utensilios - HeistCraft</title>
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="components/site-header.js"></script>
-    <script src="components/site-footer.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.hugeicons.com/font/icons.css" crossorigin="anonymous">
-    <script src="js/script.js" defer></script>
-</head>
-<body>
-    <site-header></site-header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Utensilios - HeistCraft</title>
+        <link rel="stylesheet" href="css/reset.css" />
+        <link rel="stylesheet" href="css/base.css" />
+        <link rel="stylesheet" href="css/styles.css" />
+        <script src="components/site-header.js"></script>
+        <script src="components/site-footer.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://use.hugeicons.com/font/icons.css"
+            crossorigin="anonymous"
+        />
+        <script src="js/script.js" defer></script>
+    </head>
+    <body>
+        <site-header></site-header>
 
-    <div class="container">
-        <aside>
-            <button id="filters-toggle" class="filters-toggle">
-                <span>Filtros</span>
-                <i class="hgi hgi-stroke hgi-arrow-down-01"></i>
-            </button>
-
-            <div id="filters-content" class="filters-content">
-                <div class="filter-group">
-                    <label for="type">Tipo</label>
-                    <select id="type" name="type">
-                        <option value="todos">Todos</option>
-                        <option value="ropa">Ropa</option>
-                        <option value="herramientas">Herramientas</option>
-                        <option value="otros">Otros</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="material">Material</label>
-                    <select id="material" name="material">
-                        <option value="todos">Todos</option>
-                        <option value="microfibra">Microfibra</option>
-                        <option value="tela">Tela</option>
-                        <option value="metal">Metal</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="reward">Precio Max</label>
-                    <input id="reward" name="price" type="range" min="0" max="1000" value="500">
-                    <div>Valor: <output id="reward-output">500</output> €</div>
-                </div>
-                <button id="btn-remove-filters">Quitar filtros</button>
-            </div>
-        </aside>
-
-        <div id="cart-backdrop" class="cart-backdrop"></div>
-
-        <div id="side-panel" class="side-panel">
-            <div class="panel-header">
-                <button class="btn-cart" title="Abrir carrito">
-                    <i class="hgi hgi-stroke hgi-shopping-cart-02"></i>
+        <div class="container">
+            <aside>
+                <button id="filters-toggle" class="filters-toggle">
+                    <span>Filtros</span>
+                    <i class="hgi hgi-stroke hgi-arrow-down-01"></i>
                 </button>
-                <h2>Mi Carrito</h2>
-                <button id="btn-close-panel" class="btn-close-panel" title="Cerrar carrito">
-                    <i class="hgi hgi-stroke hgi-cancel-01"></i>
-                </button>
+
+                <div id="filters-content" class="filters-content">
+                    <div class="filter-group">
+                        <label for="type">Tipo</label>
+                        <select id="type" name="type">
+                            <option value="todos">Todos</option>
+                            <option value="ropa">Ropa</option>
+                            <option value="herramientas">Herramientas</option>
+                            <option value="otros">Otros</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="material">Material</label>
+                        <select id="material" name="material">
+                            <option value="todos">Todos</option>
+                            <option value="microfibra">Microfibra</option>
+                            <option value="tela">Tela</option>
+                            <option value="metal">Metal</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="reward">Precio Max</label>
+                        <input
+                            id="reward"
+                            name="price"
+                            type="range"
+                            min="0"
+                            max="1000"
+                            value="500"
+                        />
+                        <div>Valor: <output id="reward-output">500</output> €</div>
+                    </div>
+                    <button id="btn-remove-filters">Quitar filtros</button>
+                </div>
+            </aside>
+
+            <div id="cart-backdrop" class="cart-backdrop"></div>
+
+            <div id="side-panel" class="side-panel">
+                <div class="panel-header">
+                    <button class="btn-cart" title="Abrir carrito">
+                        <i class="hgi hgi-stroke hgi-shopping-cart-02"></i>
+                    </button>
+                    <h2>Mi Carrito</h2>
+                    <button id="btn-close-panel" class="btn-close-panel" title="Cerrar carrito">
+                        <i class="hgi hgi-stroke hgi-cancel-01"></i>
+                    </button>
+                </div>
+                <div class="panel-content">
+                    <p>No hay utensilios seleccionados todavía.</p>
+                </div>
             </div>
-            <div class="panel-content">
-                <p>No hay utensilios seleccionados todavía.</p>
-            </div>
+
+            <main>
+                <div class="card">
+                    <img class="photos" src="assets/images/Guantes.jpg" alt="Guantes" />
+                    <h3>GUANTES</h3>
+                    <div class="price-tag">50 €</div>
+                    <p>Guantes de microfibra para evitar huellas</p>
+                    <button class="btn-add">Añadir al carrito</button>
+                </div>
+                <div class="card">
+                    <img class="photos" src="assets/images/Pasamontanas.jpg" alt="Pasamontañas" />
+                    <h3>PASAMONTAÑAS</h3>
+                    <div class="price-tag">75 €</div>
+                    <p>Pasamontañas para evitar ser descubierto</p>
+                    <button class="btn-add">Añadir al carrito</button>
+                </div>
+                <div class="card">
+                    <img
+                        class="photos"
+                        src="assets/images/Cortacristales.jpg"
+                        alt="Cortacristales"
+                    />
+                    <h3>CORTACRISTALES</h3>
+                    <div class="price-tag">100 €</div>
+                    <p>Cortacristales barato</p>
+                    <button class="btn-add">Añadir al carrito</button>
+                </div>
+                <div class="card">
+                    <img
+                        class="photos"
+                        src="assets/images/Cortacristales_Ventosa.jpg"
+                        alt="Cortacristales con ventosa"
+                    />
+                    <h3>CORTACRISTALES CON VENTOSA</h3>
+                    <div class="price-tag">120 €</div>
+                    <p>Cortacristales con ventosa, para mayor precisión</p>
+                    <button class="btn-add">Añadir al carrito</button>
+                </div>
+            </main>
         </div>
 
-        <main>
-            <div class="card">
-                <img class="photos" src="assets/images/Guantes.jpg" alt="Guantes">
-                <h3>GUANTES</h3>
-                <div class="price-tag">50 €</div>
-                <p>Guantes de microfibra para evitar huellas</p>
-                <button class="btn-add">
-                    Añadir al carrito
-                </button>
-            </div>
-            <div class="card">
-                <img class="photos" src="assets/images/Pasamontanas.jpg" alt="Pasamontañas">
-                <h3>PASAMONTAÑAS</h3>
-                <div class="price-tag">75 €</div>
-                <p>Pasamontañas para evitar ser descubierto</p>
-                <button class="btn-add">
-                    Añadir al carrito
-                </button>
-            </div>
-            <div class="card">
-                <img class="photos" src="assets/images/Cortacristales.jpg" alt="Cortacristales">
-                <h3>CORTACRISTALES</h3>
-                <div class="price-tag">100 €</div>  
-                <p>Cortacristales barato</p>
-                <button class="btn-add">
-                    Añadir al carrito
-                </button>
-            </div>
-            <div class="card">
-                <img class="photos" src="assets/images/Cortacristales_Ventosa.jpg" alt="Cortacristales con ventosa">
-                <h3>CORTACRISTALES CON VENTOSA</h3>
-                <div class="price-tag">120 €</div>
-                <p>Cortacristales con ventosa, para mayor precisión</p>
-                <button class="btn-add">
-                    Añadir al carrito
-                </button>
-            </div>
-        </main>
-    </div>
-
-    <site-footer></site-footer>
-</body>
+        <site-footer></site-footer>
+    </body>
 </html>
