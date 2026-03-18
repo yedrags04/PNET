@@ -526,7 +526,7 @@ main h2 i {
 
 .price-tag {
     display: inline-block;
-    font-size: 22px;
+    font-size: 1.375rem;
 }
 
 .btn-add {
@@ -540,7 +540,7 @@ main h2 i {
     cursor: pointer;
     align-self: center;
     padding: 8px 16px;
-    font-size: 14px;
+    font-size: 0.875rem;
     transition: transform 0.4s;
 
     &:hover {
@@ -552,7 +552,7 @@ main h2 i {
     background-color: var(--color-accent);
     color: var(--color-surface);
     font-weight: 600;
-    font-size: 22px;
+    font-size: 1.375rem;
     box-shadow: var(--shadow-sm);
     border-radius: 99px;
     width: 50px;
@@ -579,7 +579,7 @@ main h2 i {
 }
 
 .btn-close-panel {
-    font-size: 22px;
+    font-size: 1.375rem;
     background: none;
     border: none;
     cursor: pointer;
@@ -1180,7 +1180,7 @@ details[open] > .faq-answer {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
+    font-size: 1.5rem;
     position: fixed;
     bottom: 30px;
     left: 30px;
