@@ -67,60 +67,68 @@
                 </div>
             </aside>
 
-            <div id="cart-backdrop" class="cart-backdrop"></div>
+            <section aria-label="Carrito">
+                <div id="cart-backdrop" class="cart-backdrop"></div>
 
-            <div id="side-panel" class="side-panel">
-                <div class="panel-header">
-                    <button class="btn-cart" title="Abrir carrito">
-                        <i class="hgi hgi-stroke hgi-shopping-cart-02"></i>
-                    </button>
-                    <h2>Mi Carrito</h2>
-                    <button id="btn-close-panel" class="btn-close-panel" title="Cerrar carrito">
-                        <i class="hgi hgi-stroke hgi-cancel-01"></i>
-                    </button>
+                <div id="side-panel" class="side-panel">
+                    <div class="panel-header">
+                        <button class="btn-cart" title="Abrir carrito">
+                            <i class="hgi hgi-stroke hgi-shopping-cart-02"></i>
+                        </button>
+                        <h2>Mi Carrito</h2>
+                        <button id="btn-close-panel" class="btn-close-panel" title="Cerrar carrito">
+                            <i class="hgi hgi-stroke hgi-cancel-01"></i>
+                        </button>
+                    </div>
+                    <div class="panel-content">
+                        <p>No hay utensilios seleccionados todavía.</p>
+                    </div>
                 </div>
-                <div class="panel-content">
-                    <p>No hay utensilios seleccionados todavía.</p>
-                </div>
-            </div>
+            </section>
 
             <main>
-                <div class="card">
-                    <img class="photos" src="assets/images/Guantes.jpg" alt="Guantes" />
-                    <h3>GUANTES</h3>
-                    <div class="price-tag">50 €</div>
-                    <p>Guantes de microfibra para evitar huellas</p>
-                    <button class="btn-add">Añadir al carrito</button>
-                </div>
-                <div class="card">
-                    <img class="photos" src="assets/images/Pasamontanas.jpg" alt="Pasamontañas" />
-                    <h3>PASAMONTAÑAS</h3>
-                    <div class="price-tag">75 €</div>
-                    <p>Pasamontañas para evitar ser descubierto</p>
-                    <button class="btn-add">Añadir al carrito</button>
-                </div>
-                <div class="card">
-                    <img
-                        class="photos"
-                        src="assets/images/Cortacristales.jpg"
-                        alt="Cortacristales"
-                    />
-                    <h3>CORTACRISTALES</h3>
-                    <div class="price-tag">100 €</div>
-                    <p>Cortacristales barato</p>
-                    <button class="btn-add">Añadir al carrito</button>
-                </div>
-                <div class="card">
-                    <img
-                        class="photos"
-                        src="assets/images/Cortacristales_Ventosa.jpg"
-                        alt="Cortacristales con ventosa"
-                    />
-                    <h3>CORTACRISTALES CON VENTOSA</h3>
-                    <div class="price-tag">120 €</div>
-                    <p>Cortacristales con ventosa, para mayor precisión</p>
-                    <button class="btn-add">Añadir al carrito</button>
-                </div>
+                <section class="cards-grid" aria-label="Catálogo de utensilios">
+                    <article class="card">
+                        <img class="photos" src="assets/images/Guantes.jpg" alt="Guantes" />
+                        <h3>GUANTES</h3>
+                        <div class="price-tag">50 €</div>
+                        <p>Guantes de microfibra para evitar huellas</p>
+                        <button class="btn-add">Añadir al carrito</button>
+                    </article>
+                    <article class="card">
+                        <img
+                            class="photos"
+                            src="assets/images/Pasamontanas.jpg"
+                            alt="Pasamontañas"
+                        />
+                        <h3>PASAMONTAÑAS</h3>
+                        <div class="price-tag">75 €</div>
+                        <p>Pasamontañas para evitar ser descubierto</p>
+                        <button class="btn-add">Añadir al carrito</button>
+                    </article>
+                    <article class="card">
+                        <img
+                            class="photos"
+                            src="assets/images/Cortacristales.jpg"
+                            alt="Cortacristales"
+                        />
+                        <h3>CORTACRISTALES</h3>
+                        <div class="price-tag">100 €</div>
+                        <p>Cortacristales barato</p>
+                        <button class="btn-add">Añadir al carrito</button>
+                    </article>
+                    <article class="card">
+                        <img
+                            class="photos"
+                            src="assets/images/Cortacristales_Ventosa.jpg"
+                            alt="Cortacristales con ventosa"
+                        />
+                        <h3>CORTACRISTALES CON VENTOSA</h3>
+                        <div class="price-tag">120 €</div>
+                        <p>Cortacristales con ventosa, para mayor precisión</p>
+                        <button class="btn-add">Añadir al carrito</button>
+                    </article>
+                </section>
             </main>
         </div>
 

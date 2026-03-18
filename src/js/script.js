@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const maxReward = parseInt(document.getElementById("reward")?.value) || 0;
         const availability = document.getElementById("availability")?.value || "todos";
 
-        const cards = document.querySelectorAll("main > .card");
+        const cards = document.querySelectorAll("main .card");
 
         cards.forEach((card) => {
             const cardAddress = card.dataset.address?.toLowerCase() || "";
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // data-original-available guarda la disponibilidad real del banco (sin reservas) para
     // poder restaurarla si el usuario cancela, sin tener que recargar el HTML.
     function updateReservationStatus() {
-        const cards = document.querySelectorAll("main > .card");
+        const cards = document.querySelectorAll("main .card");
 
         cards.forEach((card) => {
             const bankName = card.querySelector("h3").textContent;

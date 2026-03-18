@@ -68,6 +68,17 @@ main {
     align-content: start;
 }
 
+main > section {
+    grid-column: 1 / -1;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    align-content: start;
+}
+
 aside {
     width: 250px;
     min-width: 250px;
@@ -729,7 +740,8 @@ details.faq-item[open] > summary.faq-question {
     background: linear-gradient(180deg, rgba(253, 199, 0, 0.03) 0%, var(--color-surface) 100%);
     border-top: 1px solid rgba(253, 199, 0, 0.1);
 
-    p {
+    p,
+    ul {
         padding: 1.8rem 2rem;
         color: var(--color-muted);
         line-height: 1.9;

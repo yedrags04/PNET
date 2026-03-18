@@ -27,62 +27,66 @@
 
         <div class="container home-container">
             <main class="home-main">
-                <h2 class="hero-title">Expertos en robos desde 1942</h2>
+                <section class="hero-section" aria-label="Buscador principal">
+                    <h2 class="hero-title">Expertos en robos desde 1942</h2>
 
-                <form class="horizontal-search-bar">
-                    <div class="input-icon">
-                        <i class="hgi hgi-stroke hgi-search-01"></i>
-                        <input type="search" placeholder="Buscar objetivo..." />
+                    <form class="horizontal-search-bar">
+                        <div class="input-icon">
+                            <i class="hgi hgi-stroke hgi-search-01"></i>
+                            <input type="search" placeholder="Buscar objetivo..." />
+                        </div>
+                        <input type="date" title="Fecha del golpe" />
+                        <select
+                            id="botin-type"
+                            name="botin-type"
+                            title="Seleccionar tipo de botín"
+                            aria-label="Tipo de botín"
+                        >
+                            <option value="" disabled selected hidden>Elige una opción</option>
+                            <option value="dinero">Efectivo</option>
+                            <option value="oro">Lingotes de Oro</option>
+                            <option value="arte">Obras de Arte</option>
+                        </select>
+                        <input type="submit" value="Buscar" />
+                    </form>
+                </section>
+
+                <section class="top-banks-section" aria-label="Top bancos">
+                    <h2 class="section-title">Top bancos</h2>
+
+                    <div class="carousel">
+                        <button class="carousel-btn prev" aria-label="Anterior">&lt;</button>
+
+                        <div class="carousel-track">
+                            <article class="carousel-slide">
+                                <img src="assets/images/banco-de-españa.png" alt="Banco Central" />
+                            </article>
+                            <article class="carousel-slide">
+                                <img
+                                    src="assets/images/casa-de-la-moneda-paris.png"
+                                    alt="Casa Moneda París"
+                                />
+                            </article>
+                            <article class="carousel-slide">
+                                <img src="assets/images/Banco-madrid.png" alt="Banco Madrid" />
+                            </article>
+                            <article class="carousel-slide">
+                                <img
+                                    src="assets/images/Casa-de-la-moneda-y-timbre.png"
+                                    alt="Banco Madrid"
+                                />
+                            </article>
+                            <article class="carousel-slide">
+                                <img src="assets/images/BBVA.png" alt="Banco Madrid" />
+                            </article>
+                            <article class="carousel-slide">
+                                <img src="assets/images/Banco-barcelona.png" alt="Banco Madrid" />
+                            </article>
+                        </div>
+
+                        <button class="carousel-btn next" aria-label="Siguiente">&gt;</button>
                     </div>
-                    <input type="date" title="Fecha del golpe" />
-                    <select
-                        id="botin-type"
-                        name="botin-type"
-                        title="Seleccionar tipo de botín"
-                        aria-label="Tipo de botín"
-                    >
-                        <option value="" disabled selected hidden>Elige una opción</option>
-                        <option value="dinero">Efectivo</option>
-                        <option value="oro">Lingotes de Oro</option>
-                        <option value="arte">Obras de Arte</option>
-                    </select>
-                    <input type="submit" value="Buscar" />
-                </form>
-
-                <h2 class="section-title">Top bancos</h2>
-
-                <div class="carousel">
-                    <button class="carousel-btn prev" aria-label="Anterior">&lt;</button>
-
-                    <div class="carousel-track">
-                        <div class="carousel-slide">
-                            <img src="assets/images/banco-de-españa.png" alt="Banco Central" />
-                        </div>
-                        <div class="carousel-slide">
-                            <img
-                                src="assets/images/casa-de-la-moneda-paris.png"
-                                alt="Casa Moneda París"
-                            />
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="assets/images/Banco-madrid.png" alt="Banco Madrid" />
-                        </div>
-                        <div class="carousel-slide">
-                            <img
-                                src="assets/images/Casa-de-la-moneda-y-timbre.png"
-                                alt="Banco Madrid"
-                            />
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="assets/images/BBVA.png" alt="Banco Madrid" />
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="assets/images/Banco-barcelona.png" alt="Banco Madrid" />
-                        </div>
-                    </div>
-
-                    <button class="carousel-btn next" aria-label="Siguiente">&gt;</button>
-                </div>
+                </section>
             </main>
         </div>
         <site-footer></site-footer>
