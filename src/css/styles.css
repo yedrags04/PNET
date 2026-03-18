@@ -1356,3 +1356,10 @@ html.a11y-stop-animations::view-transition-old(site-header),
 html.a11y-stop-animations::view-transition-new(site-header) {
     animation: none !important;
 }
+
+html.a11y-dyslexic {
+    font-family: 'OpenDyslexic', Arial, sans-serif;
+    line-height: 1.6;        /* Más espacio entre líneas */
+    letter-spacing: 0.05em;  /* Un poco más de aire entre letras */
+    word-spacing: 0.1em;     /* Más espacio entre palabras */
+}

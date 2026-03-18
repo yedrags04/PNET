@@ -411,6 +411,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
             <div class="a11y-options">
                 <button id="a11y-text" class="a11y-option-btn">Aa - Texto más grande</button>
+				<button id="a11y-dyslexic" class="a11y-option-btn">Aa - Dislexia</button>
                 <button id="a11y-contrast" class="a11y-option-btn">◐ - Alto contraste</button>
                 <button id="a11y-animations" class="a11y-option-btn">⏸ - Detener animaciones</button>
                 <button id="a11y-reset" class="a11y-option-btn reset">Restablecer ajustes</button>
@@ -421,13 +422,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 2. Elementos del DOM
     const htmlElement = document.documentElement;
-    const btnToggle = document.getElementById("a11y-toggle");
-    const panel = document.getElementById("a11y-panel");
-
-    const btnText = document.getElementById("a11y-text");
-    const btnContrast = document.getElementById("a11y-contrast");
-    const btnAnim = document.getElementById("a11y-animations");
-    const btnReset = document.getElementById("a11y-reset");
+    const btnToggle = document.getElementById('a11y-toggle');
+    const btnClose = document.getElementById('a11y-close');
+    const panel = document.getElementById('a11y-panel');
+    
+    const btnText = document.getElementById('a11y-text');
+    const btnContrast = document.getElementById('a11y-contrast');
+    const btnAnim = document.getElementById('a11y-animations');
+    const btnReset = document.getElementById('a11y-reset');
 
     // 3. Función para aplicar preferencias guardadas al cargar la página
     function loadA11yPreferences() {
@@ -439,9 +441,9 @@ document.addEventListener("DOMContentLoaded", () => {
             htmlElement.classList.add("a11y-high-contrast");
             btnContrast.classList.add("active");
         }
-        if (localStorage.getItem("a11y-stop-animations") === "true") {
-            htmlElement.classList.add("a11y-stop-animations");
-            btnAnim.classList.add("active");
+        if (localStorage.getItem('a11y-stop-animations') === 'true') {
+            htmlElement.classList.add('a11y-stop-animations');
+            btnAnim.classList.add('active');
         }
     }
 
