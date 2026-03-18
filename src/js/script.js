@@ -422,7 +422,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // 2. Elementos del DOM
     const htmlElement = document.documentElement;
     const btnToggle = document.getElementById("a11y-toggle");
-    const btnClose = document.getElementById("a11y-close");
     const panel = document.getElementById("a11y-panel");
 
     const btnText = document.getElementById("a11y-text");
@@ -446,8 +445,43 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    let closeAnimationTimeout;
+
     // 4. Lógica para abrir/cerrar el panel
-    btnToggle.addEventListener("click", () => panel.classList.toggle("open"));
+    function setPanelOpen(isOpen) {
+        clearTimeout(closeAnimationTimeout);
+
+        if (isOpen) {
+            panel.classList.remove("is-closing");
+            panel.classList.add("open");
+        } else if (panel.classList.contains("open")) {
+            panel.classList.remove("open");
+            panel.classList.add("is-closing");
+
+            closeAnimationTimeout = setTimeout(() => {
+                panel.classList.remove("is-closing");
+            }, 180);
+        }
+
+        btnToggle.setAttribute("aria-expanded", String(isOpen));
+        panel.setAttribute("aria-hidden", String(!isOpen));
+    }
+
+    btnToggle.addEventListener("click", () => {
+        setPanelOpen(!panel.classList.contains("open"));
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && panel.classList.contains("open")) {
+            setPanelOpen(false);
+        }
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!panel.classList.contains("open")) return;
+        if (panel.contains(e.target) || btnToggle.contains(e.target)) return;
+        setPanelOpen(false);
+    });
 
     // 5. Lógica de los botones de opciones
     btnText.addEventListener("click", () => {
@@ -483,6 +517,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("a11y-stop-animations", "false");
     });
 
-    // Cargar preferencias iniciales
+    // Estado inicial y preferencias
+    setPanelOpen(false);
     loadA11yPreferences();
 });

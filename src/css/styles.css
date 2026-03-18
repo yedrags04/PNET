@@ -1213,13 +1213,54 @@ details[open] > .faq-answer {
     box-shadow: var(--shadow-lg);
     padding: 20px;
     z-index: 1000;
-    display: none;
+    display: flex;
     flex-direction: column;
     gap: 15px;
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+    transform-origin: bottom left;
+    visibility: hidden;
+    pointer-events: none;
+    will-change: opacity, transform;
 }
 
 .a11y-panel.open {
-    display: flex;
+    animation: a11y-panel-in 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform-origin: bottom left;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.a11y-panel.is-closing {
+    animation: a11y-panel-out 140ms ease-in forwards;
+    visibility: visible;
+    pointer-events: none;
+}
+
+@keyframes a11y-panel-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes a11y-panel-out {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(8px) scale(0.96);
+    }
 }
 
 .a11y-header {
