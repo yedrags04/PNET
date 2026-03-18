@@ -1231,6 +1231,12 @@ details[open] > .faq-answer {
     margin: 0;
 }
 
+.a11y-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .a11y-option-btn {
     background: var(--color-overlay);
     color: var(--color-text);
@@ -1240,11 +1246,11 @@ details[open] > .faq-answer {
     cursor: pointer;
     text-align: left;
     font-weight: 600;
-    transition: all 0.2s;
+    transition: background-color 0.2s;
 }
 
 .a11y-option-btn:hover {
-    background: #3f3f4680;
+    background: var(--color-highlight);
 }
 
 /* Cuando una opción está activada */
