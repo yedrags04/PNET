@@ -58,6 +58,10 @@ textarea {
     transition: box-shadow 150ms;
 }
 
+input[type="submit"] {
+    cursor: pointer;
+}
+
 input::placeholder {
     color: var(--color-muted);
 }

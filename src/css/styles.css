@@ -420,6 +420,11 @@ dialog.is-closing::backdrop {
     color: var(--color-surface);
     font-family: var(--font-brand);
     font-size: 1.3rem;
+    transition: transform 0.2s;
+
+    &:hover {
+        transform: scale(1.02);
+    }
 }
 
 .input-icon {
