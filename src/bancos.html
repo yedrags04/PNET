@@ -266,19 +266,31 @@
                     <img id="modal-img" src="" alt="Foto del Banco" />
                     <div class="modal-info">
                         <h2 id="modal-name">Nombre del Banco</h2>
-                        <p>
-                            <strong>Dirección:</strong>
-                            <span id="modal-address">Centro ciudad</span>
-                        </p>
-                        <p><strong>Dificultad:</strong> <span id="modal-difficulty">Media</span></p>
-                        <p>
-                            <strong>Recompensa estimada:</strong>
-                            <span id="modal-reward">500</span> €
-                        </p>
-                        <p>
-                            <strong>Disponibilidad:</strong>
-                            <span id="modal-available">Desconocida</span>
-                        </p>
+                        <div class="bank-data-table-wrap">
+                            <table
+                                class="bank-data-table"
+                                aria-label="Detalles del banco seleccionado"
+                            >
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Direccion</th>
+                                        <td id="modal-address">Centro ciudad</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Dificultad</th>
+                                        <td><span id="modal-difficulty">Media</span></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Recompensa estimada</th>
+                                        <td><span id="modal-reward">500</span> EUR</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Disponibilidad</th>
+                                        <td><span id="modal-available">Desconocida</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-buttons">

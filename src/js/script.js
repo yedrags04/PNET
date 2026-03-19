@@ -166,10 +166,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 const difficulty = card.dataset.difficulty || "no disponible";
                 modalDifficulty.textContent =
                     difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
+                modalDifficulty.dataset.level = difficulty.toLowerCase();
 
                 modalReward.textContent = card.dataset.reward || "No disponible";
 
                 const available = card.dataset.available || "";
+                modalAvailable.dataset.state = available.toLowerCase();
                 modalAvailable.textContent =
                     available === "si" ? "Disponible" : available === "no" ? "Ocupado" : available;
 
@@ -422,14 +424,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 2. Elementos del DOM
     const htmlElement = document.documentElement;
-    const btnToggle = document.getElementById('a11y-toggle');
-    const panel = document.getElementById('a11y-panel');
-    
-    const btnText = document.getElementById('a11y-text');
-    const btnContrast = document.getElementById('a11y-contrast');
-    const btnDyslexic = document.getElementById('a11y-dyslexic');
-    const btnAnim = document.getElementById('a11y-animations');
-    const btnReset = document.getElementById('a11y-reset');
+    const btnToggle = document.getElementById("a11y-toggle");
+    const panel = document.getElementById("a11y-panel");
+
+    const btnText = document.getElementById("a11y-text");
+    const btnContrast = document.getElementById("a11y-contrast");
+    const btnDyslexic = document.getElementById("a11y-dyslexic");
+    const btnAnim = document.getElementById("a11y-animations");
+    const btnReset = document.getElementById("a11y-reset");
 
     // 3. Función para aplicar preferencias guardadas al cargar la página
     function loadA11yPreferences() {
@@ -441,13 +443,13 @@ document.addEventListener("DOMContentLoaded", () => {
             htmlElement.classList.add("a11y-high-contrast");
             btnContrast.classList.add("active");
         }
-        if (localStorage.getItem('a11y-stop-animations') === 'true') {
-            htmlElement.classList.add('a11y-stop-animations');
-            btnAnim.classList.add('active');
+        if (localStorage.getItem("a11y-stop-animations") === "true") {
+            htmlElement.classList.add("a11y-stop-animations");
+            btnAnim.classList.add("active");
         }
-        if (localStorage.getItem('a11y-dyslexic') === 'true') {
-            htmlElement.classList.add('a11y-dyslexic');
-            btnDyslexic.classList.add('active');
+        if (localStorage.getItem("a11y-dyslexic") === "true") {
+            htmlElement.classList.add("a11y-dyslexic");
+            btnDyslexic.classList.add("active");
         }
     }
 
@@ -519,7 +521,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "a11y-large-text",
             "a11y-high-contrast",
             "a11y-stop-animations",
-            "a11y-dyslexic"
+            "a11y-dyslexic",
         );
         btnText.classList.remove("active");
         btnContrast.classList.remove("active");
