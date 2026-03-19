@@ -64,6 +64,7 @@ body {
 button {
     background-color: var(--color-overlay);
     font-weight: 600;
+    cursor: pointer;
 }
 
 label {

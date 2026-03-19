@@ -259,9 +259,9 @@
 
         <dialog id="modal-bank">
             <div class="modal-content">
-                <span class="close-btn">
+                <button type="button" class="close-btn" aria-label="Cerrar ventana">
                     <i class="hgi hgi-stroke hgi-cancel-01"></i>
-                </span>
+                </button>
                 <div class="modal-body">
                     <img id="modal-img" src="" alt="Foto del Banco" />
                     <div class="modal-info">
@@ -301,9 +301,13 @@
         </dialog>
         <dialog id="modal-form-overlay">
             <div class="modal-content dialog-form">
-                <span class="close-form-btn close-btn">
+                <button
+                    type="button"
+                    class="close-form-btn close-btn"
+                    aria-label="Cerrar formulario"
+                >
                     <i class="hgi hgi-stroke hgi-cancel-01"></i>
-                </span>
+                </button>
 
                 <h2 class="form-title">Formulario de Operación</h2>
                 <p class="form-subtitle">Completa los detalles para confirmar tu reserva</p>
