@@ -423,11 +423,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // 2. Elementos del DOM
     const htmlElement = document.documentElement;
     const btnToggle = document.getElementById('a11y-toggle');
-    const btnClose = document.getElementById('a11y-close');
     const panel = document.getElementById('a11y-panel');
     
     const btnText = document.getElementById('a11y-text');
     const btnContrast = document.getElementById('a11y-contrast');
+    const btnDyslexic = document.getElementById('a11y-dyslexic');
     const btnAnim = document.getElementById('a11y-animations');
     const btnReset = document.getElementById('a11y-reset');
 
@@ -444,6 +444,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (localStorage.getItem('a11y-stop-animations') === 'true') {
             htmlElement.classList.add('a11y-stop-animations');
             btnAnim.classList.add('active');
+        }
+        if (localStorage.getItem('a11y-dyslexic') === 'true') {
+            htmlElement.classList.add('a11y-dyslexic');
+            btnDyslexic.classList.add('active');
         }
     }
 
@@ -504,19 +508,28 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("a11y-stop-animations", isActive);
     });
 
+    btnDyslexic.addEventListener("click", () => {
+        const isActive = htmlElement.classList.toggle("a11y-dyslexic");
+        btnDyslexic.classList.toggle("active");
+        localStorage.setItem("a11y-dyslexic", isActive);
+    });
+
     btnReset.addEventListener("click", () => {
         htmlElement.classList.remove(
             "a11y-large-text",
             "a11y-high-contrast",
             "a11y-stop-animations",
+            "a11y-dyslexic"
         );
         btnText.classList.remove("active");
         btnContrast.classList.remove("active");
         btnAnim.classList.remove("active");
+        btnDyslexic.classList.remove("active");
 
         localStorage.setItem("a11y-large-text", "false");
         localStorage.setItem("a11y-high-contrast", "false");
         localStorage.setItem("a11y-stop-animations", "false");
+        localStorage.setItem("a11y-dyslexic", "false");
     });
 
     // Estado inicial y preferencias
