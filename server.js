@@ -1,10 +1,30 @@
-const srcDir = `${import.meta.dir}/src`;
-const watchPattern = "src/**/*.{html,css,js}";
+import { createServer } from "node:http";
+import { promises as fs } from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const srcDir = path.join(__dirname, "src");
+const watchExtensions = new Set([".html", ".css", ".js"]);
 const pollIntervalMs = 200;
 const liveReloadClients = new Set();
-const encoder = new TextEncoder();
+const port = Number(process.env.PORT) || 3000;
+const host = process.env.HOST || "localhost";
 
-let server;
+const mimeTypes = {
+    ".html": "text/html; charset=utf-8",
+    ".css": "text/css; charset=utf-8",
+    ".js": "application/javascript; charset=utf-8",
+    ".json": "application/json; charset=utf-8",
+    ".svg": "image/svg+xml",
+    ".png": "image/png",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".gif": "image/gif",
+    ".ico": "image/x-icon",
+    ".txt": "text/plain; charset=utf-8",
+};
 
 const liveReloadScript = `<script>
 window.addEventListener("load", () => {
@@ -29,114 +49,75 @@ function injectLiveReload(html) {
 }
 
 function notifyReload(changedFile) {
-    for (const controller of liveReloadClients) {
+    const message = `event: reload\ndata: ${changedFile}\n\n`;
+
+    for (const res of liveReloadClients) {
         try {
-            controller.enqueue(encoder.encode(`event: reload\ndata: ${changedFile}\n\n`));
+            res.write(message);
         } catch {
-            liveReloadClients.delete(controller);
+            liveReloadClients.delete(res);
         }
     }
 }
 
-function createFetch() {
-    return async (req) => {
-        const url = new URL(req.url);
-        const pathname = decodeURIComponent(url.pathname);
+async function getWatchedFiles(dir = srcDir, base = "src") {
+    const entries = await fs.readdir(dir, { withFileTypes: true });
+    const files = [];
 
-        if (pathname === "/") {
-            return Response.redirect("/index.html");
+    for (const entry of entries) {
+        const fullPath = path.join(dir, entry.name);
+        const relativePath = `${base}/${entry.name}`;
+
+        if (entry.isDirectory()) {
+            files.push(...(await getWatchedFiles(fullPath, relativePath)));
+            continue;
         }
 
-        if (pathname === "/__live-reload") {
-            let clientController;
-            const stream = new ReadableStream({
-                start(controller) {
-                    clientController = controller;
-                    liveReloadClients.add(controller);
-                    controller.enqueue(encoder.encode("retry: 1000\n\n"));
-
-                    req.signal.addEventListener(
-                        "abort",
-                        () => {
-                            liveReloadClients.delete(controller);
-                            try {
-                                controller.close();
-                            } catch {}
-                        },
-                        { once: true },
-                    );
-                },
-                cancel() {
-                    if (clientController) {
-                        liveReloadClients.delete(clientController);
-                    }
-                },
-            });
-
-            return new Response(stream, {
-                headers: {
-                    "Content-Type": "text/event-stream; charset=utf-8",
-                    "Cache-Control": "no-cache, no-transform",
-                    Connection: "keep-alive",
-                },
-            });
+        if (watchExtensions.has(path.extname(entry.name))) {
+            files.push({ fullPath, relativePath });
         }
-
-        const file = Bun.file(`${srcDir}${pathname}`);
-        if (!(await file.exists())) {
-            return new Response("Not found", { status: 404 });
-        }
-
-        if (pathname.endsWith(".html")) {
-            return new Response(injectLiveReload(await file.text()), {
-                headers: {
-                    "Content-Type": "text/html; charset=utf-8",
-                    "Cache-Control": "no-cache",
-                },
-            });
-        }
-
-        return new Response(file);
-    };
-}
-
-async function snapshotWatchedFiles() {
-    const files = new Map();
-    const glob = new Bun.Glob(watchPattern);
-
-    for await (const relativePath of glob.scan({ cwd: import.meta.dir })) {
-        files.set(relativePath, Bun.file(`${import.meta.dir}/${relativePath}`).lastModified);
     }
 
     return files;
+}
+
+async function snapshotWatchedFiles() {
+    const snapshot = new Map();
+    const files = await getWatchedFiles();
+
+    for (const file of files) {
+        const stats = await fs.stat(file.fullPath);
+        snapshot.set(file.relativePath, stats.mtimeMs);
+    }
+
+    return snapshot;
 }
 
 async function watchFiles() {
     let previous = await snapshotWatchedFiles();
 
     while (true) {
-        await Bun.sleep(pollIntervalMs);
+        await new Promise((resolve) => setTimeout(resolve, pollIntervalMs));
         const current = await snapshotWatchedFiles();
 
         let changedFile;
-        for (const [path, modifiedAt] of current) {
-            if (previous.get(path) !== modifiedAt) {
-                changedFile = path;
+        for (const [filePath, modifiedAt] of current) {
+            if (previous.get(filePath) !== modifiedAt) {
+                changedFile = filePath;
                 break;
             }
         }
 
         if (!changedFile) {
-            for (const path of previous.keys()) {
-                if (!current.has(path)) {
-                    changedFile = path;
+            for (const filePath of previous.keys()) {
+                if (!current.has(filePath)) {
+                    changedFile = filePath;
                     break;
                 }
             }
         }
 
         if (changedFile) {
-            server.reload({ fetch: createFetch() });
             notifyReload(changedFile);
             console.log(`[reload] ${changedFile}`);
         }
@@ -145,11 +126,91 @@ async function watchFiles() {
     }
 }
 
-server = Bun.serve({
-    fetch: createFetch(),
+function getContentType(filePath) {
+    return mimeTypes[path.extname(filePath).toLowerCase()] || "application/octet-stream";
+}
+
+async function handleRequest(req, res) {
+    const url = new URL(req.url, `http://${req.headers.host || `${host}:${port}`}`);
+    const pathname = decodeURIComponent(url.pathname);
+
+    if (pathname === "/") {
+        res.writeHead(302, { Location: "/index.html" });
+        res.end();
+        return;
+    }
+
+    if (pathname === "/__live-reload") {
+        res.writeHead(200, {
+            "Content-Type": "text/event-stream; charset=utf-8",
+            "Cache-Control": "no-cache, no-transform",
+            Connection: "keep-alive",
+        });
+        res.write("retry: 1000\n\n");
+        liveReloadClients.add(res);
+
+        req.on("close", () => {
+            liveReloadClients.delete(res);
+        });
+
+        return;
+    }
+
+    const relativeFilePath = pathname.replace(/^\/+/, "");
+    const absolutePath = path.resolve(srcDir, relativeFilePath);
+
+    if (!absolutePath.startsWith(srcDir)) {
+        res.writeHead(403, { "Content-Type": "text/plain; charset=utf-8" });
+        res.end("Forbidden");
+        return;
+    }
+
+    let stats;
+    try {
+        stats = await fs.stat(absolutePath);
+    } catch {
+        res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
+        res.end("Not found");
+        return;
+    }
+
+    if (!stats.isFile()) {
+        res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
+        res.end("Not found");
+        return;
+    }
+
+    const contentType = getContentType(absolutePath);
+
+    if (absolutePath.endsWith(".html")) {
+        const html = await fs.readFile(absolutePath, "utf8");
+        res.writeHead(200, {
+            "Content-Type": "text/html; charset=utf-8",
+            "Cache-Control": "no-cache",
+        });
+        res.end(injectLiveReload(html));
+        return;
+    }
+
+    const content = await fs.readFile(absolutePath);
+    res.writeHead(200, { "Content-Type": contentType });
+    res.end(content);
+}
+
+const server = createServer((req, res) => {
+    handleRequest(req, res).catch((error) => {
+        console.error(error);
+        res.writeHead(500, { "Content-Type": "text/plain; charset=utf-8" });
+        res.end("Internal server error");
+    });
 });
 
-watchFiles();
+server.listen(port, host, () => {
+    console.log(`Serving in http://${host}:${port}`);
+    console.log("Live reload enabled for .html, .css and .js in src/");
+});
 
-console.log(`Serving in ${server.url}`);
-console.log("Live reload enabled for .html, .css and .js in src/");
+watchFiles().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+});

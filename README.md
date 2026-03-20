@@ -10,10 +10,11 @@ Creado por:
 
 ## Servidor de desarrollo
 
-El script `server.js` puede ser ejecutado con [`bun`](https://bun.sh/) para
-abrir un servidor web con el comando `bun server.js`.
+El script `server.js` puede ser ejecutado con Node.js para abrir un servidor web
+con el comando `node server.js`.
 
-La página se recargará _automágicamente_ cuando se modifique el código de la misma.
+La página se recargará _automágicamente_ cuando se modifique el código de la
+misma.
 
 ## Formato de código (Prettier)
 
