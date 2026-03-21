@@ -101,9 +101,22 @@ footer {
     background: var(--color-raised);
     color: var(--color-muted);
     text-align: center;
-    padding: 1.5rem 1rem;
+    padding: 1rem 1rem;
     margin-top: auto;
     font-size: 0.875rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+
+    a:hover {
+        text-decoration: underline;
+    }
+}
+
+@media (max-width: 768px) {
+    footer {
+        flex-direction: column;
+    }
 }
 
 /* ===== COMPONENTES ===== */

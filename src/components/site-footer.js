@@ -4,6 +4,7 @@ class SiteFooter extends HTMLElement {
 
         this.innerHTML = `
         <footer>
+            <p>Contacto: <a href="mailto:contact@heistcraft.com">contact@heistcraft.com</a><p/>
             <p>&copy; ${year} HeistCraft. Todos los derechos reservados.</p>
         </footer>`;
     }
