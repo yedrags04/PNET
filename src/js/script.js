@@ -283,6 +283,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    const reducedMotionQuery = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+    const isReducedMotionEnabled = () =>
+        document.documentElement.classList.contains("a11y-stop-animations") ||
+        localStorage.getItem("a11y-stop-animations") === "true" ||
+        Boolean(reducedMotionQuery?.matches);
+
     // --- CARRUSEL ---
     const track = document.querySelector(".carousel-track");
     const prev = document.querySelector(".carousel-btn.prev");
@@ -291,20 +297,52 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (track && prev && next && slides.length) {
         let currentIndex = 0;
+        let autoScrollInterval = null;
 
         function goTo(index) {
             currentIndex = (index + slides.length) % slides.length;
-            track.scrollTo({ left: slides[currentIndex].offsetLeft, behavior: "smooth" });
+            track.scrollTo({
+                left: slides[currentIndex].offsetLeft,
+                behavior: isReducedMotionEnabled() ? "auto" : "smooth",
+            });
+        }
+
+        function stopAutoScroll() {
+            if (autoScrollInterval) {
+                clearInterval(autoScrollInterval);
+                autoScrollInterval = null;
+            }
+        }
+
+        function startAutoScroll() {
+            if (isReducedMotionEnabled()) {
+                stopAutoScroll();
+                return;
+            }
+
+            stopAutoScroll();
+            autoScrollInterval = setInterval(() => goTo(currentIndex + 1), 3000);
+        }
+
+        function syncCarouselMotionPreference() {
+            if (isReducedMotionEnabled()) {
+                stopAutoScroll();
+            } else {
+                startAutoScroll();
+            }
         }
 
         prev.addEventListener("click", () => goTo(currentIndex - 1));
         next.addEventListener("click", () => goTo(currentIndex + 1));
 
-        // Avanza automáticamente cada 3 s; se pausa al pasar el ratón por encima.
-        let autoScrollInterval = setInterval(() => goTo(currentIndex + 1), 3000);
-        track.addEventListener("mouseenter", () => clearInterval(autoScrollInterval));
-        track.addEventListener("mouseleave", () => {
-            autoScrollInterval = setInterval(() => goTo(currentIndex + 1), 3000);
+        startAutoScroll();
+        track.addEventListener("mouseenter", stopAutoScroll);
+        track.addEventListener("mouseleave", startAutoScroll);
+        reducedMotionQuery?.addEventListener("change", syncCarouselMotionPreference);
+
+        new MutationObserver(syncCarouselMotionPreference).observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class"],
         });
     }
 
@@ -314,6 +352,15 @@ document.addEventListener("DOMContentLoaded", function () {
     // el navegador registre el valor inicial antes de aplicar la transición.
     function closeFaqItem(details) {
         const answer = details.querySelector(".faq-answer");
+
+        if (!answer) return;
+
+        if (isReducedMotionEnabled()) {
+            details.removeAttribute("open");
+            answer.style.maxHeight = "";
+            return;
+        }
+
         answer.style.maxHeight = answer.scrollHeight + "px";
         answer.offsetHeight; // fuerza reflow
         answer.style.maxHeight = "0";
@@ -330,6 +377,14 @@ document.addEventListener("DOMContentLoaded", function () {
     function openFaqItem(details) {
         details.setAttribute("open", "");
         const answer = details.querySelector(".faq-answer");
+
+        if (!answer) return;
+
+        if (isReducedMotionEnabled()) {
+            answer.style.maxHeight = "";
+            return;
+        }
+
         answer.style.maxHeight = "0";
         answer.offsetHeight; // fuerza reflow
         answer.style.maxHeight = answer.scrollHeight + "px";
