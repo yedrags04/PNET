@@ -101,7 +101,5 @@ input::placeholder {
 
 *:focus-visible {
     outline: none;
-
-    /* ES MALA PRÁCTICA USAR "!important", pero me da igual, no funciona de otra forma... */
     box-shadow: 0 0 0 2px var(--color-accent) !important;
 }
