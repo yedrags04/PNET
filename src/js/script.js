@@ -116,8 +116,11 @@ document.addEventListener("DOMContentLoaded", function () {
             card.dataset.available = reserved ? "no" : card.getAttribute("data-original-available");
 
             const moreInfoBtn = card.querySelector(".more-info");
-            moreInfoBtn.classList.toggle("reserved-btn", reserved);
-            moreInfoBtn.textContent = reserved ? "CANCELAR RESERVA" : "Más info";
+
+            if (moreInfoBtn) {
+                moreInfoBtn.classList.toggle("reserved-btn", reserved);
+                moreInfoBtn.textContent = reserved ? "CANCELAR RESERVA" : "Más info";
+            }
         });
 
         filterBanks();
@@ -421,33 +424,36 @@ document.addEventListener("DOMContentLoaded", function () {
 // --- CARRITO EN UTENSILIOS ---
 document.addEventListener("DOMContentLoaded", () => {
     const btnCart = document.querySelector(".btn-cart");
-    const btnClose = document.getElementById("btn-close-panel");
 
-    const backdrop = document.getElementById("cart-backdrop");
+    if (btnCart) {
+        const btnClose = document.getElementById("btn-close-panel");
 
-    function openCart(btn) {
-        const panel = document.getElementById("side-panel");
-        panel.classList.add("open");
-        backdrop.classList.add("open");
-        btn.disabled = true;
-        btn._keydownHandler = (e) => {
-            if (e.key === "Escape") closeCart(btn);
-        };
-        document.addEventListener("keydown", btn._keydownHandler);
+        const backdrop = document.getElementById("cart-backdrop");
+
+        function openCart(btn) {
+            const panel = document.getElementById("side-panel");
+            panel.classList.add("open");
+            backdrop.classList.add("open");
+            btn.disabled = true;
+            btn._keydownHandler = (e) => {
+                if (e.key === "Escape") closeCart(btn);
+            };
+            document.addEventListener("keydown", btn._keydownHandler);
+        }
+
+        function closeCart(btn) {
+            const panel = document.getElementById("side-panel");
+            panel.classList.remove("open");
+            backdrop.classList.remove("open");
+            document.removeEventListener("keydown", btn._keydownHandler);
+            btn._keydownHandler = null;
+            btn.disabled = false;
+        }
+
+        btnCart.addEventListener("click", () => openCart(btnCart));
+        btnClose.addEventListener("click", () => closeCart(btnCart));
+        backdrop.addEventListener("click", () => closeCart(btnCart));
     }
-
-    function closeCart(btn) {
-        const panel = document.getElementById("side-panel");
-        panel.classList.remove("open");
-        backdrop.classList.remove("open");
-        document.removeEventListener("keydown", btn._keydownHandler);
-        btn._keydownHandler = null;
-        btn.disabled = false;
-    }
-
-    btnCart.addEventListener("click", () => openCart(btnCart));
-    btnClose.addEventListener("click", () => closeCart(btnCart));
-    backdrop.addEventListener("click", () => closeCart(btnCart));
 });
 
 // ==========================================
