@@ -607,7 +607,6 @@ dialog.is-closing::backdrop {
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
     padding: 10px 0;
-    -ms-overflow-style: none;
     scrollbar-width: none;
 
     &::-webkit-scrollbar {
