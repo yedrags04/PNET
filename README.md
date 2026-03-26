@@ -8,13 +8,11 @@ Creado por:
 - Yedra García Sánchez
 - David Cifredo Juliá
 
-## Servidor de desarrollo
+## Servidor
 
-El script `server.js` puede ser ejecutado con Node.js para abrir un servidor web
-con el comando `node server.js`.
-
-La página se recargará _automágicamente_ cuando se modifique el código de la
-misma.
+El `package.json` incluye un script `start`. Este script puede ser ejecutado
+haciendo `npm run start`. Esto abrirá el servidor, que servirá los ficheros de
+`/public` en `/` y la api en `/api`.
 
 ## Formato de código (Prettier)
 
