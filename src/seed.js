@@ -1,4 +1,5 @@
-const { connectDb, getCollection } = require("./db");
+/* EJECUTAR ESTE SCRIPT CON `npm run start` */
+const { connectDb, getCollection } = require("@src/db");
 
 const bancosEjemplo = [
     {

@@ -1,9 +1,13 @@
+// Para que funcione require(@src/...)
+require("module-alias/register");
+
+// Imports
 const express = require("express");
 const app = express();
 const logger = require("morgan");
 const db = require("./db");
-const PORT = 8080;
 
+// Código para los logs de morgan
 app.use(express.json());
 app.use(
     express.urlencoded({
@@ -12,14 +16,18 @@ app.use(
 );
 app.use(logger("dev"));
 
+// Conexión a la base de datos
 db.connectDb();
 
+// Ruta de bancos
 const bancos = require("./routes/bancos.js");
 app.use("/api/bancos", bancos);
 
+// Servir la página en ./public
 app.use(express.static(__dirname + "/public"));
 
-const server = require("http").createServer(app);
-server.listen(PORT, () => {
-    console.log(`Escuchando en http://localhost:${PORT}`);
+// Por defecto escucha en el puerto 8080
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
+    console.log(`Escuchando en http://localhost:${port}`);
 });
