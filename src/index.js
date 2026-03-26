@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const logger = require("morgan");
-const PORT = 3400;
+const PORT = 8000;
 
 app.use(express.json());
 app.use(
