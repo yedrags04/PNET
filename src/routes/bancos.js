@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const { getAll } = require("../services/bancos-service");
 
 router.get("/", async (req, res) => {
-    res.status(200).send("<h1>¡Bancos!</h1>");
+    const bancos = await getAll();
+    res.status(200).json(bancos);
 });
 
 module.exports = router;

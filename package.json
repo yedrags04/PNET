@@ -15,8 +15,9 @@
     "type": "commonjs",
     "main": "index.js",
     "scripts": {
-        "start": "node --watch src/index.js",
-        "format": "prettier . -w"
+        "start": "node --watch --env-file=.env src/index.js",
+        "format": "prettier . -w",
+        "seed": "node --env-file=.env src/seed.js"
     },
     "dependencies": {
         "express": "^5.2.1",
