@@ -21,15 +21,14 @@
     },
     "dependencies": {
         "express": "^5.2.1",
-        "module-alias": "^2.3.4",
         "mongodb": "^7.1.0",
         "morgan": "^1.10.1"
     },
     "devDependencies": {
         "prettier": "^3.8.1"
     },
-    "_moduleAliases": {
-        "@src": "./src"
+    "imports": {
+        "#src/*": "./src/*"
     },
     "prettier": {
         "printWidth": 100,
