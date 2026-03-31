@@ -1,0 +1,73 @@
+### Ver bancos
+
+GET http://localhost:8080/api/bancos HTTP/1.1
+
+### Obtener un banco
+
+# @prompt bancoId
+
+GET http://localhost:8080/api/bancos/{{bancoId}} HTTP/1.1
+
+### Crear banco
+
+POST http://localhost:8080/api/bancos HTTP/1.1
+content-type: application/json
+
+{
+  "dificultad": "difisi",
+  "direccion": "C/ Nose, 123",
+  "disponible": true,
+  "imagen": "312.png",
+  "nombre": "Nose",
+  "recompensa": 2
+}
+
+### Crear varios bancos
+
+POST http://localhost:8080/api/bancos HTTP/1.1
+content-type: application/json
+
+[
+  {
+    "dificultad": "fasi",
+    "direccion": "C/ Nose, 321",
+    "disponible": true,
+    "imagen": "312.png",
+    "nombre": "Nose",
+    "recompensa": 3
+  },
+  {
+    "dificultad": "difisi",
+    "direccion": "C/ Nose, 123",
+    "disponible": true,
+    "imagen": "312.png",
+    "nombre": "Nose",
+    "recompensa": 31
+  }
+]
+
+### Actualizar un banco
+
+# @prompt bancoId
+
+PUT http://localhost:8080/api/bancos/{{bancoId}} HTTP/1.1
+content-type: application/json
+
+{
+  "dificultad": "medio",
+  "direccion": "C/ Sise, 321",
+  "disponible": true,
+  "imagen": "pn jeje",
+  "nombre": "looooool",
+  "recompensa": 1231
+}
+
+### Eliminar todos los bancos
+
+DELETE http://localhost:8080/api/bancos HTTP/1.1
+
+### Eliminar un banco
+
+# @prompt bancoId
+
+DELETE http://localhost:8080/api/bancos/{{bancoId}} HTTP/1.1
