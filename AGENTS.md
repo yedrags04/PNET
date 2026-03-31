@@ -34,33 +34,33 @@ para consultar bancos y gestionar reservas en clientes.
 - Servidor: Express
 - DB: MongoDB (driver oficial)
 - Logging HTTP: morgan
-- Alias de módulos: `@src` (configurado en `package.json` y activado en
-  `src/index.js`)
+- Alias de módulos: `#src/...` (configurado con `imports` en `package.json` y
+  resuelto por el editor con `jsconfig.json`)
 - Formato: Prettier (`printWidth: 100`, `tabWidth: 4`)
 
 **Convenciones:**
 
 - Mantener estilo de importación actual (CommonJS).
-- Reutilizar `@src/...` para rutas internas cuando tenga sentido.
+- Reutilizar `#src/...` para rutas internas cuando tenga sentido.
 - Evitar introducir frameworks/librerías nuevas sin necesidad clara.
 - Preservar idioma y tono del contenido de UI (español).
 
 ## Comandos de desarrollo
 
 - Instalar dependencias:
-  - `npm install`
+    - `npm install`
 - Levantar servidor en desarrollo:
-  - `npm run start`
+    - `npm run start`
 - Formatear proyecto:
-  - `npm run format`
+    - `npm run format`
 - Cargar datos de ejemplo (seed):
-  - `npm run seed`
+    - `npm run seed`
 
 **Notas:**
 
 - `npm run start` usa `--watch` y `--env-file=.env`.
 - `npm run seed` **elimina** primero los documentos de `bancos` y luego inserta
-datos de ejemplo.
+  datos de ejemplo.
 
 ## Variables de entorno
 
@@ -82,7 +82,7 @@ Definidas en `.env` (basado en `.env.example`):
 3. Se monta la ruta `/api/bancos` desde `src/routes/bancos.js`.
 4. Se sirven archivos estáticos de `src/public`.
 
-Capa API:
+**Capa API:**
 
 - Ruta → Servicio → MongoDB
 - `routes/bancos.js` delega en `services/bancos-service.js`
@@ -93,9 +93,17 @@ Capa API:
 Base URL local: `http://localhost:8080`
 
 - `GET /api/bancos`
-  - Devuelve array con todos los bancos.
+    - Devuelve array con todos los bancos.
 - `GET /api/bancos/:_id`
-  - Devuelve un banco por `_id` (ObjectId de MongoDB).
+    - Devuelve un banco por `_id` (ObjectId de MongoDB).
+- `POST /api/bancos`
+    - Crea uno o varios bancos (acepta objeto o array) y devuelve mensaje de confirmación.
+- `PUT /api/bancos/:_id`
+    - Actualiza parcialmente un banco por `_id` y devuelve mensaje según resultado.
+- `DELETE /api/bancos`
+    - Elimina todos los bancos.
+- `DELETE /api/bancos/:_id`
+    - Elimina un banco por `_id`.
 
 **Al tocar la API:**
 
@@ -111,14 +119,14 @@ Estructura:
 - Scripts: `src/public/js/script.js` (+ `validacion-formulario.js`)
 - Estilos: `src/public/css/base.css`, `styles.css`, `reset.css`
 - Componentes web: `src/public/components/site-header.js`, `site-footer.js`
-Reglas:
+
+**Reglas:**
+
 - Priorizar accesibilidad y mantener soporte de preferencias A11Y existentes
   (texto grande, contraste, dislexia, reducir animaciones).
 - No romper IDs/clases que `script.js` ya utiliza para filtros, modales,
   carrito, FAQ y widget de accesibilidad.
 - Mantener diseño responsive (desktop y móvil).
-
----
 
 ## Guía para agentes de IA (cómo trabajar aquí)
 
@@ -142,9 +150,9 @@ Validación mínima:
 2. `npm run start` y comprobar que el servidor arranca. Si el puerto está
    ocupado, usar la variable `PORT` para intentar abrirlo en otro puerto.
 3. Verificar manualmente:
-   - páginas cargan sin errores JS,
-   - `/api/bancos` responde,
-   - filtros/modales/carrito/FAQ siguen operativos si fueron afectados.
+    - páginas cargan sin errores JS,
+    - `/api/bancos` responde,
+    - filtros/modales/carrito/FAQ siguen operativos si fueron afectados.
 
 ## Seguridad y límites
 
