@@ -1,11 +1,8 @@
-// Para que funcione require(@src/...)
-require("module-alias/register");
-
 // Imports
 const express = require("express");
 const app = express();
 const logger = require("morgan");
-const db = require("./db");
+const db = require("#src/db.js");
 
 // Código para los logs de morgan
 app.use(express.json());
