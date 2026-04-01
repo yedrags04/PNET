@@ -96,45 +96,12 @@ const bancosEjemplo = [
 async function seedBancos() {
     await connectDb();
     const bancosCollection = getCollection("bancos");
-    const reservasCollection = getCollection("reservas");
 
     const borrado = await bancosCollection.deleteMany({});
     console.log(`Bancos eliminados: ${borrado.deletedCount}`);
 
     const insercion = await bancosCollection.insertMany(bancosEjemplo);
     console.log(`Bancos insertados: ${insercion.insertedCount}`);
-
-    const bancosInsertados = await bancosCollection.find({}).toArray();
-
-    const reservasEjemplo = [
-        {
-            cliente: "La banda de Berlin",
-            cantidadPersonas: 5,
-            confirmada: true,
-            horas: ["09:00", "11:00"],
-            bancoId: bancosInsertados[0]._id,
-        },
-        {
-            cliente: "Equipo de Nairobi",
-            cantidadPersonas: 4,
-            confirmada: false,
-            horas: ["15:30"],
-            bancoId: bancosInsertados[1]._id,
-        },
-        {
-            cliente: "Comando Tokio",
-            cantidadPersonas: 6,
-            confirmada: true,
-            horas: ["20:00", "22:30"],
-            bancoId: bancosInsertados[2]._id,
-        },
-    ];
-
-    const borradoReservas = await reservasCollection.deleteMany({});
-    console.log(`Reservas eliminadas: ${borradoReservas.deletedCount}`);
-
-    const insercionReservas = await reservasCollection.insertMany(reservasEjemplo);
-    console.log(`Reservas insertadas: ${insercionReservas.insertedCount}`);
 }
 
 seedBancos()
