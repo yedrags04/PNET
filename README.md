@@ -21,8 +21,8 @@ repositorio tomando como base `.env.example`:
 
 1. Copia `.env.example` a `.env`.
 2. Rellena las variables con tus valores reales:
-   - `MONGODB_URL`: URL de conexión de MongoDB.
-   - `MONGODB_NAME`: nombre de la base de datos.
+    - `MONGODB_URL`: URL de conexión de MongoDB.
+    - `MONGODB_NAME`: nombre de la base de datos.
 
 Después de configurar el entorno, ejecuta `npm run seed` para inicializar la
 colección de bancos con los datos de ejemplo del proyecto.

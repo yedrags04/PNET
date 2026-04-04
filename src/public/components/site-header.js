@@ -20,13 +20,21 @@ class SiteHeader extends HTMLElement {
         <header>
             <a href="index.html"><h1>HeistCraft</h1></a>
             <button id="menu-toggle" class="menu-toggle">
-                <i class="hgi hgi-stroke hgi-menu-01"></i>
+                <i data-lucide="menu"></i>
             </button>
             <nav id="main-nav"> 
                 ${navLinks}
             </nav>
         </header>
         `;
+
+        const renderIcons = () => {
+            if (window.lucide?.createIcons) {
+                window.lucide.createIcons();
+            }
+        };
+
+        renderIcons();
 
         // --- MAGIA DEL MENÚ HAMBURGUESA ---
         // Buscamos el botón y el menú recién creados
@@ -40,12 +48,13 @@ class SiteHeader extends HTMLElement {
                 mainNav.classList.toggle("open");
 
                 // Cambia el icono de las 3 rayitas a la X
-                const icon = menuToggle.querySelector("i");
                 if (mainNav.classList.contains("open")) {
-                    icon.className = "hgi hgi-stroke hgi-cancel-01";
+                    menuToggle.innerHTML = '<i data-lucide="x"></i>';
                 } else {
-                    icon.className = "hgi hgi-stroke hgi-menu-01";
+                    menuToggle.innerHTML = '<i data-lucide="menu"></i>';
                 }
+
+                renderIcons();
             });
         }
     }

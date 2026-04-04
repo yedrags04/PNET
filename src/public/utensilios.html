@@ -37,11 +37,7 @@
             href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap"
             rel="stylesheet"
         />
-        <link
-            rel="stylesheet"
-            href="https://use.hugeicons.com/font/icons.css"
-            crossorigin="anonymous"
-        />
+        <script src="https://unpkg.com/lucide@1.7.0/dist/umd/lucide.min.js"></script>
         <script src="js/script.js" defer></script>
     </head>
     <body>
@@ -51,7 +47,7 @@
             <aside>
                 <button id="filters-toggle" class="filters-toggle">
                     <span>Filtros</span>
-                    <i class="hgi hgi-stroke hgi-arrow-down-01"></i>
+                    <i data-lucide="chevron-down"></i>
                 </button>
 
                 <div id="filters-content" class="filters-content">
@@ -95,11 +91,11 @@
                 <div id="side-panel" class="side-panel">
                     <div class="panel-header">
                         <button class="btn-cart" title="Abrir carrito">
-                            <i class="hgi hgi-stroke hgi-shopping-cart-02"></i>
+                            <i data-lucide="shopping-cart"></i>
                         </button>
                         <h2>Mi Carrito</h2>
                         <button id="btn-close-panel" class="btn-close-panel" title="Cerrar carrito">
-                            <i class="hgi hgi-stroke hgi-cancel-01"></i>
+                            <i data-lucide="x"></i>
                         </button>
                     </div>
                     <div class="panel-content">

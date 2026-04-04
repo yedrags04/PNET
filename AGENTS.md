@@ -36,6 +36,7 @@ para consultar bancos y gestionar reservas en clientes.
 - Logging HTTP: morgan
 - Alias de módulos: `#src/...` (configurado con `imports` en `package.json` y
   resuelto por el editor con `jsconfig.json`)
+- Iconos: Lucide vía CDN UMD (`https://unpkg.com/lucide@1.7.0/dist/umd/lucide.min.js`)
 - Formato: Prettier (`printWidth: 100`, `tabWidth: 4`)
 
 **Convenciones:**
@@ -44,6 +45,7 @@ para consultar bancos y gestionar reservas en clientes.
 - Reutilizar `#src/...` para rutas internas cuando tenga sentido.
 - Evitar introducir frameworks/librerías nuevas sin necesidad clara.
 - Preservar idioma y tono del contenido de UI (español).
+- Mantener Lucide como librería de iconos del frontend (no reintroducir Huge Icons).
 
 ## Comandos de desarrollo
 

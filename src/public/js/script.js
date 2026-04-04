@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const renderLucideIcons = () => {
+        if (window.lucide?.createIcons) {
+            window.lucide.createIcons();
+        }
+    };
+
     // --- ACORDEÓN DE FILTROS EN MÓVIL ---
     const filtersToggle = document.getElementById("filters-toggle");
     const filtersContent = document.getElementById("filters-content");
@@ -419,6 +425,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
         });
+
+    renderLucideIcons();
 });
 
 // --- CARRITO EN UTENSILIOS ---
@@ -465,7 +473,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const a11yWidget = document.createElement("div");
     a11yWidget.innerHTML = `
         <button id="a11y-toggle" class="a11y-btn" aria-label="Abrir menú de accesibilidad" title="Accesibilidad">
-            <i class="hgi hgi-stroke hgi-user"></i>
+            <i data-lucide="user"></i>
         </button>
         <div id="a11y-panel" class="a11y-panel">
             <div class="a11y-header">
@@ -473,15 +481,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
             </div>
             <div class="a11y-options">
-                <button id="a11y-text" class="a11y-option-btn">Aa - Texto más grande</button>
-				<button id="a11y-dyslexic" class="a11y-option-btn">Aa - Dislexia</button>
-                <button id="a11y-contrast" class="a11y-option-btn">◐ - Alto contraste</button>
-                <button id="a11y-animations" class="a11y-option-btn">⏸ - Detener animaciones</button>
-                <button id="a11y-reset" class="a11y-option-btn reset">Restablecer ajustes</button>
+                <button id="a11y-text" class="a11y-option-btn">
+                    <i data-lucide="type"></i>
+                    <span>Texto más grande</span>
+                </button>
+                <button id="a11y-dyslexic" class="a11y-option-btn">
+                    <i data-lucide="book-open"></i>
+                    <span>Dislexia</span>
+                </button>
+                <button id="a11y-contrast" class="a11y-option-btn">
+                    <i data-lucide="contrast"></i>
+                    <span>Alto contraste</span>
+                </button>
+                <button id="a11y-animations" class="a11y-option-btn">
+                    <i data-lucide="pause"></i>
+                    <span>Detener animaciones</span>
+                </button>
+                <button id="a11y-reset" class="a11y-option-btn reset">
+                    <i data-lucide="rotate-ccw"></i>
+                    <span>Restablecer ajustes</span>
+                </button>
             </div>
         </div>
     `;
     document.body.appendChild(a11yWidget);
+
+    if (window.lucide?.createIcons) {
+        window.lucide.createIcons();
+    }
 
     // 2. Elementos del DOM
     const htmlElement = document.documentElement;
