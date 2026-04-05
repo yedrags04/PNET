@@ -3,16 +3,16 @@ class SiteHeader extends HTMLElement {
         const currentPage = window.location.pathname.split("/").pop() || "index.html";
 
         const links = [
-            { href: "index.html", label: "INICIO" },
-            { href: "bancos.html", label: "BANCOS" },
-            { href: "utensilios.html", label: "UTENSILIOS" },
-            { href: "FAQ.html", label: "FAQ" },
+            { href: "index.html", label: "INICIO", icon: "house" },
+            { href: "bancos.html", label: "BANCOS", icon: "landmark" },
+            { href: "utensilios.html", label: "UTENSILIOS", icon: "wrench" },
+            { href: "FAQ.html", label: "FAQ", icon: "circle-help" },
         ];
 
         const navLinks = links
-            .map(({ href, label }) => {
+            .map(({ href, label, icon }) => {
                 const isActive = currentPage === href;
-                return `<a href="${href}"${isActive ? ' class="active"' : ""}>${label}</a>`;
+                return `<a href="${href}"${isActive ? ' class="active"' : ""}><i data-lucide="${icon}"></i> ${label}</a>`;
             })
             .join("\n");
 
