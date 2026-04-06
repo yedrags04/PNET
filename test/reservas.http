@@ -1,0 +1,102 @@
+### Ver reservas
+
+GET http://localhost:8080/api/reservas HTTP/1.1
+
+### Obtener una reserva
+
+# @prompt reservaId
+
+GET http://localhost:8080/api/reservas/{{reservaId}} HTTP/1.1
+
+### Crear reserva
+
+# @prompt bankId
+
+POST http://localhost:8080/api/reservas HTTP/1.1
+content-type: application/json
+
+{
+  "leaderName": "Tokio",
+  "leaderEmail": "tokio@heistcraft.test",
+  "experience": 7,
+  "bankId": "{{bankId}}",
+  "operationDate": "2026-04-10",
+  "operationTime": "22:00",
+  "teamSize": 5,
+  "riskLevel": "alto",
+  "budget": 25000,
+  "equipment": "Inhibidor de frecuencia, ganzuas y mascaras",
+  "plan": "Entrada por acceso lateral y evacuacion por tunel de servicio.",
+  "specialties": ["hacking", "combat"],
+  "status": "confirmada",
+  "createdAt": "2026-04-01T12:00:00.000Z"
+}
+
+### Crear varias reservas
+
+# @prompt bankIdA
+# @prompt bankIdB
+
+POST http://localhost:8080/api/reservas HTTP/1.1
+content-type: application/json
+
+[
+  {
+    "leaderName": "Rio",
+    "leaderEmail": "rio@heistcraft.test",
+    "experience": 4,
+    "bankId": "{{bankIdA}}",
+    "operationDate": "2026-04-12",
+    "operationTime": "18:30",
+    "teamSize": 4,
+    "riskLevel": "medio",
+    "budget": 18000,
+    "equipment": "Walkies y cortacristales",
+    "plan": "Distraccion en entrada principal y acceso por sotano.",
+    "specialties": ["hacking", "driving"],
+    "status": "confirmada",
+    "createdAt": "2026-04-02T08:15:00.000Z"
+  },
+  {
+    "leaderName": "Nairobi",
+    "leaderEmail": "nairobi@heistcraft.test",
+    "experience": 10,
+    "bankId": "{{bankIdB}}",
+    "operationDate": "2026-04-20",
+    "operationTime": "09:45",
+    "teamSize": 6,
+    "riskLevel": "alto",
+    "budget": 32000,
+    "equipment": "Explosivos controlados y herramientas termicas",
+    "plan": "Control de perimetro y extraccion por salida de mantenimiento.",
+    "specialties": ["explosives", "logistics"],
+    "status": "confirmada",
+    "createdAt": "2026-04-03T14:45:00.000Z"
+  }
+]
+
+### Actualizar una reserva
+
+# @prompt reservaId
+
+PUT http://localhost:8080/api/reservas/{{reservaId}} HTTP/1.1
+content-type: application/json
+
+{
+  "teamSize": 7,
+  "riskLevel": "medio",
+  "budget": 40000,
+  "status": "reprogramada",
+  "operationDate": "2026-04-22",
+  "operationTime": "21:15"
+}
+
+### Eliminar todas las reservas
+
+DELETE http://localhost:8080/api/reservas HTTP/1.1
+
+### Eliminar una reserva
+
+# @prompt reservaId
+
+DELETE http://localhost:8080/api/reservas/{{reservaId}} HTTP/1.1

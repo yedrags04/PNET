@@ -14,12 +14,12 @@ POST http://localhost:8080/api/bancos HTTP/1.1
 content-type: application/json
 
 {
-  "dificultad": "difisi",
-  "direccion": "C/ Nose, 123",
-  "disponible": true,
-  "imagen": "312.png",
-  "nombre": "Nose",
-  "recompensa": 2
+  "difficulty": "difisi",
+  "address": "C/ Nose, 123",
+  "available": true,
+  "image": "312.png",
+  "name": "Nose",
+  "reward": 2
 }
 
 ### Crear varios bancos
@@ -29,20 +29,20 @@ content-type: application/json
 
 [
   {
-    "dificultad": "fasi",
-    "direccion": "C/ Nose, 321",
-    "disponible": true,
-    "imagen": "312.png",
-    "nombre": "Nose",
-    "recompensa": 3
+    "difficulty": "fasi",
+    "address": "C/ Nose, 321",
+    "available": true,
+    "image": "312.png",
+    "name": "Nose",
+    "reward": 3
   },
   {
-    "dificultad": "difisi",
-    "direccion": "C/ Nose, 123",
-    "disponible": true,
-    "imagen": "312.png",
-    "nombre": "Nose",
-    "recompensa": 31
+    "difficulty": "difisi",
+    "address": "C/ Nose, 123",
+    "available": true,
+    "image": "312.png",
+    "name": "Nose",
+    "reward": 31
   }
 ]
 
@@ -54,12 +54,12 @@ PUT http://localhost:8080/api/bancos/{{bancoId}} HTTP/1.1
 content-type: application/json
 
 {
-  "dificultad": "medio",
-  "direccion": "C/ Sise, 321",
-  "disponible": true,
-  "imagen": "pn jeje",
-  "nombre": "looooool",
-  "recompensa": 1231
+  "difficulty": "medio",
+  "address": "C/ Sise, 321",
+  "available": true,
+  "image": "pn jeje",
+  "name": "looooool",
+  "reward": 1231
 }
 
 ### Eliminar todos los bancos

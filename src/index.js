@@ -20,6 +20,10 @@ db.connectDb();
 const bancos = require("./routes/bancos.js");
 app.use("/api/bancos", bancos);
 
+// Ruta de reservas
+const reservas = require("./routes/reservas.js");
+app.use("/api/reservas", reservas);
+
 // Servir la página en ./public
 app.use(express.static(__dirname + "/public"));
 

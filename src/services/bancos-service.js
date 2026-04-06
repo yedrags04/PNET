@@ -3,12 +3,12 @@ const { ObjectId } = require("mongodb");
 
 /**
  * @typedef {Object} BancoData
- * @property {string} nombre
- * @property {string} direccion
- * @property {string} dificultad
- * @property {number} recompensa
- * @property {boolean} disponible
- * @property {string} imagen
+ * @property {string} name
+ * @property {string} address
+ * @property {string} difficulty
+ * @property {number} reward
+ * @property {boolean} available
+ * @property {string} image
  */
 
 /**

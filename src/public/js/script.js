@@ -253,16 +253,63 @@ document.addEventListener("DOMContentLoaded", function () {
                 e.preventDefault();
 
                 const bankSelect = document.getElementById("bank-select");
-                const selectedBankName = bankSelect.options[bankSelect.selectedIndex].text;
+                const selectedBankName = bankSelect.options[bankSelect.selectedIndex]?.text || "";
+                const specialties = Array.from(
+                    document.querySelectorAll('input[name="specialties"]:checked'),
+                ).map((el) => el.value);
+
+                if (specialties.length === 0) {
+                    alert("⚠️ Debes seleccionar al menos una especialidad para tu equipo");
+                    return;
+                }
+
+                const operationId = Date.now();
+                const reservationData = {
+                    id: operationId,
+                    leaderName: document.getElementById("leader-name").value,
+                    leaderEmail: document.getElementById("leader-email").value,
+                    experience:
+                        Number.parseInt(document.getElementById("experience").value, 10) || 0,
+                    bankId: bankSelect.value,
+                    bankName: selectedBankName,
+                    address: pendingReservationData.address || modalAddress.textContent || "",
+                    difficulty: (
+                        pendingReservationData.difficulty ||
+                        modalDifficulty.textContent ||
+                        ""
+                    ).toLowerCase(),
+                    reward:
+                        Number.parseInt(
+                            pendingReservationData.reward || modalReward.textContent || "0",
+                            10,
+                        ) || 0,
+                    operationDate: document.getElementById("operation-date").value,
+                    operationTime: document.getElementById("operation-time").value,
+                    teamSize: Number.parseInt(document.getElementById("team-size").value, 10) || 1,
+                    riskLevel: document.getElementById("risk-level").value,
+                    budget: Number.parseInt(document.getElementById("budget").value, 10) || 0,
+                    equipment: document.getElementById("equipment").value,
+                    plan: document.getElementById("plan").value,
+                    specialties,
+                    termsAccepted: Boolean(heistForm.querySelector('input[name="terms"]')?.checked),
+                    status: "confirmada",
+                    createdAt: new Date().toISOString(),
+                };
+
+                let operations = JSON.parse(localStorage.getItem("heistcraft_operations")) || [];
+                operations.push(reservationData);
+                localStorage.setItem("heistcraft_operations", JSON.stringify(operations));
 
                 const reservation = {
-                    id: Date.now(),
-                    bankName: selectedBankName,
-                    address: pendingReservationData.address || "Dirección no especificada",
-                    reward: pendingReservationData.reward || "0",
-                    difficulty: pendingReservationData.difficulty || "No especificada",
-                    date: document.getElementById("operation-date").value,
-                    time: document.getElementById("operation-time").value,
+                    id: operationId,
+                    bankName: reservationData.bankName,
+                    address: reservationData.address,
+                    reward: String(reservationData.reward),
+                    difficulty:
+                        reservationData.difficulty.charAt(0).toUpperCase() +
+                        reservationData.difficulty.slice(1),
+                    date: reservationData.operationDate,
+                    time: reservationData.operationTime,
                 };
 
                 let reservations =
