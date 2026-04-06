@@ -81,6 +81,48 @@ main > section {
     grid-column: 1 / -1;
 }
 
+/* Contenedor para alinear los botones horizontalmente */
+.card-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    padding: 0 15px 15px;
+}
+
+.btn-edit {
+    display: none; /* OCULTO POR DEFECTO */
+    background-color: var(--color-highlight);
+    color: var(--color-text);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    transition:
+        transform 0.2s,
+        background-color 0.2s;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-edit:hover {
+    transform: scale(1.1);
+    background-color: var(--color-accent);
+}
+
+/* SOLO SE MUESTRA SI LA CARD TIENE LA CLASE .reserved */
+.card.reserved .btn-edit {
+    display: flex;
+}
+
+/* Ajuste para que el botón "Más info" no ocupe todo el ancho si hay un botón al lado */
+.card.reserved .more-info {
+    flex-grow: 1;
+}
+
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

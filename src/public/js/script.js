@@ -109,20 +109,29 @@ document.addEventListener("DOMContentLoaded", function () {
     // poder restaurarla si el usuario cancela, sin tener que recargar el HTML.
     function updateReservationStatus() {
         const cards = document.querySelectorAll("main .card");
+        const reservations = JSON.parse(localStorage.getItem("heistcraft_reservations")) || [];
 
         cards.forEach((card) => {
             const bankName = card.querySelector("h3").textContent;
+            const reservationFound = reservations.find((r) => r.bankName === bankName);
+            const reserved = !!reservationFound;
 
-            if (!card.hasAttribute("data-original-available")) {
-                card.setAttribute("data-original-available", card.dataset.available);
-            }
-
-            const reserved = isReserved(bankName);
+            // 1. Aplicamos la clase que dispara el CSS del botón de editar
             card.classList.toggle("reserved", reserved);
+
+            // 2. Sincronizamos el resto de atributos
             card.dataset.available = reserved ? "no" : card.getAttribute("data-original-available");
 
-            const moreInfoBtn = card.querySelector(".more-info");
+            // 3. Configuramos el botón de editar si existe reserva
+            const btnEdit = card.querySelector(".btn-edit");
+            if (btnEdit && reserved) {
+                btnEdit.onclick = () => {
+                    // Función para abrir el modal del formulario con los datos cargados
+                    openEditForm(reservationFound);
+                };
+            }
 
+            const moreInfoBtn = card.querySelector(".more-info");
             if (moreInfoBtn) {
                 moreInfoBtn.classList.toggle("reserved-btn", reserved);
                 moreInfoBtn.textContent = reserved ? "CANCELAR RESERVA" : "Más info";
@@ -130,6 +139,22 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         filterBanks();
+        renderLucideIcons(); // Para asegurar que el icono del lápiz se dibuje
+    }
+
+    // Función auxiliar para cargar los datos en el formulario existente
+    function openEditForm(data) {
+        const modalFormOverlay = document.getElementById("modal-form-overlay");
+        const heistForm = document.getElementById("heist-form");
+
+        // Rellenamos los campos básicos (puedes añadir los demás igual)
+        document.getElementById("operation-date").value = data.date;
+        document.getElementById("operation-time").value = data.time;
+
+        // Guardamos el ID en el formulario para saber que estamos EDITANDO y no creando
+        heistForm.dataset.editingId = data.id;
+
+        modalFormOverlay.showModal();
     }
 
     // --- MODALES (solo en bancos.html) ---
@@ -253,63 +278,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 e.preventDefault();
 
                 const bankSelect = document.getElementById("bank-select");
-                const selectedBankName = bankSelect.options[bankSelect.selectedIndex]?.text || "";
-                const specialties = Array.from(
-                    document.querySelectorAll('input[name="specialties"]:checked'),
-                ).map((el) => el.value);
-
-                if (specialties.length === 0) {
-                    alert("⚠️ Debes seleccionar al menos una especialidad para tu equipo");
-                    return;
-                }
-
-                const operationId = Date.now();
-                const reservationData = {
-                    id: operationId,
-                    leaderName: document.getElementById("leader-name").value,
-                    leaderEmail: document.getElementById("leader-email").value,
-                    experience:
-                        Number.parseInt(document.getElementById("experience").value, 10) || 0,
-                    bankId: bankSelect.value,
-                    bankName: selectedBankName,
-                    address: pendingReservationData.address || modalAddress.textContent || "",
-                    difficulty: (
-                        pendingReservationData.difficulty ||
-                        modalDifficulty.textContent ||
-                        ""
-                    ).toLowerCase(),
-                    reward:
-                        Number.parseInt(
-                            pendingReservationData.reward || modalReward.textContent || "0",
-                            10,
-                        ) || 0,
-                    operationDate: document.getElementById("operation-date").value,
-                    operationTime: document.getElementById("operation-time").value,
-                    teamSize: Number.parseInt(document.getElementById("team-size").value, 10) || 1,
-                    riskLevel: document.getElementById("risk-level").value,
-                    budget: Number.parseInt(document.getElementById("budget").value, 10) || 0,
-                    equipment: document.getElementById("equipment").value,
-                    plan: document.getElementById("plan").value,
-                    specialties,
-                    termsAccepted: Boolean(heistForm.querySelector('input[name="terms"]')?.checked),
-                    status: "confirmada",
-                    createdAt: new Date().toISOString(),
-                };
-
-                let operations = JSON.parse(localStorage.getItem("heistcraft_operations")) || [];
-                operations.push(reservationData);
-                localStorage.setItem("heistcraft_operations", JSON.stringify(operations));
+                const selectedBankName = bankSelect.options[bankSelect.selectedIndex].text;
 
                 const reservation = {
-                    id: operationId,
-                    bankName: reservationData.bankName,
-                    address: reservationData.address,
-                    reward: String(reservationData.reward),
-                    difficulty:
-                        reservationData.difficulty.charAt(0).toUpperCase() +
-                        reservationData.difficulty.slice(1),
-                    date: reservationData.operationDate,
-                    time: reservationData.operationTime,
+                    id: Date.now(),
+                    bankName: selectedBankName,
+                    address: pendingReservationData.address || "Dirección no especificada",
+                    reward: pendingReservationData.reward || "0",
+                    difficulty: pendingReservationData.difficulty || "No especificada",
+                    date: document.getElementById("operation-date").value,
+                    time: document.getElementById("operation-time").value,
                 };
 
                 let reservations =
