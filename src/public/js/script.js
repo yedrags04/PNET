@@ -681,40 +681,34 @@ document.addEventListener("DOMContentLoaded", () => {
 // Función para pintar los productos en el HTML
 
 async function renderUtensilios() {
-    const contenedor = document.querySelector(".cards-grid");
-
-    // IMPORTANTE: Solo ejecutar si el contenedor existe en el HTML actual
-    if (!contenedor) return;
+    const $contenedor = $("#utensilios-list");
+    if (!$contenedor.length) return;
 
     try {
-        const response = await fetch("/api/utensilios");
-        if (!response.ok) throw new Error("Error en la petición");
+        const utensilios = await $.ajax({
+            url: "/api/utensilios",
+            method: "GET",
+            dataType: "json",
+        });
 
-        const utensilios = await response.json();
-
-        contenedor.innerHTML = "";
+        $contenedor.empty();
 
         utensilios.forEach((u) => {
-            const article = document.createElement("article");
-            article.className = "card";
-
-            article.innerHTML = `
+            const $article = $("<article>", { class: "card" }).html(`
                 <img class="photos" src="${u.imagen}" alt="${u.nombre}" />
                 <h3>${u.nombre}</h3>
                 <div class="price-tag">${u.precio} €</div>
                 <p>${u.descripcion}</p>
                 <button class="btn-add">Añadir al carrito</button>
-            `;
+            `);
 
-            contenedor.appendChild(article);
+            $contenedor.append($article);
         });
     } catch (error) {
         console.error("Error al cargar utensilios:", error);
     }
 }
 
-// Event Listeners
 document.addEventListener("DOMContentLoaded", () => {
     renderUtensilios();
-    // Aquí puedes llamar a otras funciones que tengas en script.js
 });
