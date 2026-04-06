@@ -651,3 +651,47 @@ document.addEventListener("DOMContentLoaded", () => {
     setPanelOpen(false);
     loadA11yPreferences();
 });
+
+// ==========================================
+// ====== Generar tarjetas utensilios =======
+// ==========================================
+// Función para pintar los productos en el HTML
+
+async function renderUtensilios() {
+    const contenedor = document.querySelector(".cards-grid");
+
+    // IMPORTANTE: Solo ejecutar si el contenedor existe en el HTML actual
+    if (!contenedor) return;
+
+    try {
+        const response = await fetch("/api/utensilios");
+        if (!response.ok) throw new Error("Error en la petición");
+
+        const utensilios = await response.json();
+
+        contenedor.innerHTML = "";
+
+        utensilios.forEach((u) => {
+            const article = document.createElement("article");
+            article.className = "card";
+
+            article.innerHTML = `
+                <img class="photos" src="${u.imagen}" alt="${u.nombre}" />
+                <h3>${u.nombre}</h3>
+                <div class="price-tag">${u.precio} €</div>
+                <p>${u.descripcion}</p>
+                <button class="btn-add">Añadir al carrito</button>
+            `;
+
+            contenedor.appendChild(article);
+        });
+    } catch (error) {
+        console.error("Error al cargar utensilios:", error);
+    }
+}
+
+// Event Listeners
+document.addEventListener("DOMContentLoaded", () => {
+    renderUtensilios();
+    // Aquí puedes llamar a otras funciones que tengas en script.js
+});
