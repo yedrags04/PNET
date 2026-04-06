@@ -17,11 +17,15 @@ app.use(logger("dev"));
 db.connectDb();
 
 // Ruta de bancos
-const bancos = require("./routes/bancos.js");
+const bancos = require("#src/routes/bancos.js");
 app.use("/api/bancos", bancos);
 
+// Ruta de utensilios
+const utensilios = require("#src/routes/utensilios.js");
+app.use("/api/utensilios", utensilios);
+
 // Ruta de reservas
-const reservas = require("./routes/reservas.js");
+const reservas = require("#src/routes/reservas.js");
 app.use("/api/reservas", reservas);
 
 // Servir la página en ./public

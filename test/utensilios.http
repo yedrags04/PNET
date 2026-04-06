@@ -1,0 +1,9 @@
+### Ver utensilios
+
+GET http://localhost:8080/api/utensilios HTTP/1.1
+
+### Obtener un utensilio
+
+# @prompt utensilioId
+
+GET http://localhost:8080/api/utensilios/{{utensilioId}} HTTP/1.1

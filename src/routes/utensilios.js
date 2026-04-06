@@ -22,3 +22,5 @@ router.get("/:_id", async (req, res) => {
         res.status(404).json({ msg: `No se pudo obtener el utensilio con _id: ${_id}` });
     }
 });
+
+module.exports = router;
