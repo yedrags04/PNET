@@ -147,12 +147,14 @@ document.addEventListener("DOMContentLoaded", function () {
         const modalFormOverlay = document.getElementById("modal-form-overlay");
         const heistForm = document.getElementById("heist-form");
 
-        // Rellenamos los campos básicos (puedes añadir los demás igual)
+        // Rellenamos los campos
         document.getElementById("operation-date").value = data.date;
         document.getElementById("operation-time").value = data.time;
 
-        // Guardamos el ID en el formulario para saber que estamos EDITANDO y no creando
-        heistForm.dataset.editingId = data.id;
+        // IMPORTANTE: MongoDB usa _id. Si tus datos vienen de la base de datos, usa data._id
+        // Si vienen del localStorage antiguo, usa data.id
+        const idParaEditar = data._id || data.id;
+        heistForm.dataset.editingId = idParaEditar;
 
         modalFormOverlay.showModal();
     }
@@ -273,33 +275,54 @@ document.addEventListener("DOMContentLoaded", function () {
             if (e.target === modalFormOverlay) closeForm();
         });
 
-        if (heistForm) {
-            heistForm.addEventListener("submit", (e) => {
+        if ($("#heist-form").length > 0) {
+            $("#heist-form").on("submit", function (e) {
                 e.preventDefault();
 
-                const bankSelect = document.getElementById("bank-select");
-                const selectedBankName = bankSelect.options[bankSelect.selectedIndex].text;
+                const $form = $(this);
+                const editingId = $form.attr("data-editing-id");
 
-                const reservation = {
-                    id: Date.now(),
-                    bankName: selectedBankName,
-                    address: pendingReservationData.address || "Dirección no especificada",
-                    reward: pendingReservationData.reward || "0",
-                    difficulty: pendingReservationData.difficulty || "No especificada",
-                    date: document.getElementById("operation-date").value,
-                    time: document.getElementById("operation-time").value,
+                // Construimos el objeto EXACTO que necesita tu reservas-service.js
+                const formData = {
+                    leaderName: $("#leader-name").val(),
+                    leaderEmail: $("#leader-email").val(),
+                    experience: parseInt($("#experience").val()) || 0,
+                    bankId: $("#bank-select").val(), // Asegúrate de que este ID sea válido
+                    operationDate: $("#operation-date").val(),
+                    operationTime: $("#operation-time").val(),
+                    teamSize: parseInt($("#team-size").val()) || 1,
+                    riskLevel: $("#risk-level").val(),
+                    budget: parseFloat($("#budget").val()) || 0,
+                    equipment: $("#equipment").val(),
+                    plan: $("#plan").val(),
+                    specialties: $("input[name='specialties']:checked")
+                        .map(function () {
+                            return this.value;
+                        })
+                        .get(),
+                    status: "pendiente",
                 };
 
-                let reservations =
-                    JSON.parse(localStorage.getItem("heistcraft_reservations")) || [];
-                reservations.push(reservation);
-                localStorage.setItem("heistcraft_reservations", JSON.stringify(reservations));
+                const url = editingId ? `/api/reservas/${editingId}` : "/api/reservas";
+                const method = editingId ? "PUT" : "POST";
 
-                updateReservationStatus();
-                closeForm();
-                alert(
-                    `✓ RESERVA CONFIRMADA\n\n${reservation.bankName}\nFecha: ${reservation.date}\nHora: ${reservation.time}`,
-                );
+                $.ajax({
+                    url: url,
+                    method: method,
+                    contentType: "application/json",
+                    data: JSON.stringify(formData),
+                    success: function (response) {
+                        alert("✅ ¡OPERACIÓN EXITOSA!");
+                        $form.removeAttr("data-editing-id");
+                        $form[0].reset();
+                        document.getElementById("modal-form-overlay").close();
+                        updateReservationStatus();
+                    },
+                    error: function (xhr) {
+                        console.error("Error detallado:", xhr.responseText);
+                        alert("❌ Error " + xhr.status + ": Revisa la consola del servidor.");
+                    },
+                });
             });
         }
 

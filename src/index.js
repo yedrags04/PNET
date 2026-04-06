@@ -1,34 +1,25 @@
-// Imports
 const express = require("express");
-const app = express();
-const logger = require("morgan");
+const path = require("path");
 const db = require("#src/db.js");
+const logger = require("morgan");
 
-// Código para los logs de morgan
-app.use(express.json());
-app.use(
-    express.urlencoded({
-        extended: true,
-    }),
-);
+const app = express();
+
+// 1. Configuración (DEBE IR PRIMERO)
 app.use(logger("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Conexión a la base de datos
 db.connectDb();
 
-// Ruta de bancos
-const bancos = require("./routes/bancos.js");
-app.use("/api/bancos", bancos);
+// 2. Definición de rutas
+const reservasRoutes = require("./routes/reservas");
+app.use("/api/reservas", reservasRoutes); // El prefijo es /api/reservas
 
-// Ruta de reservas
-const reservas = require("./routes/reservas.js");
-app.use("/api/reservas", reservas);
+// 3. Estáticos
+app.use(express.static(path.join(__dirname, "public")));
 
-// Servir la página en ./public
-app.use(express.static(__dirname + "/public"));
-
-// Por defecto escucha en el puerto 8080
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
-    console.log(`Escuchando en http://localhost:${port}`);
+    console.log(`🚀 Servidor listo en http://localhost:${port}`);
 });

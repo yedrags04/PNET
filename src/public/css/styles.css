@@ -506,7 +506,7 @@ dialog.is-closing::backdrop {
     font-family: var(--font-brand);
     font-size: 1.2rem;
     border: none;
-    border-radius: 30px;
+    border-radius: 99px;
     transition: transform 0.2s;
 
     &:hover {
