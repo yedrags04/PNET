@@ -6,14 +6,15 @@ Este documento guía a agentes de IA y colaboradores para trabajar en este
 repositorio de forma segura, consistente y sin romper funcionalidades
 existentes.
 
-Proyecto: **HeistCraft**, aplicación web con frontend estático y API en Express
-para consultar bancos y gestionar reservas en clientes.
+Proyecto: **HeistCraft**, aplicación web con frontend estático usando JQuery y
+API en Express para consultar bancos y gestionar reservas en clientes.
 
 ## Resumen rápido del proyecto
 
 - Backend en Node.js (CommonJS) con Express.
 - API disponible bajo `/api`.
 - Frontend estático servido desde `src/public`.
+- Uso de JQuery para realizar peticiones al backend.
 - Persistencia en MongoDB (colección `bancos`).
 - Datos de ejemplo cargados con script de seed.
 - Formato de código con Prettier.
@@ -129,6 +130,7 @@ Estructura:
 - No romper IDs/clases que `script.js` ya utiliza para filtros, modales,
   carrito, FAQ y widget de accesibilidad.
 - Mantener diseño responsive (desktop y móvil).
+- Utilizar JQuery para realizar peticiones a la base de datos.
 
 ## Guía para agentes de IA (cómo trabajar aquí)
 
