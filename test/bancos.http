@@ -14,12 +14,12 @@ POST http://localhost:8080/api/bancos HTTP/1.1
 content-type: application/json
 
 {
-  "difficulty": "difisi",
-  "address": "C/ Nose, 123",
+  "difficulty": "dificil",
+  "address": "Calle Alcala 123, Madrid",
   "available": true,
-  "image": "312.png",
-  "name": "Nose",
-  "reward": 2
+  "image": "banco-central-madrid.jpg",
+  "name": "Banco Central Madrid",
+  "reward": 250000
 }
 
 ### Crear varios bancos
@@ -29,20 +29,20 @@ content-type: application/json
 
 [
   {
-    "difficulty": "fasi",
-    "address": "C/ Nose, 321",
+    "difficulty": "facil",
+    "address": "Avenida de la Paz 45, Valencia",
     "available": true,
-    "image": "312.png",
-    "name": "Nose",
-    "reward": 3
+    "image": "sucursal-valencia.jpg",
+    "name": "Sucursal Valencia",
+    "reward": 90000
   },
   {
-    "difficulty": "difisi",
-    "address": "C/ Nose, 123",
+    "difficulty": "medio",
+    "address": "Gran Via 78, Barcelona",
     "available": true,
-    "image": "312.png",
-    "name": "Nose",
-    "reward": 31
+    "image": "deposito-barcelona.jpg",
+    "name": "Deposito Barcelona",
+    "reward": 160000
   }
 ]
 
@@ -55,11 +55,11 @@ content-type: application/json
 
 {
   "difficulty": "medio",
-  "address": "C/ Sise, 321",
+  "address": "Paseo de Recoletos 15, Madrid",
   "available": true,
-  "image": "pn jeje",
-  "name": "looooool",
-  "reward": 1231
+  "image": "banco-recoletos.jpg",
+  "name": "Banco Recoletos",
+  "reward": 180000
 }
 
 ### Eliminar todos los bancos

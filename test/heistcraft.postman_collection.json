@@ -1,0 +1,266 @@
+{
+    "info": {
+        "name": "HeistCraft API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": "Coleccion convertida desde ficheros REST Client/Kulala de test."
+    },
+    "item": [
+        {
+            "name": "Bancos",
+            "item": [
+                {
+                    "name": "Ver bancos",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "{{baseUrl}}/api/bancos"
+                    }
+                },
+                {
+                    "name": "Obtener un banco",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "{{baseUrl}}/api/bancos/{{bancoId}}"
+                    }
+                },
+                {
+                    "name": "Crear banco",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"difficulty\": \"dificil\",\n  \"address\": \"Calle Alcala 123, Madrid\",\n  \"available\": true,\n  \"image\": \"banco-central-madrid.jpg\",\n  \"name\": \"Banco Central Madrid\",\n  \"reward\": 250000\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "{{baseUrl}}/api/bancos"
+                    }
+                },
+                {
+                    "name": "Crear varios bancos",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[\n  {\n    \"difficulty\": \"facil\",\n    \"address\": \"Avenida de la Paz 45, Valencia\",\n    \"available\": true,\n    \"image\": \"sucursal-valencia.jpg\",\n    \"name\": \"Sucursal Valencia\",\n    \"reward\": 90000\n  },\n  {\n    \"difficulty\": \"medio\",\n    \"address\": \"Gran Via 78, Barcelona\",\n    \"available\": true,\n    \"image\": \"deposito-barcelona.jpg\",\n    \"name\": \"Deposito Barcelona\",\n    \"reward\": 160000\n  }\n]",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "{{baseUrl}}/api/bancos"
+                    }
+                },
+                {
+                    "name": "Actualizar un banco",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"difficulty\": \"medio\",\n  \"address\": \"Paseo de Recoletos 15, Madrid\",\n  \"available\": true,\n  \"image\": \"banco-recoletos.jpg\",\n  \"name\": \"Banco Recoletos\",\n  \"reward\": 180000\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "{{baseUrl}}/api/bancos/{{bancoId}}"
+                    }
+                },
+                {
+                    "name": "Eliminar todos los bancos",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": "{{baseUrl}}/api/bancos"
+                    }
+                },
+                {
+                    "name": "Eliminar un banco",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": "{{baseUrl}}/api/bancos/{{bancoId}}"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Reservas",
+            "item": [
+                {
+                    "name": "Ver reservas",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "{{baseUrl}}/api/reservas"
+                    }
+                },
+                {
+                    "name": "Obtener una reserva",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "{{baseUrl}}/api/reservas/{{reservaId}}"
+                    }
+                },
+                {
+                    "name": "Crear reserva",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"leaderName\": \"Tokio\",\n  \"leaderEmail\": \"tokio@heistcraft.test\",\n  \"experience\": 7,\n  \"bankId\": \"{{bankId}}\",\n  \"operationDate\": \"2026-04-10\",\n  \"operationTime\": \"22:00\",\n  \"teamSize\": 5,\n  \"riskLevel\": \"alto\",\n  \"budget\": 25000,\n  \"equipment\": \"Inhibidor de frecuencia, ganzuas y mascaras\",\n  \"plan\": \"Entrada por acceso lateral y evacuacion por tunel de servicio.\",\n  \"specialties\": [\"hacking\", \"combat\"],\n  \"status\": \"confirmada\",\n  \"createdAt\": \"2026-04-01T12:00:00.000Z\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "{{baseUrl}}/api/reservas"
+                    }
+                },
+                {
+                    "name": "Crear varias reservas",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[\n  {\n    \"leaderName\": \"Rio\",\n    \"leaderEmail\": \"rio@heistcraft.test\",\n    \"experience\": 4,\n    \"bankId\": \"{{bankIdA}}\",\n    \"operationDate\": \"2026-04-12\",\n    \"operationTime\": \"18:30\",\n    \"teamSize\": 4,\n    \"riskLevel\": \"medio\",\n    \"budget\": 18000,\n    \"equipment\": \"Walkies y cortacristales\",\n    \"plan\": \"Distraccion en entrada principal y acceso por sotano.\",\n    \"specialties\": [\"hacking\", \"driving\"],\n    \"status\": \"confirmada\",\n    \"createdAt\": \"2026-04-02T08:15:00.000Z\"\n  },\n  {\n    \"leaderName\": \"Nairobi\",\n    \"leaderEmail\": \"nairobi@heistcraft.test\",\n    \"experience\": 10,\n    \"bankId\": \"{{bankIdB}}\",\n    \"operationDate\": \"2026-04-20\",\n    \"operationTime\": \"09:45\",\n    \"teamSize\": 6,\n    \"riskLevel\": \"alto\",\n    \"budget\": 32000,\n    \"equipment\": \"Explosivos controlados y herramientas termicas\",\n    \"plan\": \"Control de perimetro y extraccion por salida de mantenimiento.\",\n    \"specialties\": [\"explosives\", \"logistics\"],\n    \"status\": \"confirmada\",\n    \"createdAt\": \"2026-04-03T14:45:00.000Z\"\n  }\n]",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "{{baseUrl}}/api/reservas"
+                    }
+                },
+                {
+                    "name": "Actualizar una reserva",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"teamSize\": 7,\n  \"riskLevel\": \"medio\",\n  \"budget\": 40000,\n  \"status\": \"reprogramada\",\n  \"operationDate\": \"2026-04-22\",\n  \"operationTime\": \"21:15\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "{{baseUrl}}/api/reservas/{{reservaId}}"
+                    }
+                },
+                {
+                    "name": "Eliminar todas las reservas",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": "{{baseUrl}}/api/reservas"
+                    }
+                },
+                {
+                    "name": "Eliminar una reserva",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": "{{baseUrl}}/api/reservas/{{reservaId}}"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Utensilios",
+            "item": [
+                {
+                    "name": "Ver utensilios",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "{{baseUrl}}/api/utensilios"
+                    }
+                },
+                {
+                    "name": "Obtener un utensilio",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "{{baseUrl}}/api/utensilios/{{utensilioId}}"
+                    }
+                }
+            ]
+        }
+    ],
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:8080"
+        },
+        {
+            "key": "bancoId",
+            "value": ""
+        },
+        {
+            "key": "reservaId",
+            "value": ""
+        },
+        {
+            "key": "utensilioId",
+            "value": ""
+        },
+        {
+            "key": "bankId",
+            "value": ""
+        },
+        {
+            "key": "bankIdA",
+            "value": ""
+        },
+        {
+            "key": "bankIdB",
+            "value": ""
+        }
+    ]
+}
