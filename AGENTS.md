@@ -7,7 +7,7 @@ repositorio de forma segura, consistente y sin romper funcionalidades
 existentes.
 
 Proyecto: **HeistCraft**, aplicación web con frontend estático usando JQuery y
-API en Express para consultar bancos y gestionar reservas en clientes.
+API en Express para consultar bancos, utensilios y gestionar reservas.
 
 ## Resumen rápido del proyecto
 
@@ -15,7 +15,7 @@ API en Express para consultar bancos y gestionar reservas en clientes.
 - API disponible bajo `/api`.
 - Frontend estático servido desde `src/public`.
 - Uso de JQuery para realizar peticiones al backend.
-- Persistencia en MongoDB (colección `bancos`).
+- Persistencia en MongoDB (colecciones `bancos`, `reservas` y `utensilios`).
 - Datos de ejemplo cargados con script de seed.
 - Formato de código con Prettier.
 
@@ -24,7 +24,11 @@ API en Express para consultar bancos y gestionar reservas en clientes.
 - `src/index.js` (arranque del servidor y montaje de middlewares/rutas)
 - `src/db.js` (conexión y acceso a colecciones MongoDB)
 - `src/routes/bancos.js` (endpoints de bancos)
+- `src/routes/reservas.js` (endpoints de reservas)
+- `src/routes/utensilios.js` (endpoints de utensilios)
 - `src/services/bancos-service.js` (lógica de acceso a datos)
+- `src/services/reservas-service.js` (lógica de acceso a datos de reservas)
+- `src/services/utensilios-service.js` (lógica de acceso a datos de utensilios)
 - `src/seed.js` (reinicializa e inserta datos de ejemplo)
 - `src/public/` (HTML/CSS/JS estático)
 
@@ -62,8 +66,8 @@ API en Express para consultar bancos y gestionar reservas en clientes.
 **Notas:**
 
 - `npm run start` usa `--watch` y `--env-file=.env`.
-- `npm run seed` **elimina** primero los documentos de `bancos` y luego inserta
-  datos de ejemplo.
+- `npm run seed` **elimina** primero los documentos de `bancos`, `utensilios` y
+  `reservas`, y luego inserta datos de ejemplo.
 
 ## Variables de entorno
 
@@ -82,14 +86,17 @@ Definidas en `.env` (basado en `.env.example`):
 
 1. `src/index.js` inicia Express y middlewares (`json`, `urlencoded`, `morgan`).
 2. Se conecta a MongoDB mediante `connectDb()` de `src/db.js`.
-3. Se monta la ruta `/api/bancos` desde `src/routes/bancos.js`.
+3. Se montan las rutas `/api/bancos`, `/api/utensilios` y `/api/reservas`.
 4. Se sirven archivos estáticos de `src/public`.
 
 **Capa API:**
 
 - Ruta → Servicio → MongoDB
 - `routes/bancos.js` delega en `services/bancos-service.js`
-- `bancos-service` consulta la colección `bancos` vía `getCollection("bancos")`
+- `routes/reservas.js` delega en `services/reservas-service.js`
+- `routes/utensilios.js` delega en `services/utensilios-service.js`
+- Los servicios consultan sus colecciones vía `getCollection("bancos")`,
+  `getCollection("reservas")` y `getCollection("utensilios")`.
 
 ## Contrato actual de API
 
@@ -107,6 +114,24 @@ Base URL local: `http://localhost:8080`
     - Elimina todos los bancos.
 - `DELETE /api/bancos/:_id`
     - Elimina un banco por `_id`.
+
+- `GET /api/reservas`
+    - Devuelve array con todas las reservas.
+- `GET /api/reservas/:_id`
+    - Devuelve una reserva por `_id` (ObjectId de MongoDB).
+- `POST /api/reservas`
+    - Crea una o varias reservas (acepta objeto o array) y devuelve mensaje de confirmación.
+- `PUT /api/reservas/:_id`
+    - Actualiza parcialmente una reserva por `_id` y devuelve mensaje según resultado.
+- `DELETE /api/reservas`
+    - Elimina todas las reservas.
+- `DELETE /api/reservas/:_id`
+    - Elimina una reserva por `_id`.
+
+- `GET /api/utensilios`
+    - Devuelve array con todos los utensilios.
+- `GET /api/utensilios/:_id`
+    - Devuelve un utensilio por `_id` (ObjectId de MongoDB).
 
 **Al tocar la API:**
 
@@ -155,7 +180,7 @@ Validación mínima:
    ocupado, usar la variable `PORT` para intentar abrirlo en otro puerto.
 3. Verificar manualmente:
     - páginas cargan sin errores JS,
-    - `/api/bancos` responde,
+    - `/api/bancos`, `/api/reservas` y `/api/utensilios` responden,
     - filtros/modales/carrito/FAQ siguen operativos si fueron afectados.
 
 ## Seguridad y límites
@@ -163,7 +188,8 @@ Validación mínima:
 - No añadir credenciales reales en el repo.
 - No hacer cambios destructivos en Git sin instrucción explícita.
 - No ejecutar acciones de despliegue o push remoto sin pedirlo.
-- Tener cuidado con `seed`: destruye contenido de la colección `bancos`.
+- Tener cuidado con `seed`: destruye contenido de las colecciones `bancos`,
+  `utensilios` y `reservas`.
 
 ## Criterios de entrega (Definition of Done)
 
