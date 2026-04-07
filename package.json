@@ -1,7 +1,16 @@
 {
     "name": "heistcraft",
     "version": "1.0.0",
-    "description": "Una aplicación web para reservar bancos y utensilios para cometer atracos 💵.",
+    "description": "HeistCraft: aplicación web con API REST en Express para consultar y gestionar bancos (listar, crear, actualizar y eliminar) y frontend estático en jQuery.",
+    "keywords": [
+        "heistcraft",
+        "api-rest",
+        "express",
+        "mongodb",
+        "jquery",
+        "bancos",
+        "reservas"
+    ],
     "homepage": "https://github.com/yedrags04/PNET#readme",
     "bugs": {
         "url": "https://github.com/yedrags04/PNET/issues"
@@ -10,8 +19,18 @@
         "type": "git",
         "url": "git+https://github.com/yedrags04/PNET.git"
     },
-    "license": "ISC",
     "author": "HeistCorp",
+    "contributors": [
+        {
+            "name": "Joaquín Guerra Tocino"
+        },
+        {
+            "name": "David Cifredo Juliá"
+        },
+        {
+            "name": "Yedra García Sánchez"
+        }
+    ],
     "type": "commonjs",
     "main": "index.js",
     "scripts": {
