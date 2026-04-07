@@ -1,266 +1,958 @@
 {
-    "info": {
-        "name": "HeistCraft API",
-        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-        "description": "Coleccion convertida desde ficheros REST Client/Kulala de test."
+  "info": {
+    "_postman_id": "a50a0e62-e8a7-43a9-87ed-71fa6d4b5ae7",
+    "name": "HeistCraft API",
+    "description": "Coleccion convertida desde ficheros REST Client/Kulala de test.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53321993",
+    "_collection_link": "https://go.postman.co/collection/53321993-a50a0e62-e8a7-43a9-87ed-71fa6d4b5ae7?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Bancos",
+      "item": [
+        {
+          "name": "Ver bancos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/bancos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "bancos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener un banco",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/bancos/{{bancoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "bancos",
+                "{{bancoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear banco",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"difficulty\": \"difisi\",\n  \"address\": \"C/ Nose, 123\",\n  \"available\": true,\n  \"image\": \"312.png\",\n  \"name\": \"Nose\",\n  \"reward\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/bancos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "bancos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear varios bancos",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"difficulty\": \"fasi\",\n    \"address\": \"C/ Nose, 321\",\n    \"available\": true,\n    \"image\": \"312.png\",\n    \"name\": \"Nose\",\n    \"reward\": 3\n  },\n  {\n    \"difficulty\": \"difisi\",\n    \"address\": \"C/ Nose, 123\",\n    \"available\": true,\n    \"image\": \"312.png\",\n    \"name\": \"Nose\",\n    \"reward\": 31\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/bancos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "bancos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar un banco",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"difficulty\": \"medio\",\n  \"address\": \"C/ Sise, 321\",\n  \"available\": true,\n  \"image\": \"pn jeje\",\n  \"name\": \"looooool\",\n  \"reward\": 1231\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/bancos/{{bancoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "bancos",
+                "{{bancoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar todos los bancos",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/bancos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "bancos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar un banco",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/bancos/{{bancoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "bancos",
+                "{{bancoId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
     },
-    "item": [
+    {
+      "name": "Reservas",
+      "item": [
         {
-            "name": "Bancos",
-            "item": [
-                {
-                    "name": "Ver bancos",
-                    "request": {
-                        "method": "GET",
-                        "header": [],
-                        "url": "{{baseUrl}}/api/bancos"
-                    }
-                },
-                {
-                    "name": "Obtener un banco",
-                    "request": {
-                        "method": "GET",
-                        "header": [],
-                        "url": "{{baseUrl}}/api/bancos/{{bancoId}}"
-                    }
-                },
-                {
-                    "name": "Crear banco",
-                    "request": {
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n  \"difficulty\": \"dificil\",\n  \"address\": \"Calle Alcala 123, Madrid\",\n  \"available\": true,\n  \"image\": \"banco-central-madrid.jpg\",\n  \"name\": \"Banco Central Madrid\",\n  \"reward\": 250000\n}",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        },
-                        "url": "{{baseUrl}}/api/bancos"
-                    }
-                },
-                {
-                    "name": "Crear varios bancos",
-                    "request": {
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[\n  {\n    \"difficulty\": \"facil\",\n    \"address\": \"Avenida de la Paz 45, Valencia\",\n    \"available\": true,\n    \"image\": \"sucursal-valencia.jpg\",\n    \"name\": \"Sucursal Valencia\",\n    \"reward\": 90000\n  },\n  {\n    \"difficulty\": \"medio\",\n    \"address\": \"Gran Via 78, Barcelona\",\n    \"available\": true,\n    \"image\": \"deposito-barcelona.jpg\",\n    \"name\": \"Deposito Barcelona\",\n    \"reward\": 160000\n  }\n]",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        },
-                        "url": "{{baseUrl}}/api/bancos"
-                    }
-                },
-                {
-                    "name": "Actualizar un banco",
-                    "request": {
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n  \"difficulty\": \"medio\",\n  \"address\": \"Paseo de Recoletos 15, Madrid\",\n  \"available\": true,\n  \"image\": \"banco-recoletos.jpg\",\n  \"name\": \"Banco Recoletos\",\n  \"reward\": 180000\n}",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        },
-                        "url": "{{baseUrl}}/api/bancos/{{bancoId}}"
-                    }
-                },
-                {
-                    "name": "Eliminar todos los bancos",
-                    "request": {
-                        "method": "DELETE",
-                        "header": [],
-                        "url": "{{baseUrl}}/api/bancos"
-                    }
-                },
-                {
-                    "name": "Eliminar un banco",
-                    "request": {
-                        "method": "DELETE",
-                        "header": [],
-                        "url": "{{baseUrl}}/api/bancos/{{bancoId}}"
-                    }
+          "name": "Ver reservas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/reservas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "reservas"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Ver reservas",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/reservas",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "reservas"
+                  ]
                 }
-            ]
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1010"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3f2-MsYQyxkx6T1SbEX1Z9keKYpTgv4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 07 Apr 2026 20:53:51 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n    {\n        \"_id\": \"69d5428f5ea2c35816ea2de2\",\n        \"leaderName\": \"El Profesor\",\n        \"leaderEmail\": \"profesor@heistcraft.test\",\n        \"experience\": 15,\n        \"bankId\": \"69d5428f5ea2c35816ea2dcd\",\n        \"operationDate\": \"2026-03-01\",\n        \"operationTime\": \"14:30\",\n        \"teamSize\": 8,\n        \"riskLevel\": \"alto\",\n        \"budget\": 50000,\n        \"equipment\": \"Inhibidores, herramientas termicas y comunicaciones seguras\",\n        \"plan\": \"Entrada por servicio, control de accesos y extraccion en dos vehiculos\",\n        \"specialties\": [\n            \"hacking\",\n            \"driving\",\n            \"combat\"\n        ],\n        \"status\": \"confirmada\",\n        \"createdAt\": \"2026-02-20T10:30:00.000Z\"\n    },\n    {\n        \"_id\": \"69d5428f5ea2c35816ea2de3\",\n        \"leaderName\": \"Berlin\",\n        \"leaderEmail\": \"berlin@heistcraft.test\",\n        \"experience\": 12,\n        \"bankId\": \"69d5428f5ea2c35816ea2dd0\",\n        \"operationDate\": \"2026-02-28\",\n        \"operationTime\": \"10:15\",\n        \"teamSize\": 6,\n        \"riskLevel\": \"medio\",\n        \"budget\": 30000,\n        \"equipment\": \"Ganzuas, drones de reconocimiento y equipo tactico ligero\",\n        \"plan\": \"Reconocimiento previo, acceso simultaneo y salida escalonada\",\n        \"specialties\": [\n            \"negotiation\",\n            \"logistics\"\n        ],\n        \"status\": \"confirmada\",\n        \"createdAt\": \"2026-02-18T08:00:00.000Z\"\n    }\n]"
+            }
+          ]
         },
         {
-            "name": "Reservas",
-            "item": [
-                {
-                    "name": "Ver reservas",
-                    "request": {
-                        "method": "GET",
-                        "header": [],
-                        "url": "{{baseUrl}}/api/reservas"
-                    }
-                },
-                {
-                    "name": "Obtener una reserva",
-                    "request": {
-                        "method": "GET",
-                        "header": [],
-                        "url": "{{baseUrl}}/api/reservas/{{reservaId}}"
-                    }
-                },
-                {
-                    "name": "Crear reserva",
-                    "request": {
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n  \"leaderName\": \"Tokio\",\n  \"leaderEmail\": \"tokio@heistcraft.test\",\n  \"experience\": 7,\n  \"bankId\": \"{{bankId}}\",\n  \"operationDate\": \"2026-04-10\",\n  \"operationTime\": \"22:00\",\n  \"teamSize\": 5,\n  \"riskLevel\": \"alto\",\n  \"budget\": 25000,\n  \"equipment\": \"Inhibidor de frecuencia, ganzuas y mascaras\",\n  \"plan\": \"Entrada por acceso lateral y evacuacion por tunel de servicio.\",\n  \"specialties\": [\"hacking\", \"combat\"],\n  \"status\": \"confirmada\",\n  \"createdAt\": \"2026-04-01T12:00:00.000Z\"\n}",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        },
-                        "url": "{{baseUrl}}/api/reservas"
-                    }
-                },
-                {
-                    "name": "Crear varias reservas",
-                    "request": {
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[\n  {\n    \"leaderName\": \"Rio\",\n    \"leaderEmail\": \"rio@heistcraft.test\",\n    \"experience\": 4,\n    \"bankId\": \"{{bankIdA}}\",\n    \"operationDate\": \"2026-04-12\",\n    \"operationTime\": \"18:30\",\n    \"teamSize\": 4,\n    \"riskLevel\": \"medio\",\n    \"budget\": 18000,\n    \"equipment\": \"Walkies y cortacristales\",\n    \"plan\": \"Distraccion en entrada principal y acceso por sotano.\",\n    \"specialties\": [\"hacking\", \"driving\"],\n    \"status\": \"confirmada\",\n    \"createdAt\": \"2026-04-02T08:15:00.000Z\"\n  },\n  {\n    \"leaderName\": \"Nairobi\",\n    \"leaderEmail\": \"nairobi@heistcraft.test\",\n    \"experience\": 10,\n    \"bankId\": \"{{bankIdB}}\",\n    \"operationDate\": \"2026-04-20\",\n    \"operationTime\": \"09:45\",\n    \"teamSize\": 6,\n    \"riskLevel\": \"alto\",\n    \"budget\": 32000,\n    \"equipment\": \"Explosivos controlados y herramientas termicas\",\n    \"plan\": \"Control de perimetro y extraccion por salida de mantenimiento.\",\n    \"specialties\": [\"explosives\", \"logistics\"],\n    \"status\": \"confirmada\",\n    \"createdAt\": \"2026-04-03T14:45:00.000Z\"\n  }\n]",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        },
-                        "url": "{{baseUrl}}/api/reservas"
-                    }
-                },
-                {
-                    "name": "Actualizar una reserva",
-                    "request": {
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n  \"teamSize\": 7,\n  \"riskLevel\": \"medio\",\n  \"budget\": 40000,\n  \"status\": \"reprogramada\",\n  \"operationDate\": \"2026-04-22\",\n  \"operationTime\": \"21:15\"\n}",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        },
-                        "url": "{{baseUrl}}/api/reservas/{{reservaId}}"
-                    }
-                },
-                {
-                    "name": "Eliminar todas las reservas",
-                    "request": {
-                        "method": "DELETE",
-                        "header": [],
-                        "url": "{{baseUrl}}/api/reservas"
-                    }
-                },
-                {
-                    "name": "Eliminar una reserva",
-                    "request": {
-                        "method": "DELETE",
-                        "header": [],
-                        "url": "{{baseUrl}}/api/reservas/{{reservaId}}"
-                    }
+          "name": "Obtener una reserva",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/reservas/{{reservaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "reservas",
+                "{{reservaId}}"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Obtener una reserva",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/reservas/{{reservaId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "reservas",
+                    "{{reservaId}}"
+                  ]
                 }
-            ]
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "514"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"202-A48KjCYkC0HVtuKNXwWPWEeSv7U\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 07 Apr 2026 21:08:47 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_id\": \"69d5428f5ea2c35816ea2de2\",\n    \"leaderName\": \"El Profesor\",\n    \"leaderEmail\": \"profesor@heistcraft.test\",\n    \"experience\": 15,\n    \"bankId\": \"69d5428f5ea2c35816ea2dcd\",\n    \"operationDate\": \"2026-03-01\",\n    \"operationTime\": \"14:30\",\n    \"teamSize\": 8,\n    \"riskLevel\": \"alto\",\n    \"budget\": 50000,\n    \"equipment\": \"Inhibidores, herramientas termicas y comunicaciones seguras\",\n    \"plan\": \"Entrada por servicio, control de accesos y extraccion en dos vehiculos\",\n    \"specialties\": [\n        \"hacking\",\n        \"driving\",\n        \"combat\"\n    ],\n    \"status\": \"confirmada\",\n    \"createdAt\": \"2026-02-20T10:30:00.000Z\"\n}"
+            },
+            {
+              "name": "Obtener una reserva",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/reservas/{{reservaId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "reservas",
+                    "{{reservaId}}"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "61"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3d-gYKdgJM+EQ/n53BC1lCBwnwvf+8\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 07 Apr 2026 21:08:57 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"msg\": \"No se pudo obtener la reserva con _id: sdasdasdasds\"\n}"
+            }
+          ]
         },
         {
-            "name": "Utensilios",
-            "item": [
-                {
-                    "name": "Ver utensilios",
-                    "request": {
-                        "method": "GET",
-                        "header": [],
-                        "url": "{{baseUrl}}/api/utensilios"
+          "name": "Crear reserva",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n aasdadadasasdasd\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reservas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "reservas"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Crear reserva",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"leaderName\": \"Tokio\",\n  \"leaderEmail\": \"tokio@heistcraft.test\",\n  \"experience\": 7,\n  \"bankId\": \"{{bankId}}\",\n  \"operationDate\": \"2026-04-10\",\n  \"operationTime\": \"22:00\",\n  \"teamSize\": 5,\n  \"riskLevel\": \"alto\",\n  \"budget\": 25000,\n  \"equipment\": \"Inhibidor de frecuencia, ganzuas y mascaras\",\n  \"plan\": \"Entrada por acceso lateral y evacuacion por tunel de servicio.\",\n  \"specialties\": [\"hacking\", \"combat\"],\n  \"status\": \"confirmada\",\n  \"createdAt\": \"2026-04-01T12:00:00.000Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
                     }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/reservas",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "reservas"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
                 },
                 {
-                    "name": "Obtener un utensilio",
-                    "request": {
-                        "method": "GET",
-                        "header": [],
-                        "url": "{{baseUrl}}/api/utensilios/{{utensilioId}}"
-                    }
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "71"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"47-lHJj8nl3HNQZSs7OUH+Jbo9mHA4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 07 Apr 2026 21:09:56 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
                 }
-            ]
+              ],
+              "cookie": [],
+              "body": "{\n    \"msg\": \"Reserva creada correctamente con id: 69d572a410006fc239bb136b\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Crear varias reservas",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"leaderName\": \"Rio\",\n    \"leaderEmail\": \"rio@heistcraft.test\",\n    \"experience\": 4,\n    \"bankId\": \"{{bankIdA}}\",\n    \"operationDate\": \"2026-04-12\",\n    \"operationTime\": \"18:30\",\n    \"teamSize\": 4,\n    \"riskLevel\": \"medio\",\n    \"budget\": 18000,\n    \"equipment\": \"Walkies y cortacristales\",\n    \"plan\": \"Distraccion en entrada principal y acceso por sotano.\",\n    \"specialties\": [\"hacking\", \"driving\"],\n    \"status\": \"confirmada\",\n    \"createdAt\": \"2026-04-02T08:15:00.000Z\"\n  },\n  {\n    \"leaderName\": \"Nairobi\",\n    \"leaderEmail\": \"nairobi@heistcraft.test\",\n    \"experience\": 10,\n    \"bankId\": \"{{bankIdB}}\",\n    \"operationDate\": \"2026-04-20\",\n    \"operationTime\": \"09:45\",\n    \"teamSize\": 6,\n    \"riskLevel\": \"alto\",\n    \"budget\": 32000,\n    \"equipment\": \"Explosivos controlados y herramientas termicas\",\n    \"plan\": \"Control de perimetro y extraccion por salida de mantenimiento.\",\n    \"specialties\": [\"explosives\", \"logistics\"],\n    \"status\": \"confirmada\",\n    \"createdAt\": \"2026-04-03T14:45:00.000Z\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reservas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "reservas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar una reserva",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"teamSize\": 7,\n  \"riskLevel\": \"medio\",\n  \"budget\": 40000,\n  \"status\": \"reprogramada\",\n  \"operationDate\": \"2026-04-22\",\n  \"operationTime\": \"21:15\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reservas/{{reservaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "reservas",
+                "{{reservaId}}"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Actualizar una reserva",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"teamSize\": 7,\n  \"riskLevel\": \"medio\",\n  \"budget\": 40000,\n  \"status\": \"reprogramada\",\n  \"operationDate\": \"2026-04-22\",\n  \"operationTime\": \"21:15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/reservas/{{reservaId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "reservas",
+                    "{{reservaId}}"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "64"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"40-FM3cXwOIzzG5HG2Wr05L5IvXtqA\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 07 Apr 2026 21:13:01 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"msg\": \"No se pudo actualizar la reserva con _id: sdasdasdasds\"\n}"
+            },
+            {
+              "name": "Actualizar una reserva",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"teamSize\": 7,\n  \"riskLevel\": \"medio\",\n  \"budget\": 40000,\n  \"status\": \"reprogramada\",\n  \"operationDate\": \"2026-04-22\",\n  \"operationTime\": \"21:15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/reservas/{{reservaId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "reservas",
+                    "{{reservaId}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "77"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"4d-6JYILDKHVTnvV2I2KLIC3UcnoXI\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 07 Apr 2026 21:14:08 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"msg\": \"Reserva con _id: 69d5428f5ea2c35816ea2de3 actualizada correctamente\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Eliminar todas las reservas",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/reservas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "reservas"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Eliminar todas las reservas",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/reservas",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "reservas"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "43"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"2b-TceB408o/W8cWaUnDpAXFg/AqpY\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 07 Apr 2026 21:15:23 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"msg\": \"Reservas eliminadas correctamente\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Eliminar una reserva",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/reservas/{{reservaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "reservas",
+                "{{reservaId}}"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Eliminar una reserva",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/reservas/{{reservaId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "reservas",
+                    "{{reservaId}}"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "65"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"41-lMOXccNrQ6SW4RuAonvdhu3FpNc\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 07 Apr 2026 21:14:52 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"msg\": \"No se pudo eliminar la reserva con _id: sdasdasasddasds\"\n}"
+            },
+            {
+              "name": "Eliminar una reserva",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/reservas/{{reservaId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "reservas",
+                    "{{reservaId}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "66"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"42-Lr9nKvQcoT2PgWhWdj7TaqfHNIk\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 07 Apr 2026 21:15:12 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"msg\": \"Reserva 69d5428f5ea2c35816ea2de3 eliminada correctamente\"\n}"
+            }
+          ]
         }
-    ],
-    "variable": [
+      ]
+    },
+    {
+      "name": "Utensilios",
+      "item": [
         {
-            "key": "baseUrl",
-            "value": "http://localhost:8080"
+          "name": "Ver utensilios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/utensilios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "utensilios"
+              ]
+            }
+          },
+          "response": []
         },
         {
-            "key": "bancoId",
-            "value": ""
-        },
-        {
-            "key": "reservaId",
-            "value": ""
-        },
-        {
-            "key": "utensilioId",
-            "value": ""
-        },
-        {
-            "key": "bankId",
-            "value": ""
-        },
-        {
-            "key": "bankIdA",
-            "value": ""
-        },
-        {
-            "key": "bankIdB",
-            "value": ""
+          "name": "Obtener un utensilio",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/utensilios/{{utensilioId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "utensilios",
+                "{{utensilioId}}"
+              ]
+            }
+          },
+          "response": []
         }
-    ]
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "bancoId",
+      "value": ""
+    },
+    {
+      "key": "reservaId",
+      "value": ""
+    },
+    {
+      "key": "utensilioId",
+      "value": ""
+    },
+    {
+      "key": "bankId",
+      "value": ""
+    },
+    {
+      "key": "bankIdA",
+      "value": ""
+    },
+    {
+      "key": "bankIdB",
+      "value": ""
+    }
+  ]
 }
