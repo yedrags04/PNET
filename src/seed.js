@@ -20,8 +20,8 @@ const bancosEjemplo = [
         image: "assets/images/Banco-barcelona.avif",
     },
     {
-        name: "BANCO DE ESPANA",
-        address: "C/ de Espana 1, Madrid",
+        name: "BANCO DE ESPAÑA",
+        address: "C/ de España 1, Madrid",
         difficulty: "media",
         reward: 550,
         available: true,
